@@ -26,8 +26,11 @@ export function hasDemos(slug: string): boolean {
   return slug in demoModules;
 }
 
-export async function loadDemos(slug: string): Promise<DemoModule["demos"]> {
+export async function loadDemoModule(slug: string): Promise<DemoModule> {
   const load = demoModules[slug];
-  if (!load) return [];
-  return (await load()).demos;
+  return load ? load() : { demos: [] };
+}
+
+export async function loadDemos(slug: string): Promise<DemoModule["demos"]> {
+  return (await loadDemoModule(slug)).demos;
 }

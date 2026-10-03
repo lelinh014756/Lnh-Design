@@ -10,12 +10,13 @@ import {
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { toDependencyEntries } from "@/lib/registry/dependencies";
 import { getRegistryItemMeta } from "@/lib/registry/load";
-import { loadDemos } from "@/modules/showcase/demos/registry";
+import { loadDemoModule } from "@/modules/showcase/demos/registry";
 import { demoSource } from "@/modules/showcase/demos/sources";
 import { ComponentInstallBar } from "@/modules/showcase/components/component-install-bar";
 import { DemoCard } from "@/modules/showcase/components/demo-card";
 import { DocsToc } from "@/modules/showcase/components/docs-toc";
 import { PageHeader } from "@/modules/showcase/components/page-header";
+import { PropsTable } from "@/modules/showcase/components/props-table";
 import { ShowcaseContentShell } from "@/layouts/showcase/showcase-content-shell";
 
 /**
@@ -53,9 +54,16 @@ export default async function ComponentDetailPage({
 
   const { dict, locale } = await getDictionary();
   const t = dict.showcase;
-  const [demos, registryItem] = await Promise.all([loadDemos(slug), getRegistryItemMeta(slug)]);
+  const [{ demos, props = [] }, registryItem] = await Promise.all([
+    loadDemoModule(slug),
+    getRegistryItemMeta(slug),
+  ]);
   const dependencies = registryItem ? toDependencyEntries(registryItem) : [];
   const category = item.categories[0];
+  const tocSections = [
+    ...demos.map((demo) => ({ id: demo.id, label: demo.title[locale] })),
+    ...(props.length > 0 ? [{ id: "props", label: t.props }] : []),
+  ];
 
   return (
     <ShowcaseContentShell>
@@ -92,7 +100,8 @@ export default async function ComponentDetailPage({
         </div>
       ) : (
         <div className="flex gap-8">
-          <div className="flex min-w-0 flex-1 flex-col gap-5">
+          {/* `@container`: DemoCard chia cột theo bề rộng khung này, không theo viewport. */}
+          <div className="@container flex min-w-0 flex-1 flex-col">
             <h2 className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
               {t.examples}
             </h2>
@@ -103,18 +112,31 @@ export default async function ComponentDetailPage({
                 slug={slug}
                 title={demo.title[locale]}
                 description={demo.description?.[locale]}
+                snippet={demo.snippet}
                 source={demoSource(slug, demo.id)}
                 component={demo.render}
                 mode={demo.mode}
+                layout={demo.layout}
               />
             ))}
+            {props.length > 0 && (
+              <PropsTable
+                id="props"
+                title={t.props}
+                labels={{
+                  name: t.propName,
+                  type: t.propType,
+                  default: t.propDefault,
+                  description: t.propDescription,
+                }}
+                items={props}
+                locale={locale}
+              />
+            )}
           </div>
 
           <div className="hidden w-44 shrink-0 lg:block">
-            <DocsToc
-              label={t.examples}
-              sections={demos.map((demo) => ({ id: demo.id, label: demo.title[locale] }))}
-            />
+            <DocsToc label={dict.docs.onThisPage} sections={tocSections} />
           </div>
         </div>
       )}

@@ -2,7 +2,10 @@
 
 import StatisticsCard from "@/components/layout/statistics-card";
 
-/** Ba hướng delta: tăng, giảm, đứng yên — mỗi hướng một màu và một icon. */
+/**
+ * Ba hướng delta: tăng, giảm, đứng yên — mỗi hướng một icon mũi tên. Màu do
+ * `tone` quyết định, không suy từ hướng: giảm không mặc định là xấu.
+ */
 export default function StatisticsCardDeltas() {
   return (
     <div className="grid gap-4 sm:grid-cols-3">
