@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
-  BugIcon,
   ChevronDownIcon,
   CodeIcon,
   ExternalLinkIcon,
@@ -11,12 +10,8 @@ import {
   MaximizeIcon,
   MinimizeIcon,
   MonitorIcon,
-  MoonIcon,
-  NetworkIcon,
   RefreshCwIcon,
   SmartphoneIcon,
-  SparklesIcon,
-  SunIcon,
   TabletIcon,
 } from "lucide-react";
 
@@ -36,7 +31,6 @@ import {
   type BlockCatalogItem,
   type PackageManager,
 } from "@/config/catalog";
-import { reportIssueUrl, siteConfig } from "@/config/site";
 import type { DependencyEntry } from "@/lib/registry/dependencies";
 import { useT } from "@/lib/i18n/context";
 import { hasPreview } from "@/modules/showcase/previews";
@@ -54,15 +48,6 @@ const VIEWPORTS: { key: PreviewViewport; Icon: typeof MonitorIcon; labelKey: str
 
 const iconClass =
   "grid size-7 place-items-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground";
-
-/** Logo X vẽ inline — lucide đã bỏ hết icon thương hiệu, kéo thêm một bộ icon nữa chỉ vì một hình là thừa. */
-function XMark() {
-  return (
-    <svg viewBox="0 0 16 16" className="size-3.5" fill="currentColor" aria-hidden>
-      <path d="M9.52 6.77 15.48 0h-1.41L8.9 5.88 4.77 0H0l6.25 8.9L0 16h1.41l5.46-6.21L11.23 16H16L9.52 6.77ZM7.59 8.98l-.63-.89L1.92 1.04h2.17l4.06 5.7.63.89 5.28 7.41h-2.17L7.59 8.98Z" />
-    </svg>
-  );
-}
 
 function IconAction({
   label,
@@ -103,24 +88,6 @@ function IconAction({
   );
 }
 
-/**
- * Prompt cho agent: đủ để nó cài và biết mình vừa cài cái gì.
- *
- * Kèm URL item trong registry vì agent nào đọc được mạng thì lấy thẳng danh
- * sách file và phụ thuộc từ đó, không phải đoán theo tên.
- */
-function aiPrompt(item: BlockCatalogItem, command: string, description: string): string {
-  const itemUrl = new URL(`r/${item.slug}.json`, siteConfig.url).toString();
-  return [
-    `Thêm block "${item.name}" từ registry AureCook vào dự án này.`,
-    ``,
-    `Lệnh cài: ${command}`,
-    `Registry item: ${itemUrl}`,
-    ``,
-    `Mô tả: ${description}`,
-  ].join("\n");
-}
-
 export interface BlockShowcaseCardProps {
   item: BlockCatalogItem;
   dependencies: DependencyEntry[];
@@ -136,21 +103,17 @@ export interface BlockShowcaseCardProps {
  * giao diện — nó có layout riêng, breakpoint riêng, đôi khi cả nền riêng. Đổi
  * viewport ở đây phải đổi bề rộng THẬT thì media query bên trong mới chạy đúng,
  * và đó chỉ iframe làm được.
- *
- * Theme khung xem tách khỏi theme site: kiểm tra block ở chế độ tối không nên
- * bắt người đọc đảo cả trang mình đang đọc.
  */
 export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: BlockShowcaseCardProps) {
   const [view, setView] = useState<"preview" | "code">("preview");
   const [viewport, setViewport] = useState<PreviewViewport>("desktop");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [manager, setManager] = useState<PackageManager>("pnpm");
   const [expanded, setExpanded] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
   const { dict, locale } = useT();
   const t = dict.showcase;
   const available = hasPreview(item.slug);
-  const previewUrl = `/preview/${item.slug}?theme=${theme}`;
+  const previewUrl = `/preview/${item.slug}`;
   const command = installCommandFor(item, manager);
   const description = item.description[locale];
 
@@ -166,12 +129,6 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [expanded]);
-
-  const shareUrl = new URL(`blocks/${item.categories[0]}/${item.slug}`, siteConfig.url).toString();
-  const shareHref = `https://x.com/intent/post?${new URLSearchParams({
-    text: `${item.name} — ${description}`,
-    url: shareUrl,
-  }).toString()}`;
 
   return (
     <article
@@ -227,13 +184,6 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
 
           {view === "preview" && available && (
             <>
-              <IconAction
-                label={t.toggleDark}
-                onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
-                active={theme === "dark"}
-              >
-                {theme === "dark" ? <SunIcon className="size-3.5" /> : <MoonIcon className="size-3.5" />}
-              </IconAction>
               <IconAction label={t.refreshPreview} onClick={() => setReloadKey((key) => key + 1)}>
                 <RefreshCwIcon className="size-3.5" />
               </IconAction>
@@ -249,45 +199,6 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
               </IconAction>
             </>
           )}
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span>
-                <CopyButton
-                  value={aiPrompt(item, command, description)}
-                  label={t.copyAiPrompt}
-                  size="sm"
-                  idleIcon={<SparklesIcon className="size-3.5" />}
-                />
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">{t.copyAiPrompt}</TooltipContent>
-          </Tooltip>
-
-          {dependencies.length > 0 && (
-            <DependenciesDialog itemName={registryItemName(item)} dependencies={dependencies}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    aria-label={t.dependencies}
-                    className={cn(iconClass, "w-auto gap-1 px-1.5")}
-                  >
-                    <NetworkIcon className="size-3.5" />
-                    <span className="text-[11px] tabular-nums">{dependencies.length}</span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">{t.dependencies}</TooltipContent>
-              </Tooltip>
-            </DependenciesDialog>
-          )}
-
-          <IconAction label={t.shareOnX} href={shareHref}>
-            <XMark />
-          </IconAction>
-          <IconAction label={t.reportIssue} href={reportIssueUrl(registryItemName(item))}>
-            <BugIcon className="size-3.5" />
-          </IconAction>
 
           {view === "preview" && available && (
             <div className="hidden items-center rounded-md border bg-background p-0.5 sm:flex">
@@ -344,6 +255,8 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
             </code>
             <CopyButton value={command} label={t.copyCommand} size="sm" />
           </span>
+
+          <DependenciesDialog itemName={item.name} dependencies={dependencies} />
         </div>
       </header>
 
@@ -353,7 +266,6 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
         <PreviewFrame
           name={item.slug}
           viewport={viewport}
-          theme={theme}
           reloadKey={reloadKey}
           fill={expanded}
           title={item.name}

@@ -1,7 +1,5 @@
 "use client";
 
-import { PackageIcon } from "lucide-react";
-
 import { CopyButton } from "@/components/general/copy-button";
 import { installCommand, registryItemName, type CatalogItem } from "@/config/catalog";
 import type { DependencyEntry } from "@/lib/registry/dependencies";
@@ -34,18 +32,7 @@ export function ComponentInstallBar({
         {installCommand(item)}
       </code>
       <CopyButton value={installCommand(item)} label={t.copyCommand} size="sm" />
-      {dependencies.length > 0 && (
-        <DependenciesDialog itemName={item.name} dependencies={dependencies}>
-          <button
-            type="button"
-            className="flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 hover:bg-accent"
-          >
-            <PackageIcon className="size-3.5" />
-            {t.dependencies}
-            <span className="tabular-nums text-muted-foreground">{dependencies.length}</span>
-          </button>
-        </DependenciesDialog>
-      )}
+      <DependenciesDialog itemName={item.name} dependencies={dependencies} />
     </div>
   );
 }

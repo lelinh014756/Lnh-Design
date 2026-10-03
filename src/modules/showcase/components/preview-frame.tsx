@@ -24,8 +24,6 @@ export interface PreviewFrameProps {
   /** Id demo khi component có nhiều demo. Bỏ trống → demo đơn trong `previews/`. */
   demo?: string;
   viewport?: PreviewViewport;
-  /** Theme riêng của khung xem, độc lập với theme trang mẹ. */
-  theme?: "light" | "dark";
   /** Đổi giá trị này để ép tải lại khung. */
   reloadKey?: number;
   /** Cao bằng khung chứa thay vì theo số đo khung con — dùng khi phóng to toàn màn hình. */
@@ -37,10 +35,9 @@ export interface PreviewFrameProps {
 /**
  * Khung xem trước bằng iframe.
  *
- * Dùng iframe thay vì render thẳng trong trang vì ba lý do cùng lúc: demo được
- * cách ly khỏi CSS của trang mẹ, đổi viewport là đổi bề rộng thật (media query
- * trong demo chạy đúng), và theme của khung độc lập với theme người dùng đang
- * xem site.
+ * Dùng iframe thay vì render thẳng trong trang vì hai lý do cùng lúc: demo được
+ * cách ly khỏi CSS của trang mẹ, và đổi viewport là đổi bề rộng thật (media
+ * query trong demo chạy đúng).
  *
  * Chiều cao do khung con đo rồi `postMessage` lên — không đọc
  * `contentDocument.scrollHeight` từ ngoài, vì cách đó chỉ chạy khi cùng origin
@@ -53,7 +50,6 @@ export function PreviewFrame({
   name,
   demo,
   viewport = "desktop",
-  theme,
   reloadKey = 0,
   fill = false,
   className,
@@ -82,7 +78,6 @@ export function PreviewFrame({
   }, [onMessage]);
 
   const params = new URLSearchParams();
-  if (theme) params.set("theme", theme);
   if (demo) params.set("demo", demo);
   const query = params.toString();
 
