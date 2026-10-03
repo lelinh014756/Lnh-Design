@@ -1,0 +1,5 @@
+{
+  "title": "Component",
+  "subtitle": "Component cấp app dựng trên primitive shadcn đã chỉnh theo style radix-mira. Cài từng cái một, primitive đi theo như phụ thuộc.",
+  "countSuffix": "component"
+}

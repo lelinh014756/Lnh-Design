@@ -1,0 +1,14 @@
+{
+  "title": "Template",
+  "subtitle": "Sản phẩm nhiều trang chạy được, dựng từ đúng những component và block trong registry này.",
+  "countSuffix": "template",
+  "livePreview": "Xem bản chạy",
+  "getTemplate": "Lấy template",
+  "details": "Thông tin",
+  "framework": "Framework",
+  "base": "Nền primitive",
+  "style": "Style",
+  "surface": "Bề mặt",
+  "techStack": "Công nghệ",
+  "empty": "Chưa có template nào ở mục này."
+}

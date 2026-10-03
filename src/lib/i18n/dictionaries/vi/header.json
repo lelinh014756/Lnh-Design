@@ -1,0 +1,16 @@
+{
+  "guide": "Hướng dẫn",
+  "notifications": "Thông báo",
+  "settings": "Cài đặt",
+  "settingsTheme": "Giao diện",
+  "settingsThemeHint": "Chọn theme — lưu trên trình duyệt, áp dụng ngay và giữ khi mở lại.",
+  "language": "Ngôn ngữ",
+  "localeVi": "Tiếng Việt",
+  "localeEn": "Tiếng Anh",
+  "userMenu": {
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất",
+    "triggerLabel": "Menu người dùng",
+    "loading": "Đang tải…"
+  }
+}

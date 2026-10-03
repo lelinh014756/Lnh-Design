@@ -1,0 +1,5 @@
+{
+  "title": "Components",
+  "subtitle": "App-level components built on shadcn primitives restyled for radix-mira. Install them one at a time; primitives come along as dependencies.",
+  "countSuffix": "components"
+}

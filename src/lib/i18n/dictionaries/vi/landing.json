@@ -1,0 +1,81 @@
+{
+  "hero": {
+    "eyebrow": "Registry UI nội bộ",
+    "title": "Một hệ UI. Mọi sản phẩm.",
+    "titleAccent": "Mọi sản phẩm.",
+    "subtitle": "AureCook phân phối component chuẩn của đội qua registry shadcn: chạy một lệnh là có mã nguồn nằm trong repo bạn, sửa thoải mái, không khoá vào thư viện nào.",
+    "ctaPrimary": "Bắt đầu",
+    "ctaSecondary": "Xem component",
+    "installHint": "Cài một item bất kỳ:"
+  },
+  "stats": {
+    "components": "component",
+    "blocks": "block",
+    "templates": "template",
+    "caption": "Đếm trực tiếp từ catalog, không phải số viết tay."
+  },
+  "problem": {
+    "title": "Vì sao cần thứ này",
+    "subtitle": "Hai dự án cùng công ty, cùng shadcn, nhưng không dùng lại được của nhau. Mỗi lần dựng màn mới là dựng lại từ đầu.",
+    "colAspect": "Hạng mục",
+    "colBefore": "Trước khi có AureCook",
+    "colAfter": "Sau khi có AureCook",
+    "rows": {
+      "style": {
+        "aspect": "Style shadcn",
+        "before": "Mỗi repo một style, cùng Button ra hai hình dạng",
+        "after": "Một style radix-mira, khoá trong tokens package"
+      },
+      "icons": {
+        "aspect": "Thư viện icon",
+        "before": "Trộn lucide và hugeicons, khai báo lệch với code thật",
+        "after": "lucide cho mọi item vào registry"
+      },
+      "alias": {
+        "aspect": "Alias import",
+        "before": "@/components/ui ở repo này, chỗ khác lại khác",
+        "after": "Placeholder @ui/ @lib/ tự đặt đúng chỗ theo từng repo"
+      },
+      "version": {
+        "aspect": "Version phụ thuộc",
+        "before": "lucide ^1.9 và ^1.34 cùng tồn tại, vỡ khi copy component",
+        "after": "Sàn version khai ngay trong registry item"
+      }
+    }
+  },
+  "channels": {
+    "title": "Hai kênh phân phối",
+    "subtitle": "Thứ không được phép khác nhau thì khoá version. Thứ cần khác nhau theo sản phẩm thì copy về, đội tự sửa.",
+    "npmTitle": "npm package",
+    "npmBody": "Token màu, tailwind preset, tsconfig, eslint config. Cài như dependency thường, nâng version là cả hệ đổi theo.",
+    "npmPoint1": "Khoá version, không cho lệch",
+    "npmPoint2": "Nâng cấp tập trung",
+    "npmPoint3": "Không sửa được ở repo khách",
+    "registryTitle": "shadcn registry",
+    "registryBody": "Component, block, template. CLI chép mã nguồn vào repo bạn — đọc được, sửa được, không có lớp trừu tượng nào ở giữa.",
+    "registryPoint1": "Mã nguồn nằm trong repo bạn",
+    "registryPoint2": "Sửa tự do theo nghiệp vụ",
+    "registryPoint3": "Cảnh báo khi cài đè bản đã sửa"
+  },
+  "usage": {
+    "title": "Dùng thế nào",
+    "step1Title": "Khai registry một lần",
+    "step1Body": "Thêm khối registries vào components.json của repo bạn.",
+    "step2Title": "Cài item cần dùng",
+    "step2Body": "CLI tự kéo cả phụ thuộc registry lẫn npm.",
+    "step3Title": "Sửa theo nghiệp vụ",
+    "step3Body": "Mã đã nằm trong repo bạn — không cần chờ ai release."
+  },
+  "cta": {
+    "title": "Bắt đầu từ đâu",
+    "body": "Đọc phần cài đặt, hoặc nhảy thẳng vào danh mục component.",
+    "primary": "Đọc tài liệu",
+    "secondary": "Duyệt catalog"
+  },
+  "footer": {
+    "tagline": "Hệ UI dùng chung cho các sản phẩm nội bộ.",
+    "product": "Sản phẩm",
+    "resources": "Tài nguyên",
+    "rights": "Bảo lưu mọi quyền."
+  }
+}

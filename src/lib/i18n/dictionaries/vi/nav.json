@@ -1,0 +1,13 @@
+{
+  "home": "Trang chủ",
+  "components": "Component",
+  "blocks": "Block",
+  "templates": "Template",
+  "docs": "Tài liệu",
+  "icons": "Icon",
+  "tokens": "Token",
+  "internal": "Khu vực nội bộ",
+  "registry": "Registry",
+  "changelog": "Nhật ký thay đổi",
+  "readiness_none": "Màn hình chưa dựng"
+}

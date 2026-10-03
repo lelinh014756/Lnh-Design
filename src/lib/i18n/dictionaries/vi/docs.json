@@ -1,0 +1,47 @@
+{
+  "title": "Tài liệu",
+  "subtitle": "Cài đặt, quy ước, hợp đồng i18n và quy trình cập nhật.",
+  "onThisPage": "Trong trang này",
+  "next": "Tiếp theo",
+  "previous": "Trước đó",
+  "editPage": "Sửa trang này",
+  "sectionSetup": "Bắt đầu",
+  "sectionConventions": "Quy ước",
+  "sectionRegistry": "Registry",
+  "sections": {
+    "intro": {
+      "title": "AureCook là gì",
+      "body": "Một registry shadcn nội bộ. Bạn khai registry một lần trong components.json, rồi cài từng component bằng CLI — mã nguồn chép thẳng vào repo bạn, không có package nào đứng giữa để phải chờ release."
+    },
+    "install": {
+      "title": "Cài đặt",
+      "step1": "Khai registry công khai trong components.json của repo bạn:",
+      "step2": "Cài item đầu tiên. CLI tự kéo cả phụ thuộc registry lẫn gói npm:",
+      "step3": "Xong. File nằm ở đúng thư mục theo alias của repo bạn, không phải theo alias của AureCook."
+    },
+    "internal": {
+      "title": "Registry nội bộ",
+      "body": "Item nội bộ nằm ở namespace riêng và cần token. Đặt AURECOOK_TOKEN vào biến môi trường của máy hoặc CI — không bao giờ commit vào repo."
+    },
+    "i18n": {
+      "title": "Hợp đồng i18n",
+      "body": "Component trong registry không được đòi repo khách phải có từ điển. Chuỗi hiển thị đi qua ba tầng, theo thứ tự ưu tiên giảm dần.",
+      "tier1": "Prop labels do nơi gọi truyền — thắng tất cả.",
+      "tier2": "Object localization truyền vào component gốc — dịch cả cụm một lần.",
+      "tier3": "Mặc định tiếng Anh gắn sẵn trong item — cài vào repo trống là chạy được ngay.",
+      "warning": "Item nào còn đọc thẳng từ điển của app là item chưa cài được vào repo trống. registry-builder in cảnh báo cho từng file như vậy ở mỗi lần build."
+    },
+    "update": {
+      "title": "Cập nhật item đã cài",
+      "body": "Chạy lại đúng lệnh add. CLI hỏi trước khi ghi đè file bạn đã sửa — đọc diff rồi mới quyết định, đừng bấm đồng ý theo phản xạ.",
+      "warning": "Mã đã nằm trong repo bạn nghĩa là bạn sở hữu nó. Sửa thoải mái, nhưng sửa rồi thì mỗi lần cập nhật là một lần merge thủ công — đó là cái giá của việc không bị khoá vào thư viện."
+    },
+    "conventions": {
+      "title": "Quy ước",
+      "naming": "Tên file kebab-case, mô tả rõ mục đích. Slug của item trùng với tên thư mục và tham số route xem trước.",
+      "loc": "Giới hạn dòng: component và hook ≤500, page và layout ≤700, config ≤1000. Vượt thì tách theo ranh giới logic, không tách cho đủ số.",
+      "icons": "lucide cho mọi thứ vào registry. Một thư viện icon, không có ngoại lệ.",
+      "comments": "Chú thích giải thích TẠI SAO, không tham chiếu số phase hay mã finding — những thứ đó biến mất còn mã thì ở lại."
+    }
+  }
+}

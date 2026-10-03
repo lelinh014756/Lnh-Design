@@ -1,0 +1,13 @@
+{
+  "title": "Icons",
+  "subtitle": "The lucide set — the single icon library for everything in the registry. Click to copy the name or the JSX.",
+  "searchPlaceholder": "Search icons by name…",
+  "size": "Size",
+  "strokeWidth": "Stroke width",
+  "copyName": "Copy name",
+  "copyJsx": "Copy JSX",
+  "copiedName": "Copied {name}",
+  "copiedJsx": "Copied JSX for {name}",
+  "empty": "No icon by that name.",
+  "resultCount": "{count} icons"
+}

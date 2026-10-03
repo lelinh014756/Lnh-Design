@@ -1,0 +1,13 @@
+{
+  "title": "Icon",
+  "subtitle": "Bộ lucide — thư viện icon duy nhất cho mọi thứ vào registry. Bấm để chép tên hoặc JSX.",
+  "searchPlaceholder": "Tìm icon theo tên…",
+  "size": "Cỡ",
+  "strokeWidth": "Độ dày nét",
+  "copyName": "Chép tên",
+  "copyJsx": "Chép JSX",
+  "copiedName": "Đã chép tên {name}",
+  "copiedJsx": "Đã chép JSX của {name}",
+  "empty": "Không có icon nào tên như vậy.",
+  "resultCount": "{count} icon"
+}

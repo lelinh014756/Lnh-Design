@@ -1,0 +1,13 @@
+{
+  "home": "Home",
+  "components": "Components",
+  "blocks": "Blocks",
+  "templates": "Templates",
+  "docs": "Docs",
+  "icons": "Icons",
+  "tokens": "Tokens",
+  "internal": "Internal",
+  "registry": "Registry",
+  "changelog": "Changelog",
+  "readiness_none": "Screen not built yet"
+}

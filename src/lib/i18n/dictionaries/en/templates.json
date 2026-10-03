@@ -1,0 +1,14 @@
+{
+  "title": "Templates",
+  "subtitle": "Multi-page products built from the very components and blocks in this registry.",
+  "countSuffix": "templates",
+  "livePreview": "Live preview",
+  "getTemplate": "Get the template",
+  "details": "Details",
+  "framework": "Framework",
+  "base": "Base",
+  "style": "Style",
+  "surface": "Surface",
+  "techStack": "Tech stack",
+  "empty": "No template here yet."
+}

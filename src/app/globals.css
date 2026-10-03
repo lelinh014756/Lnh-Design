@@ -1,0 +1,644 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-brand-secondary: var(--brand-secondary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* Custome */
+    --height-header: var(--header-height);
+    --color-landing-surface: var(--landing-surface-warm);
+    --height-landing-header: var(--landing-header-height);
+
+      @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  --animate-table-progress: table-progress 1.2s ease-in-out infinite;
+
+  @keyframes table-progress {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+
+  --font-heading: var(--font-sans);
+
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  --radius-3xl: calc(var(--radius) * 2.2);
+
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    /* Brand AureCook: primary #1B49F5 · phụ #7839EE */
+    --primary: oklch(0.508 0.258 265.14);
+    --primary-foreground: oklch(0.98 0.02 265.14);
+    --brand-secondary: oklch(0.537 0.248 291.51);
+    /* Điểm dừng thứ 2 cho nền gradient sidebar — gán thẳng theo --brand-secondary
+       (chỉ 1 brand, không cần giá trị riêng — xem I.5 mục 12). */
+    --brand-accent-2: var(--brand-secondary);
+    --secondary: oklch(0.967 0.001 286.375);
+    --secondary-foreground: oklch(0.21 0.006 285.885);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    /* Dải màu biểu đồ suy từ --primary nên tự đi theo màu thương hiệu đang
+       chọn. Bảng xám mặc định của shadcn khiến các lát donut gần như không
+       phân biệt được. Dải đơn sắc (đậm → nhạt) hợp với dữ liệu có thứ bậc như
+       hạng A/B/C hơn là dải nhiều màu. */
+    --chart-1: var(--primary);
+    --chart-2: oklch(from var(--primary) calc(l + 0.11) calc(c * 0.88) h);
+    --chart-3: oklch(from var(--primary) calc(l + 0.22) calc(c * 0.72) h);
+    --chart-4: oklch(from var(--primary) calc(l + 0.32) calc(c * 0.54) h);
+    --chart-5: oklch(from var(--primary) calc(l + 0.40) calc(c * 0.36) h);
+    --radius: 0.625rem;
+    /* Nền tảng của nhóm token sidebar. Tách riêng khỏi --sidebar-* để ô xem
+       trước kiểu sidebar kéo lại được giá trị "không áp kiểu nào" ngay cả khi
+       <html> đang mang một kiểu khác — xem khối "kiểu nền sidebar" bên dưới. */
+    --sidebar-base: oklch(100% 0.00011 271.152);
+    --sidebar-foreground-base: oklch(0.145 0 0);
+    --sidebar-primary-base: var(--primary);
+    --sidebar-primary-foreground-base: var(--primary-foreground);
+    --sidebar-accent-base: oklch(0.97 0 0);
+    --sidebar-accent-foreground-base: oklch(0.205 0 0);
+    --sidebar-border-base: oklch(0.922 0 0);
+
+    --sidebar: var(--sidebar-base);
+    --sidebar-foreground: var(--sidebar-foreground-base);
+    --sidebar-primary: var(--sidebar-primary-base);
+    --sidebar-primary-foreground: var(--sidebar-primary-foreground-base);
+    --sidebar-accent: var(--sidebar-accent-base);
+    --sidebar-accent-foreground: var(--sidebar-accent-foreground-base);
+    --sidebar-border: var(--sidebar-border-base);
+    --sidebar-ring: oklch(0.708 0 0);
+    --input-autofill: #fff;
+
+    /* Custome */
+    --header-height: 50px;
+    --container-max-width: 1920px;
+
+    /* Landing — nền kem ấm để cắt nhịp giữa các dải trắng, thay cho việc đổ
+       bóng lên mọi thẻ. Hue lệch nhẹ khỏi trung tính, cố ý. */
+    --landing-surface-warm: oklch(0.981 0.009 96);
+    /* Nền chuyển sắc rất nhạt cho các dải section xen kẽ. Dẫn xuất từ
+       --primary nên đổi màu thương hiệu là cả hệ đi theo, không phải sửa tay
+       từng chỗ. */
+    --landing-gradient-from: oklch(from var(--primary) 0.985 calc(c * 0.05) h);
+    --landing-gradient-to: oklch(from var(--primary) 0.962 calc(c * 0.16) h);
+    --landing-card-shadow:
+        0 8px 30px -4px oklch(from var(--primary) 0.35 calc(c * 0.8) h / 0.05),
+        0 8px 30px -6px oklch(from var(--primary) 0.55 calc(c * 0.6) h / 0.07);
+    --landing-header-height: 4rem;
+}
+
+.dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    /* Brand AureCook (dark): primary #1B49F5 · phụ #7839EE.
+       ⚠️ PLACEHOLDER — chỉ suy diễn cơ học từ bản light (L+, C− cùng H, đúng
+       nguyên tắc pattern sẵn có), CHƯA tự tay tinh chỉnh bằng mắt theo I.5
+       mục 12. Cần duyệt lại độ tương phản khi build UI thật trên nền tối. */
+    --primary: oklch(0.62 0.22 265.14);
+    --primary-foreground: oklch(0.98 0.02 265.14);
+    --brand-secondary: oklch(0.62 0.2 291.51);
+    --brand-accent-2: var(--brand-secondary);
+    --secondary: oklch(0.274 0.006 286.033);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    /* Nền tối: đi ngược lại, từ --primary nhạt dần xuống để giữ tương phản. */
+    --chart-1: var(--primary);
+    --chart-2: oklch(from var(--primary) calc(l - 0.09) calc(c * 0.88) h);
+    --chart-3: oklch(from var(--primary) calc(l - 0.17) calc(c * 0.72) h);
+    --chart-4: oklch(from var(--primary) calc(l - 0.24) calc(c * 0.54) h);
+    --chart-5: oklch(from var(--primary) calc(l - 0.30) calc(c * 0.36) h);
+    --sidebar-base: oklch(0.205 0 0);
+    /* Phải trung tính như --foreground (giống quy ước ở :root line ~128), KHÔNG
+       bind vào --primary — nếu không toàn bộ chữ menu item (không riêng item
+       active) sẽ nhuộm theo màu thương hiệu đang chọn. */
+    --sidebar-foreground-base: var(--foreground);
+    /* var(--primary)/var(--primary-foreground) thay vì hardcode — mục sidebar
+       đang active luôn bám đúng màu thương hiệu từ một nguồn duy nhất. */
+    --sidebar-primary-base: var(--primary);
+    --sidebar-primary-foreground-base: var(--primary-foreground);
+    --sidebar-accent-base: oklch(0.269 0 0);
+    --sidebar-accent-foreground-base: oklch(0.985 0 0);
+    --sidebar-border-base: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+    --input-autofill: #151515;
+    --landing-surface-warm: oklch(0.19 0.008 96);
+    --landing-gradient-from: oklch(from var(--primary) 0.195 calc(c * 0.14) h);
+    --landing-gradient-to: oklch(from var(--primary) 0.168 calc(c * 0.24) h);
+    --landing-card-shadow:
+        0 8px 30px -4px oklch(0 0 0 / 0.3),
+        0 8px 30px -6px oklch(0 0 0 / 0.24);
+}
+
+/* Appearance — màu thương hiệu
+   ─────────────────────────────────────────────────────────────────────────
+   AureCook chỉ có MỘT brand, nên không còn khối `[data-brand="..."]`: token
+   --primary/--brand-secondary/--brand-accent-2 khai một lần ở :root/.dark
+   phía trên là đủ. Cơ chế đổi nền sidebar (`data-sidebar-style`) vẫn giữ —
+   nó độc lập với brand và là thứ trang /tokens cho phép thử trực tiếp. */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Appearance — kiểu nền sidebar
+   ═══════════════════════════════════════════════════════════════════════════
+   Bật qua thuộc tính `data-sidebar-style` trên <html> (AccountNav → "Kiểu
+   sidebar"). Không có thuộc tính = nền mặc định hiện tại, không đổi gì.
+
+   "Đặc tối" và "Gradient thương hiệu" cố định là mảng tối bất kể light/dark
+   app — giống Discord/Linear, sidebar là một khối riêng không đổi theo theme
+   nội dung. "Nhạt màu nhấn" thì ngược lại, phải đổi theo light/dark vì nền
+   pha loãng sáng sẽ chói mắt trên nội dung tối.
+
+   QUY TẮC BẮT BUỘC khi thêm kiểu mới: mỗi khối phải khai đủ 7 token sidebar,
+   không được bỏ trống token nào với suy nghĩ "không set thì lấy mặc định".
+   Ô xem trước trong AccountNav cũng mang chính thuộc tính này, nên "mặc định"
+   ở đó là giá trị đang kế thừa từ <html>, không phải giá trị ở :root.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Mặc định — lấy lại nhóm --sidebar-*-base ở :root/.dark, nên tự đúng theo
+   sáng/tối và theo brand đang chọn. */
+[data-sidebar-style="default"] {
+    --sidebar: var(--sidebar-base);
+    --sidebar-foreground: var(--sidebar-foreground-base);
+    --sidebar-accent: var(--sidebar-accent-base);
+    --sidebar-accent-foreground: var(--sidebar-accent-foreground-base);
+    --sidebar-border: var(--sidebar-border-base);
+    --sidebar-primary: var(--sidebar-primary-base);
+    --sidebar-primary-foreground: var(--sidebar-primary-foreground-base);
+}
+
+/* Đặc tối */
+[data-sidebar-style="solid"] {
+    --sidebar: oklch(0.19 0.006 250);
+    --sidebar-foreground: oklch(0.72 0.006 250);
+    --sidebar-accent: oklch(0.26 0.008 250);
+    --sidebar-accent-foreground: oklch(0.96 0.004 250);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+}
+
+/* Gradient thương hiệu — background-color (biến --sidebar) chỉ là lớp dự
+   phòng cho những chỗ dùng bg-sidebar dạng đặc (vd Sheet trên mobile); ảnh
+   gradient thật vẽ đè lên qua [data-slot="sidebar-inner"] bên dưới. */
+[data-sidebar-style="gradient"] {
+    --sidebar: var(--primary);
+    --sidebar-foreground: oklch(1 0 0 / 72%);
+    --sidebar-accent: oklch(1 0 0 / 10%);
+    --sidebar-accent-foreground: oklch(1 0 0);
+    --sidebar-border: oklch(1 0 0 / 14%);
+    --sidebar-primary: oklch(1 0 0 / 18%);
+    --sidebar-primary-foreground: oklch(1 0 0);
+}
+[data-sidebar-style="gradient"] [data-slot="sidebar-inner"] {
+    background-image: linear-gradient(165deg, var(--primary), var(--brand-accent-2));
+}
+
+/* Nhạt màu nhấn — pha loãng trực tiếp từ --primary bằng cú pháp oklch(from …)
+   nên tự đổi đúng theo brand đang chọn, không cần lặp lại cho từng brand. */
+[data-sidebar-style="tint"] {
+    --sidebar: oklch(from var(--primary) 0.96 calc(c * 0.3) h);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-accent: oklch(1 0 0);
+    --sidebar-accent-foreground: oklch(from var(--primary) 0.4 c h);
+    --sidebar-border: oklch(from var(--primary) 0.88 calc(c * 0.5) h);
+    --sidebar-primary: oklch(1 0 0);
+    --sidebar-primary-foreground: oklch(from var(--primary) 0.4 c h);
+}
+.dark[data-sidebar-style="tint"],
+.dark [data-sidebar-style="tint"] {
+    /* Nền pha loãng sáng không hợp với app tối — đổi sang nền tối ám màu
+       thương hiệu, mục active dùng khối đặc thay vì "thẻ nổi" như bản sáng.
+       Nhánh hậu duệ dành cho ô xem trước: nó nằm trong <html class="dark">
+       chứ không tự mang class, nên selector gộp `.dark[…]` sẽ không khớp. */
+    --sidebar: oklch(from var(--primary) 0.22 calc(c * 0.6) h);
+    --sidebar-foreground: oklch(from var(--primary) 0.85 calc(c * 0.15) h);
+    --sidebar-accent: oklch(from var(--primary) 0.3 calc(c * 0.55) h);
+    --sidebar-accent-foreground: oklch(0.98 0 0);
+    --sidebar-border: oklch(1 0 0 / 8%);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+}
+/* Mục active nổi hẳn khỏi nền nhạt bằng bóng đổ nhẹ màu thương hiệu — chỉ áp
+   ở bản sáng vì bản tối dùng khối đặc (--sidebar-primary), tự đã tương phản đủ. */
+[data-sidebar-style="tint"] [data-slot="sidebar-menu-button"][data-active="true"] {
+    box-shadow: 0 3px 10px -4px oklch(from var(--primary) l c h / 40%);
+}
+.dark[data-sidebar-style="tint"] [data-slot="sidebar-menu-button"][data-active="true"] {
+    box-shadow: none;
+}
+
+/* Ô xem trước kiểu sidebar (AccountNav → "Kiểu sidebar").
+   Dùng thuộc tính riêng `data-sidebar-preview` cho phần vẽ, không tái dùng
+   [data-slot="sidebar-inner"]: selector hậu duệ của kiểu gradient sẽ khớp mọi
+   ô lồng trong <html> khi html đang bật gradient, kể cả ô kiểu khác. */
+[data-sidebar-preview="gradient"] {
+    background-image: linear-gradient(165deg, var(--primary), var(--brand-accent-2));
+    /* Chấm ở 18% như sidebar thật gần như chìm hẳn trên ô 32×44px. */
+    --sidebar-primary: oklch(1 0 0 / 65%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+    }
+  html {
+    @apply font-sans;
+    }
+
+      /* CHỉnh màu auto fill input*/
+  input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    /* Ép màu nền về đúng màu nền của Input (dùng biến của Shadcn) */
+    -webkit-box-shadow: 0 0 0px 1000px var(--input-autofill) inset !important;
+    
+    /* Ép màu chữ về đúng màu văn bản của bạn */
+    -webkit-text-fill-color: var(--foreground) !important;
+    
+    /* Chỉnh độ mượt của font chữ */
+    caret-color: var(--foreground);
+  }
+
+  /* FloatingInput forceLight — luôn nền sáng, kể cả dark + autofill trình duyệt */
+  [data-force-light] {
+    color-scheme: light;
+    background-color: #ffffff !important;
+    color: #171717 !important;
+  }
+
+  [data-force-light] input {
+    color: #171717 !important;
+    caret-color: #171717 !important;
+    -webkit-text-fill-color: #171717;
+  }
+
+  [data-force-light] input:-webkit-autofill,
+  [data-force-light] input:-webkit-autofill:hover,
+  [data-force-light] input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #171717 !important;
+    caret-color: #171717 !important;
+  }
+}
+
+/* Typography */
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-foreground;
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   Landing — lớp phủ hero
+   ═══════════════════════════════════════════════════════════════════════════
+   Đủ đậm ở mép chữ để chữ trắng đạt tương phản AA, mờ dần sang phía đối diện
+   để không giết ảnh nền. Dẫn xuất từ --primary bằng cú pháp màu tương đối
+   (cùng kỹ thuật đã dùng cho --chart-2..5) nên đổi màu thương hiệu là lớp phủ
+   đi theo, không phải sửa tay.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.landing-hero-scrim {
+    background-image: linear-gradient(
+        176deg,
+        oklch(from var(--primary) 0.34 calc(c * 1.1) h / 0.5) 0%,
+        oklch(from var(--primary) 0.31 calc(c * 1) h / 0.68) 55%,
+        oklch(from var(--primary) 0.28 calc(c * 0.95) h / 0.82) 100%
+    );
+}
+
+@media (min-width: 768px) {
+    /* Từ tablet trở lên chữ dồn về trái nên chuyển sang phủ chéo, chừa nửa phải
+       cho ảnh nền lộ ra. Độ đục dừng ở mức vừa đủ cho chữ trắng đạt AA —
+       đẩy cao hơn là ảnh chìm hẳn, lúc đó dùng nền màu trơn còn nhẹ hơn. */
+    .landing-hero-scrim {
+        background-image: linear-gradient(
+            100deg,
+            oklch(from var(--primary) 0.3 calc(c * 1.1) h / 0.84) 0%,
+            oklch(from var(--primary) 0.34 calc(c * 1) h / 0.64) 40%,
+            oklch(from var(--primary) 0.4 calc(c * 0.8) h / 0.2) 66%,
+            transparent 92%
+        );
+    }
+}
+
+/* Auth hero (cột trái trang đăng nhập) — ảnh nền hazy/sáng hơn ảnh landing,
+   không có vùng tối tự nhiên cho chữ trắng bám vào. Phủ dọc theo chiều nội
+   dung (badge → tiêu đề → mô tả → danh sách), đậm dần xuống dưới vì phần
+   danh sách dày chữ nhất. Cùng kỹ thuật derive từ --primary như trên. */
+.auth-hero-scrim {
+    background-image: linear-gradient(
+        165deg,
+        oklch(from var(--primary) 0.32 calc(c * 1) h / 0.55) 0%,
+        oklch(from var(--primary) 0.3 calc(c * 1) h / 0.7) 45%,
+        oklch(from var(--primary) 0.26 calc(c * 0.9) h / 0.82) 100%
+    );
+}
+
+/* Hiện dần từng từ của tiêu đề hero.
+   Làm bằng CSS thuần thay vì JS: HTML dựng sẵn giữ nguyên chữ ở trạng thái
+   nhìn thấy được, `backwards` mới kéo nó về trạng thái đầu khi animation chạy.
+   Nhờ vậy trình duyệt không chạy JS vẫn đọc được tiêu đề. */
+@keyframes landing-word-in {
+    from {
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+.landing-word {
+    display: inline-block;
+    animation: landing-word-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-word {
+        animation: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Landing — bề mặt & thẻ
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Dải nền chuyển sắc dùng xen kẽ với nền trắng để cắt nhịp dọc trang. */
+.landing-gradient-surface {
+    background-image: linear-gradient(
+        226deg,
+        var(--landing-gradient-from) 0%,
+        var(--landing-gradient-to) 100%
+    );
+}
+
+/* Thẻ nổi trên nền chuyển sắc: nền trắng hơi trong để lộ sắc nền phía sau,
+   viền sáng mảnh và bóng rất nhạt — đủ tách khỏi nền mà không thành hộp nặng. */
+.landing-soft-card {
+    background: color-mix(in oklab, var(--card) 82%, transparent);
+    box-shadow: var(--landing-card-shadow);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Landing — hoạt hoạ minh hoạ trong SVG
+   ═══════════════════════════════════════════════════════════════════════════
+   Các section minh hoạ nghiệp vụ bằng SVG vẽ tay thay vì Lottie: không thêm
+   runtime, không tải JSON, và tự tắt theo prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes landing-draw {
+    from {
+        stroke-dashoffset: var(--dash, 200);
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes landing-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(4px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.06) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes landing-fade-cycle {
+    0%,
+    8% {
+        opacity: 0;
+    }
+    18%,
+    82% {
+        opacity: 1;
+    }
+    92%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes landing-travel {
+    0% {
+        offset-distance: 0%;
+    }
+    100% {
+        offset-distance: 100%;
+    }
+}
+
+@keyframes landing-rise {
+    from {
+        transform: translateY(6px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes landing-pulse-ring {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.55;
+    }
+    100% {
+        transform: scale(1.9);
+        opacity: 0;
+    }
+}
+
+@keyframes landing-sweep {
+    0% {
+        transform: translateX(-30%);
+    }
+    100% {
+        transform: translateX(130%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-viz * {
+        animation: none !important;
+        stroke-dashoffset: 0 !important;
+        opacity: 1 !important;
+        offset-distance: 50% !important;
+    }
+}
+
+/* Lớp dùng chung bên trong .landing-viz. Gom ở đây thay vì rải style inline:
+   mỗi hình minh hoạ chỉ còn phải khai độ trễ, phần còn lại thống nhất. */
+.landing-viz [data-anim] {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.landing-viz .viz-draw {
+    stroke-dasharray: var(--dash, 200);
+    animation: landing-draw 1.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.landing-viz .viz-pop {
+    animation: landing-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.landing-viz .viz-rise {
+    animation: landing-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.landing-viz .viz-travel {
+    animation: landing-travel 3.6s ease-in-out infinite;
+}
+
+.landing-viz .viz-ring {
+    animation: landing-pulse-ring 2.4s ease-out infinite;
+}
+
+.landing-viz .viz-sweep {
+    animation: landing-sweep 2.8s ease-in-out infinite;
+}
+
+.landing-viz .viz-cycle {
+    animation: landing-fade-cycle 4.4s ease-in-out infinite;
+}
+
+/* Nửa tiêu đề được nhấn: chuyển sắc trong lòng chữ, trôi rất chậm.
+   `--brand-secondary` bị ép tối lại vì bản gốc sáng ~89% — để nguyên thì trên
+   nền trắng gần như không đọc được. */
+@keyframes landing-text-shine {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.landing-title-accent {
+    background-image: linear-gradient(
+        76deg,
+        var(--primary) 0%,
+        var(--brand-accent-2) 46%,
+        oklch(from var(--brand-secondary) 0.7 c h) 100%
+    );
+    background-size: 400% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: landing-text-shine 6s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-title-accent {
+        animation: none;
+    }
+}

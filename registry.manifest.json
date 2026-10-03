@@ -1,0 +1,321 @@
+{
+  "action-bar": {
+    "files": [
+      "src/components/ui/action-bar.tsx",
+      "src/hooks/use-as-ref.ts",
+      "src/hooks/use-isomorphic-layout-effect.ts"
+    ]
+  },
+  "actions-button": {
+    "files": [
+      "src/components/general/actions-button.tsx",
+      "src/config/actions-button.ts"
+    ]
+  },
+  "alert-dialog-status": {
+    "files": [
+      "src/components/feedback/alert-dialog-status.tsx"
+    ]
+  },
+  "app-avatar": {
+    "files": [
+      "src/components/data-display/app-avatar.tsx"
+    ]
+  },
+  "app-button": {
+    "files": [
+      "src/components/general/app-button.tsx"
+    ]
+  },
+  "app-card": {
+    "files": [
+      "src/components/layout/app-card.tsx"
+    ]
+  },
+  "app-content-shell": {
+    "files": [
+      "src/components/layout/app-content-shell.tsx"
+    ]
+  },
+  "app-dialog": {
+    "files": [
+      "src/components/feedback/app-dialog.tsx"
+    ]
+  },
+  "app-field": {
+    "files": [
+      "src/components/data-entry/app-field.tsx"
+    ]
+  },
+  "app-heading": {
+    "files": [
+      "src/components/general/app-heading.tsx"
+    ]
+  },
+  "app-icon": {
+    "files": [
+      "src/components/general/app-icon.tsx"
+    ]
+  },
+  "app-input": {
+    "files": [
+      "src/components/data-entry/app-input.tsx"
+    ]
+  },
+  "app-sheet": {
+    "files": [
+      "src/components/feedback/app-sheet.tsx"
+    ]
+  },
+  "app-title": {
+    "files": [
+      "src/components/general/app-title.tsx"
+    ]
+  },
+  "app-toolbar": {
+    "files": [
+      "src/components/layout/app-toolbar.tsx"
+    ]
+  },
+  "app-tooltip": {
+    "files": [
+      "src/components/data-display/app-tooltip.tsx"
+    ]
+  },
+  "appearance-picker": {
+    "files": [
+      "src/components/data-entry/appearance-picker.tsx",
+      "src/config/appearance.ts",
+      "src/store/appearance-store.ts"
+    ]
+  },
+  "auth-login": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "app-input",
+      "app-field"
+    ]
+  },
+  "badge-status": {
+    "files": [
+      "src/components/data-display/badge-status.tsx"
+    ]
+  },
+  "chart-card": {
+    "files": [
+      "src/components/layout/chart-card.tsx"
+    ]
+  },
+  "data-table": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "table-core",
+      "table-chrome"
+    ],
+    "files": [
+      "src/components/data-table/*.ts",
+      "src/components/data-table/*.tsx",
+      "src/components/data-table/body/*.tsx",
+      "src/components/data-table/footer/*.tsx",
+      "src/components/data-table/head/*.tsx",
+      "src/components/data-table/inputs/*.tsx",
+      "src/components/data-table/table/*.tsx",
+      "src/components/data-table/toolbar/*.tsx",
+      "src/components/data-table/lib/column-size-vars.ts",
+      "src/components/data-table/lib/data-table.ts",
+      "src/components/data-table/lib/export.ts",
+      "src/components/data-table/lib/labeled.ts",
+      "src/components/data-table/hooks/use-column-resize.ts",
+      "src/components/data-table/hooks/use-column-size-vars.ts",
+      "src/components/data-table/hooks/use-infinite-scroll.ts",
+      "src/lib/format.ts"
+    ]
+  },
+  "data-table-url": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "data-table"
+    ],
+    "files": [
+      "src/components/data-table/hooks/use-data-table.ts",
+      "src/components/data-table/lib/parsers.ts",
+      "src/components/data-table/menus/*.tsx",
+      "src/components/data-table/url/index.ts"
+    ]
+  },
+  "dev-portal": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "nav-tree",
+      "data-table"
+    ],
+    "files": [
+      "src/config/nav/dev-nav-config.ts"
+    ]
+  },
+  "empty-states": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "illustrations",
+      "fallback-shell"
+    ]
+  },
+  "fallback-shell": {
+    "files": [
+      "src/components/feedback/fallback-shell.tsx"
+    ]
+  },
+  "floating-input": {
+    "files": [
+      "src/components/data-entry/floating-input.tsx"
+    ]
+  },
+  "home-section-header": {
+    "files": [
+      "src/components/layout/home-section-header.tsx"
+    ]
+  },
+  "illustrations": {
+    "files": [
+      "src/components/illustrations/*.tsx",
+      "src/config/illustration-layout.ts"
+    ]
+  },
+  "marquee": {
+    "files": [
+      "src/components/data-display/marquee.tsx"
+    ]
+  },
+  "mode-toggle-button": {
+    "files": [
+      "src/components/general/mode-toggle-button.tsx"
+    ]
+  },
+  "nav-item-recursive": {
+    "files": [
+      "src/components/navigation/nav-item-recursive.tsx"
+    ]
+  },
+  "nav-tree": {
+    "type": "registry:block",
+    "files": [
+      "src/config/nav/nav-config.ts",
+      "src/config/nav/nav-readiness.ts"
+    ]
+  },
+  "note-confirm-dialog": {
+    "files": [
+      "src/components/feedback/note-confirm-dialog.tsx"
+    ]
+  },
+  "page-background": {
+    "files": [
+      "src/components/layout/page-background.tsx",
+      "src/config/assets.ts"
+    ]
+  },
+  "ping-indicator": {
+    "files": [
+      "src/components/feedback/ping-indicator.tsx"
+    ]
+  },
+  "refresh-button": {
+    "files": [
+      "src/components/general/refresh-button.tsx"
+    ]
+  },
+  "resize-image": {
+    "files": [
+      "src/components/data-display/resize-image.tsx"
+    ]
+  },
+  "search-input": {
+    "files": [
+      "src/components/data-entry/search-input.tsx"
+    ]
+  },
+  "sidebar": {
+    "files": [
+      "src/components/ui/sidebar.tsx",
+      "src/hooks/use-mobile.ts"
+    ]
+  },
+  "sortable": {
+    "files": [
+      "src/components/ui/sortable.tsx",
+      "src/lib/compose-refs.ts"
+    ]
+  },
+  "statistics-card": {
+    "files": [
+      "src/components/layout/statistics-card.tsx"
+    ]
+  },
+  "statistics-card-grid": {
+    "files": [
+      "src/components/layout/statistics-card-grid.tsx"
+    ]
+  },
+  "stats-overview": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "statistics-card",
+      "statistics-card-grid",
+      "chart-card"
+    ]
+  },
+  "status-switch": {
+    "files": [
+      "src/components/data-entry/status-switch.tsx"
+    ]
+  },
+  "table-chrome": {
+    "type": "registry:block",
+    "registryDependencies": [
+      "table-core"
+    ],
+    "files": [
+      "src/components/table/*.tsx",
+      "src/components/table/index.ts",
+      "src/components/table/settings/*.ts",
+      "src/components/table/settings/*.tsx",
+      "src/components/table/excel/*.ts",
+      "src/components/table/excel/*.tsx",
+      "!src/components/table/table-select-column.tsx"
+    ],
+    "cssVars": {
+      "theme": {
+        "--animate-table-progress": "table-progress 1.2s ease-in-out infinite"
+      }
+    },
+    "css": {
+      "@keyframes table-progress": {
+        "0%": {
+          "transform": "translateX(-100%)"
+        },
+        "100%": {
+          "transform": "translateX(400%)"
+        }
+      }
+    }
+  },
+  "table-core": {
+    "type": "registry:block",
+    "files": [
+      "src/hooks/table/*.ts",
+      "src/hooks/table/*.tsx",
+      "src/lib/table/*.ts",
+      "src/lib/table/localization/*.ts",
+      "src/lib/table/types.ts",
+      "src/components/table/table-select-column.tsx",
+      "src/hooks/use-debounced-callback.ts",
+      "src/hooks/use-callback-ref.ts",
+      "src/lib/id.ts"
+    ]
+  },
+  "toggle-group-theme": {
+    "files": [
+      "src/components/data-entry/toggle-group-theme.tsx"
+    ]
+  }
+}

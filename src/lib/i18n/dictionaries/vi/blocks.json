@@ -1,0 +1,13 @@
+{
+  "title": "Block",
+  "subtitle": "Cụm nhiều component đã ghép sẵn thành một mảng giao diện chạy được — chép về là có màn hình, không phải có mảnh ghép.",
+  "countSuffix": "block",
+  "searchPlaceholder": "Tìm block…",
+  "empty": "Không có block nào khớp bộ lọc.",
+  "kinds": {
+    "all": "Tất cả",
+    "application": "Ứng dụng",
+    "data-grid": "Bảng dữ liệu",
+    "solutions": "Giải pháp"
+  }
+}

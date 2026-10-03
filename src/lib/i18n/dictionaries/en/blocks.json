@@ -1,0 +1,13 @@
+{
+  "title": "Blocks",
+  "subtitle": "Multi-component compositions that already work as a slice of UI — you get a screen, not a pile of parts.",
+  "countSuffix": "blocks",
+  "searchPlaceholder": "Search blocks…",
+  "empty": "No block matches these filters.",
+  "kinds": {
+    "all": "All",
+    "application": "Application",
+    "data-grid": "Data Grid",
+    "solutions": "Solutions"
+  }
+}

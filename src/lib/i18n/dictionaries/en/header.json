@@ -1,0 +1,16 @@
+{
+  "guide": "Guide",
+  "notifications": "Notifications",
+  "settings": "Settings",
+  "settingsTheme": "Theme",
+  "settingsThemeHint": "Select theme — saved in browser, applies immediately and persists on reload.",
+  "language": "Language",
+  "localeVi": "Tiếng Việt",
+  "localeEn": "English",
+  "userMenu": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "triggerLabel": "User menu",
+    "loading": "Loading…"
+  }
+}

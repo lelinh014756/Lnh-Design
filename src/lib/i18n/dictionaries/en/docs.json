@@ -1,0 +1,47 @@
+{
+  "title": "Docs",
+  "subtitle": "Setup, conventions, the i18n contract, and the update workflow.",
+  "onThisPage": "On this page",
+  "next": "Next",
+  "previous": "Previous",
+  "editPage": "Edit this page",
+  "sectionSetup": "Getting started",
+  "sectionConventions": "Conventions",
+  "sectionRegistry": "Registry",
+  "sections": {
+    "intro": {
+      "title": "What AureCook is",
+      "body": "An internal shadcn registry. Declare it once in components.json, then install components with the CLI — the source lands in your repo, with no package in between to wait on for releases."
+    },
+    "install": {
+      "title": "Setup",
+      "step1": "Declare the public registry in your repo's components.json:",
+      "step2": "Install your first item. The CLI pulls both registry and npm dependencies:",
+      "step3": "Done. Files land in your repo's own alias directories, not AureCook's."
+    },
+    "internal": {
+      "title": "Private registry",
+      "body": "Internal items live in their own namespace and need a token. Put AURECOOK_TOKEN in your shell or CI environment — never commit it."
+    },
+    "i18n": {
+      "title": "The i18n contract",
+      "body": "A registry component must never require the consuming repo to have a dictionary. User-facing strings resolve through three tiers, highest priority first.",
+      "tier1": "A labels prop from the call site — wins over everything.",
+      "tier2": "A localization object passed to the root component — translates a whole cluster at once.",
+      "tier3": "English defaults baked into the item — it runs in a blank repo as-is.",
+      "warning": "Any item still reading the app dictionary directly is not installable in a blank repo. registry-builder prints a warning per such file on every build."
+    },
+    "update": {
+      "title": "Updating an installed item",
+      "body": "Run the same add command again. The CLI asks before overwriting files you have edited — read the diff before deciding, don't accept by reflex.",
+      "warning": "Once the code is in your repo it is yours. Edit freely, but every update after that is a manual merge — that is the price of not being locked into a library."
+    },
+    "conventions": {
+      "title": "Conventions",
+      "naming": "Files are kebab-case and describe their purpose. An item's slug matches its directory name and its preview route param.",
+      "loc": "Line limits: components and hooks ≤500, pages and layouts ≤700, config ≤1000. Split along logical boundaries, not to hit a number.",
+      "icons": "lucide for everything in the registry. One icon library, no exceptions.",
+      "comments": "Comments explain WHY, and never reference phase numbers or finding codes — those disappear while the code stays."
+    }
+  }
+}
