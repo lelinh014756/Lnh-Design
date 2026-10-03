@@ -26,8 +26,10 @@ export function ShowcaseContentShell({
   return (
     <div
       className={cn(
-        "h-full space-y-4 p-3",
-        isTableShell ? "flex flex-col" : "overflow-y-auto",
+        "space-y-4 p-3",
+        // Không tự cuộn: `ShowcaseShell` đã có vùng cuộn, cuộn lồng ở đây làm
+        // hỏng `position: sticky` của mục lục.
+        isTableShell ? "flex h-full flex-col" : "min-h-full",
         className
       )}
     >

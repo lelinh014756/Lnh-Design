@@ -67,79 +67,81 @@ export default async function ComponentDetailPage({
 
   return (
     <ShowcaseContentShell>
-      <PageHeader
-        crumbs={[
-          { label: dict.components.title, href: "/components" },
-          ...(category ? [{ label: t.categories[category], href: `/components#${category}` }] : []),
-          { label: item.name },
-        ]}
-        title={item.name}
-        description={item.description[locale]}
-        actions={
-          <div className="flex items-center gap-2">
-            {item.isNew && (
-              <Badge variant="secondary" className="rounded-4xl px-2.5 py-0.5">
-                {t.new}
-              </Badge>
-            )}
-            {item.visibility === "internal" && (
-              <Badge variant="outline" className="rounded-4xl px-2.5 py-0.5" title={t.internalOnlyHint}>
-                {t.internalOnly}
-              </Badge>
-            )}
-          </div>
-        }
-      />
+      {/* Mục lục là cột riêng chạy từ đỉnh trang, ngang hàng tiêu đề — không
+          nằm dưới header/lệnh cài, nên hai thứ đó không chiếm bề ngang của nó. */}
+      <div className="flex gap-8">
+        <div className="flex min-w-0 flex-1 flex-col gap-4">
+          <PageHeader
+            crumbs={[
+              { label: dict.components.title, href: "/components" },
+              ...(category ? [{ label: t.categories[category], href: `/components#${category}` }] : []),
+              { label: item.name },
+            ]}
+            title={item.name}
+            description={item.description[locale]}
+            actions={
+              <div className="flex items-center gap-2">
+                {item.isNew && (
+                  <Badge variant="secondary" className="rounded-4xl px-2.5 py-0.5">
+                    {t.new}
+                  </Badge>
+                )}
+                {item.visibility === "internal" && (
+                  <Badge variant="outline" className="rounded-4xl px-2.5 py-0.5" title={t.internalOnlyHint}>
+                    {t.internalOnly}
+                  </Badge>
+                )}
+              </div>
+            }
+          />
 
-      <ComponentInstallBar item={item} dependencies={dependencies} />
+          <ComponentInstallBar item={item} dependencies={dependencies} />
 
-      {demos.length === 0 ? (
-        <div className="flex flex-col items-center gap-1.5 rounded-lg border border-dashed px-6 py-14 text-center">
-          <p className="text-sm font-medium text-foreground">{t.previewPending}</p>
-          <p className="max-w-sm text-xs leading-5 text-muted-foreground">{t.previewPendingBody}</p>
+          {demos.length === 0 ? (
+            <div className="flex flex-col items-center gap-1.5 rounded-lg border border-dashed px-6 py-14 text-center">
+              <p className="text-sm font-medium text-foreground">{t.previewPending}</p>
+              <p className="max-w-sm text-xs leading-5 text-muted-foreground">{t.previewPendingBody}</p>
+            </div>
+          ) : (
+            // `@container`: DemoCard chia cột theo bề rộng khung này, không theo viewport.
+            <div className="@container flex min-w-0 flex-col">
+              <h2 className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
+                {t.examples}
+              </h2>
+              {demos.map((demo) => (
+                <DemoCard
+                  key={demo.id}
+                  id={demo.id}
+                  slug={slug}
+                  title={demo.title[locale]}
+                  description={demo.description?.[locale]}
+                  snippet={demo.snippet}
+                  source={demoSource(slug, demo.id)}
+                  component={demo.render}
+                  mode={demo.mode}
+                  layout={demo.layout}
+                />
+              ))}
+              {props.length > 0 && (
+                <PropsTable
+                  id="props"
+                  title={t.props}
+                  labels={{
+                    name: t.propName,
+                    type: t.propType,
+                    default: t.propDefault,
+                    description: t.propDescription,
+                  }}
+                  items={props}
+                  locale={locale}
+                />
+              )}
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="flex gap-8">
-          {/* `@container`: DemoCard chia cột theo bề rộng khung này, không theo viewport. */}
-          <div className="@container flex min-w-0 flex-1 flex-col">
-            <h2 className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
-              {t.examples}
-            </h2>
-            {demos.map((demo) => (
-              <DemoCard
-                key={demo.id}
-                id={demo.id}
-                slug={slug}
-                title={demo.title[locale]}
-                description={demo.description?.[locale]}
-                snippet={demo.snippet}
-                source={demoSource(slug, demo.id)}
-                component={demo.render}
-                mode={demo.mode}
-                layout={demo.layout}
-              />
-            ))}
-            {props.length > 0 && (
-              <PropsTable
-                id="props"
-                title={t.props}
-                labels={{
-                  name: t.propName,
-                  type: t.propType,
-                  default: t.propDefault,
-                  description: t.propDescription,
-                }}
-                items={props}
-                locale={locale}
-              />
-            )}
-          </div>
 
-          <div className="hidden w-44 shrink-0 lg:block">
-            <DocsToc label={dict.docs.onThisPage} sections={tocSections} />
-          </div>
-        </div>
-      )}
+        <DocsToc label={dict.docs.onThisPage} sections={tocSections} className="w-48 shrink-0" />
+      </div>
     </ShowcaseContentShell>
   );
 }
