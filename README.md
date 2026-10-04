@@ -71,7 +71,7 @@ Thêm vào `components.json` của dự án React:
 | `/blocks` | Tab theo loại (`?kind=`) + thẻ nhóm. Mỗi block: Xem trước / Mã nguồn, đổi theme, viewport, phóng to, chọn package manager, chép prompt AI |
 | `/templates` | Template nhiều trang |
 | `/docs` | Cài đặt, quy ước |
-| `/icons` | Toàn bộ icon lucide, đổi size/stroke, bấm chép tên |
+| `/icons` | Icon đã đăng ký trong `AppIcon` (vẽ qua provider đang active), đổi size/stroke, bấm chép tên |
 | `/tokens` | Bảng token đọc trực tiếp từ `globals.css` |
 | `/internal` | Khu vực nội bộ, cần đăng nhập |
 
@@ -84,7 +84,7 @@ Component render demo trực tiếp trong trang. Block render trong iframe vì c
 | Quyết định | Lý do |
 |---|---|
 | Registry item trỏ thẳng vào `src/`, không có bản chép thứ hai | Demo chính là nội dung phát hành — item hỏng thì demo hỏng theo, không có bản thứ hai để lệch |
-| Dùng lucide cho mọi thứ vào registry | Trộn hai thư viện icon là gốc rễ của giao diện lệch nhau |
+| Icon đi qua `AppIcon` + provider (hiện hugeicons), primitive `ui/` giữ lucide | Đổi thư viện bằng một dòng import trong `app-icon.tsx`; ESLint chặn import thẳng thư viện icon ở chỗ khác |
 | Dependency suy tự động từ `import`, không khai tay | Khai tay thì mỗi lần thêm import là một cơ hội quên, lỗi chỉ lộ ra ở máy người cài |
 | Catalog là data thuần, không chứa JSX | Script Node đọc thẳng được mà không cần bundler |
 | Mã nguồn demo trích nguyên văn từ file, không cắt theo marker | Một demo một file nên source không thể lệch với chính nó |

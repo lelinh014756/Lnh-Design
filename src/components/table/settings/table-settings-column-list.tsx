@@ -1,6 +1,6 @@
 "use client";
 
-import { Pin, RotateCcw } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -93,7 +93,7 @@ export function TableSettingsColumnList({
         <p className="font-medium text-sm">{labels.columnLayout}</p>
         {hasCustomLayout && (
           <Button variant="ghost" className="h-7 text-xs" onClick={onReset}>
-            <RotateCcw className="size-3.5" />
+            <AppIcon icon="rotate-ccw" className="size-3.5" />
             {labels.resetColumnLayout}
           </Button>
         )}
@@ -111,12 +111,12 @@ export function TableSettingsColumnList({
           {labels.columnVisibility}
         </span>
         <span className="text-center" title={labels.pinLeft}>
-          <Pin className="inline size-3 mr-1 rotate-90" />
+          <AppIcon icon="pin" className="inline size-3 mr-1 rotate-90" />
           {labels.pinLeft}
         </span>
         <span className="text-center" title={labels.pinRight}>
           {labels.pinRight}
-          <Pin className="inline size-3 ml-1 -rotate-90" />
+          <AppIcon icon="pin" className="inline size-3 ml-1 -rotate-90" />
         </span>
       </div>
 

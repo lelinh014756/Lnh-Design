@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { PlusIcon, TrashIcon } from "lucide-react";
 
 import AppIcon from "@/components/general/app-icon";
 import { Button } from "@/components/ui/button";
@@ -20,11 +19,11 @@ export const generalPreviews: PreviewMap = {
       <Button variant="secondary">Xem lại</Button>
       <Button variant="ghost">Bỏ qua</Button>
       <Button variant="destructive">
-        <TrashIcon />
+        <AppIcon icon="trash" />
         Xoá
       </Button>
       <Button size="sm">
-        <PlusIcon />
+        <AppIcon icon="plus" />
         Thêm
       </Button>
       <Button disabled>

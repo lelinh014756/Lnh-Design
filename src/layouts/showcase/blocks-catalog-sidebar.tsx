@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import {
   DropdownMenu,
@@ -66,7 +66,7 @@ export function BlocksCatalogSidebar({ items }: { items: BlockCatalogItem[] }) {
             <span className="ml-auto text-xs tabular-nums text-muted-foreground">
               {counts[kind]}
             </span>
-            <ChevronsUpDownIcon className="size-3.5 shrink-0 text-muted-foreground" />
+            <AppIcon icon="chevrons-up-down" className="size-3.5 shrink-0 text-muted-foreground" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-48">
             {BLOCK_KIND_FILTERS.map((option) => (
@@ -77,7 +77,7 @@ export function BlocksCatalogSidebar({ items }: { items: BlockCatalogItem[] }) {
                 }
                 className="gap-2"
               >
-                <CheckIcon
+                <AppIcon icon="check"
                   className={cn("size-3.5", option === kind ? "opacity-100" : "opacity-0")}
                 />
                 <span className="mr-auto">{t.kinds[option]}</span>

@@ -5,8 +5,8 @@ import type { NavReadiness } from './nav-readiness';
 /**
  * Mô hình dữ liệu điều hướng.
  *
- * `iconKey` là tên icon lucide (khoá trong `APP_ICONS`),
- * không phải Lucide như repo nguồn.
+ * `iconKey` là tên trong `ICON_NAMES` (render qua `AppIcon`), không phải
+ * component icon như repo nguồn.
  */
 
 export type NavPathMatchMode = 'exact' | 'prefix';

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ComponentType } from "react";
-import { CodeIcon, RefreshCwIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { CopyButton } from "@/components/general/copy-button";
 import { useT } from "@/lib/i18n/context";
@@ -84,7 +84,7 @@ export function DemoCard({
             title={t.reloadDemo}
             className={toolButton}
           >
-            <RefreshCwIcon className="size-3.5" />
+            <AppIcon icon="refresh-cw" className="size-3.5" />
           </button>
           {source && (
             <>
@@ -97,7 +97,7 @@ export function DemoCard({
                 title={codeOpen ? t.hideCode : t.showCode}
                 className={cn(toolButton, codeOpen && "bg-accent text-foreground")}
               >
-                <CodeIcon className="size-3.5" />
+                <AppIcon icon="code" className="size-3.5" />
               </button>
               <CopyButton value={source} label={t.copyCode} size="sm" />
             </>

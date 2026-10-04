@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRightIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -52,7 +52,7 @@ export const navigationPreviews: PreviewMap = {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm">
           Hành động
-          <ChevronRightIcon className="rotate-90" />
+          <AppIcon icon="chevron-right" className="rotate-90" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-52">

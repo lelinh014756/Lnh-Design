@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ChevronRightIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { cn } from "@/lib/utils";
 
@@ -37,7 +37,7 @@ export function PageHeader({
         <nav className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
           {crumbs.map((crumb, index) => (
             <span key={`${crumb.label}-${index}`} className="flex items-center gap-1">
-              {index > 0 && <ChevronRightIcon className="size-3.5 opacity-60" />}
+              {index > 0 && <AppIcon icon="chevron-right" className="size-3.5 opacity-60" />}
               {crumb.href ? (
                 <Link href={crumb.href} className="transition-colors hover:text-foreground">
                   {crumb.label}

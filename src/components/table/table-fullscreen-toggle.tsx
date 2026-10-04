@@ -1,7 +1,7 @@
 "use client";
 
 import type { RowData } from "@tanstack/react-table";
-import { Maximize, Minimize } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -65,9 +65,9 @@ export function TableFullscreenToggle<TData extends RowData>({
           onClick={() => setIsFullScreen(!isFullScreen)}
         >
           {isFullScreen ? (
-            <Minimize className="text-muted-foreground" />
+            <AppIcon icon="minimize" className="text-muted-foreground" />
           ) : (
-            <Maximize className="text-muted-foreground" />
+            <AppIcon icon="maximize" className="text-muted-foreground" />
           )}
         </Button>
       </TooltipTrigger>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MenuIcon, XIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { ModeToggleButton } from "@/components/general";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,7 @@ export function LandingHeaderClient({ nav }: { nav: Dictionary["nav"] }) {
             aria-expanded={menuOpen}
             className="grid size-8 place-items-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground md:hidden"
           >
-            {menuOpen ? <XIcon className="size-4.5" /> : <MenuIcon className="size-4.5" />}
+            {menuOpen ? <AppIcon icon="x" className="size-4.5" /> : <AppIcon icon="menu" className="size-4.5" />}
           </button>
         </div>
       </LandingContainer>

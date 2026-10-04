@@ -1,5 +1,5 @@
 import { useState, useEffect, memo } from 'react';
-import { Search, X } from 'lucide-react';
+import AppIcon from '@/components/general/app-icon';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils';
@@ -43,7 +43,7 @@ const SearchInput = ({
     <InputGroup className={cn("w-80", className)}>
       {/* Icon kính lúp ở đầu */}
       <InputGroupAddon>
-        {isLoading ? <Spinner /> : <Search className="size-4 text-muted-foreground" />}
+        {isLoading ? <Spinner /> : <AppIcon icon="search" className="size-4 text-muted-foreground" />}
       </InputGroupAddon>
 
       <InputGroupInput
@@ -62,7 +62,7 @@ const SearchInput = ({
           className="cursor-pointer hover:text-foreground transition-colors"
           onClick={handleClear}
         >
-          <X className="size-4 text-muted-foreground" />
+          <AppIcon icon="x" className="size-4 text-muted-foreground" />
         </InputGroupAddon>
       )}
 

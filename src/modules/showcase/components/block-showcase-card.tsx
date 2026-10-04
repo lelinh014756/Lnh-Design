@@ -2,18 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  ChevronDownIcon,
-  CodeIcon,
-  ExternalLinkIcon,
-  InfoIcon,
-  MaximizeIcon,
-  MinimizeIcon,
-  MonitorIcon,
-  RefreshCwIcon,
-  SmartphoneIcon,
-  TabletIcon,
-} from "lucide-react";
+import AppIcon, { type IconName } from "@/components/general/app-icon";
 
 import { CopyButton } from "@/components/general/copy-button";
 import { Badge } from "@/components/ui/badge";
@@ -40,10 +29,10 @@ import { BlockSourceView } from "./block-source-view";
 import { DependenciesDialog } from "./dependencies-dialog";
 import { PreviewFrame, type PreviewViewport } from "./preview-frame";
 
-const VIEWPORTS: { key: PreviewViewport; Icon: typeof MonitorIcon; labelKey: string }[] = [
-  { key: "desktop", Icon: MonitorIcon, labelKey: "viewportDesktop" },
-  { key: "tablet", Icon: TabletIcon, labelKey: "viewportTablet" },
-  { key: "mobile", Icon: SmartphoneIcon, labelKey: "viewportMobile" },
+const VIEWPORTS: { key: PreviewViewport; icon: IconName; labelKey: string }[] = [
+  { key: "desktop", icon: "monitor", labelKey: "viewportDesktop" },
+  { key: "tablet", icon: "tablet", labelKey: "viewportTablet" },
+  { key: "mobile", icon: "smartphone", labelKey: "viewportMobile" },
 ];
 
 const iconClass =
@@ -155,7 +144,7 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              {key === "code" && <CodeIcon className="size-3.5" />}
+              {key === "code" && <AppIcon icon="code" className="size-3.5" />}
               {key === "preview" ? t.preview : t.code}
             </button>
           ))}
@@ -174,7 +163,7 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
           <Tooltip>
             <TooltipTrigger asChild>
               <span className={cn(iconClass, "cursor-help")} aria-label={t.aboutBlock}>
-                <InfoIcon className="size-3.5" />
+                <AppIcon icon="info" className="size-3.5" />
               </span>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="max-w-xs">
@@ -185,24 +174,24 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
           {view === "preview" && available && (
             <>
               <IconAction label={t.refreshPreview} onClick={() => setReloadKey((key) => key + 1)}>
-                <RefreshCwIcon className="size-3.5" />
+                <AppIcon icon="refresh-cw" className="size-3.5" />
               </IconAction>
               <IconAction
                 label={expanded ? t.exitFullscreen : t.fullscreen}
                 onClick={() => setExpanded((current) => !current)}
                 active={expanded}
               >
-                {expanded ? <MinimizeIcon className="size-3.5" /> : <MaximizeIcon className="size-3.5" />}
+                {expanded ? <AppIcon icon="minimize" className="size-3.5" /> : <AppIcon icon="maximize" className="size-3.5" />}
               </IconAction>
               <IconAction label={t.openNewTab} href={previewUrl}>
-                <ExternalLinkIcon className="size-3.5" />
+                <AppIcon icon="external-link" className="size-3.5" />
               </IconAction>
             </>
           )}
 
           {view === "preview" && available && (
             <div className="hidden items-center rounded-md border bg-background p-0.5 sm:flex">
-              {VIEWPORTS.map(({ key, Icon, labelKey }) => (
+              {VIEWPORTS.map(({ key, icon, labelKey }) => (
                 <Tooltip key={key}>
                   <TooltipTrigger asChild>
                     <button
@@ -217,7 +206,7 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
                           : "text-muted-foreground hover:text-foreground",
                       )}
                     >
-                      <Icon className="size-3.5" />
+                      <AppIcon icon={icon} className="size-3.5" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom">
@@ -235,7 +224,7 @@ export function BlockShowcaseCard({ item, dependencies, href, kindLabel }: Block
                 className="flex items-center gap-0.5 rounded-sm px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground"
               >
                 {manager}
-                <ChevronDownIcon className="size-3" />
+                <AppIcon icon="chevron-down" className="size-3" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-28">
                 {PACKAGE_MANAGERS.map((option) => (

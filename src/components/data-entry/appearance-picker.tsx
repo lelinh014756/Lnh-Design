@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { CheckIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { SIDEBAR_STYLES, SIDEBAR_STYLE_OPTIONS } from "@/config/appearance";
@@ -81,7 +81,7 @@ export const SidebarStylePicker = memo(function SidebarStylePicker({
               >
                 <SidebarStyleSwatch style={style} />
                 {isActive && (
-                  <CheckIcon
+                  <AppIcon icon="check"
                     className="absolute top-1/2 left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 text-sidebar-primary-foreground"
                     strokeWidth={3}
                   />

@@ -1,8 +1,8 @@
 "use client";
 
 import type { RowData } from "@tanstack/react-table";
-import { Rows2, Rows3, Rows4 } from "lucide-react";
 
+import AppIcon, { type IconName } from "@/components/general/app-icon";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -13,10 +13,10 @@ import type { TableCoreInstance } from "@/hooks/table/use-table-core";
 import { getNextDensity } from "@/lib/table/style-utils";
 import type { Density } from "@/lib/table/types";
 
-const densityIcons: Record<Density, typeof Rows2> = {
-  compact: Rows4,
-  comfortable: Rows3,
-  spacious: Rows2,
+const densityIcons: Record<Density, IconName> = {
+  compact: "rows-4",
+  comfortable: "rows-3",
+  spacious: "rows-2",
 };
 
 export interface TableDensityToggleLabels {
@@ -41,7 +41,6 @@ export function TableDensityToggle<TData extends RowData>({
   labels,
 }: TableDensityToggleProps<TData>) {
   const { density } = table.getState();
-  const Icon = densityIcons[density];
   const trigger = labels?.trigger ?? table.options.localization.density.toggleDensity;
 
   return (
@@ -54,7 +53,7 @@ export function TableDensityToggle<TData extends RowData>({
           className="size-8"
           onClick={() => table.extra.setDensity(getNextDensity(density))}
         >
-          <Icon className="text-muted-foreground" />
+          <AppIcon icon={densityIcons[density]} className="text-muted-foreground" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>{trigger}</TooltipContent>

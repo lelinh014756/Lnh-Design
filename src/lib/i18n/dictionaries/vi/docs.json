@@ -40,7 +40,7 @@
       "title": "Quy ước",
       "naming": "Tên file kebab-case, mô tả rõ mục đích. Slug của item trùng với tên thư mục và tham số route xem trước.",
       "loc": "Giới hạn dòng: component và hook ≤500, page và layout ≤700, config ≤1000. Vượt thì tách theo ranh giới logic, không tách cho đủ số.",
-      "icons": "lucide cho mọi thứ vào registry. Một thư viện icon, không có ngoại lệ.",
+      "icons": "Mọi icon đi qua AppIcon bằng tên; thư viện do provider quyết định (hiện là hugeicons), đổi bằng một dòng import. Riêng primitive shadcn trong ui/ giữ lucide.",
       "comments": "Chú thích giải thích TẠI SAO, không tham chiếu số phase hay mã finding — những thứ đó biến mất còn mã thì ở lại."
     }
   }

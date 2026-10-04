@@ -40,7 +40,7 @@
       "title": "Conventions",
       "naming": "Files are kebab-case and describe their purpose. An item's slug matches its directory name and its preview route param.",
       "loc": "Line limits: components and hooks ≤500, pages and layouts ≤700, config ≤1000. Split along logical boundaries, not to hit a number.",
-      "icons": "lucide for everything in the registry. One icon library, no exceptions.",
+      "icons": "Every icon goes through AppIcon by name; the library is a provider choice (currently hugeicons), swapped with one import line. shadcn primitives in ui/ keep lucide.",
       "comments": "Comments explain WHY, and never reference phase numbers or finding codes — those disappear while the code stays."
     }
   }

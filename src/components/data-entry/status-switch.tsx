@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Check, X } from "lucide-react"
+import AppIcon from "@/components/general/app-icon"
 import { AlertDialogStatus } from "../feedback"
 import { PingIndicator } from "../feedback"
 import { Spinner } from "@/components/ui/spinner"
@@ -191,9 +191,9 @@ export const StatusSwitch = React.forwardRef<HTMLButtonElement, StatusSwitchProp
                         {isLoading ? (
                             <Spinner className={sizeConfig.icon} />
                         ) : isChecked ? (
-                            <Check className={cn("text-emerald-600 stroke-[3]", sizeConfig.icon)} />
+                            <AppIcon icon="check" strokeWidth={3} className={cn("text-emerald-600", sizeConfig.icon)} />
                         ) : (
-                            <X className={cn("text-slate-400 stroke-[2.5]", sizeConfig.icon)} />
+                            <AppIcon icon="x" strokeWidth={2.5} className={cn("text-slate-400", sizeConfig.icon)} />
                         )}
                     </span>
                 </button>

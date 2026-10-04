@@ -10,7 +10,7 @@
  */
 
 import type { RowData } from "@tanstack/react-table";
-import { X } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { DataTableColumnFilter } from "@/components/data-table/inputs/data-table-column-filter";
@@ -75,7 +75,7 @@ export function DataTableTopToolbar<TData extends RowData>({
             className="border-dashed"
             onClick={onReset}
           >
-            <X />
+            <AppIcon icon="x" />
             {d.column.reset}
           </Button>
         )}

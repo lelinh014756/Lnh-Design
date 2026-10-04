@@ -54,7 +54,8 @@
   },
   "app-icon": {
     "files": [
-      "src/components/general/app-icon.tsx"
+      "src/components/general/app-icon.tsx",
+      "src/components/general/icon-providers/*"
     ]
   },
   "app-input": {
@@ -65,6 +66,12 @@
   "app-sheet": {
     "files": [
       "src/components/feedback/app-sheet.tsx"
+    ]
+  },
+  "app-stepper": {
+    "files": [
+      "src/components/data-display/app-stepper/*.ts",
+      "src/components/data-display/app-stepper/*.tsx"
     ]
   },
   "app-title": {

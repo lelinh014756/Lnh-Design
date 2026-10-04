@@ -1,7 +1,7 @@
 "use client";
 
 import type { Table } from "@tanstack/react-table";
-import { Settings2 } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -81,7 +81,7 @@ export function TableColumnVisibilityMenu<TData>({
           className="ml-auto hidden h-8 font-normal lg:flex"
           disabled={disabled}
         >
-          <Settings2 className="text-muted-foreground" />
+          <AppIcon icon="settings-2" className="text-muted-foreground" />
           {labels.buttonLabel}
         </Button>
       </PopoverTrigger>

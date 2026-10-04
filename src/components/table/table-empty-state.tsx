@@ -1,4 +1,4 @@
-import { Inbox } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export function TableEmptyState({
       )}
       {...props}
     >
-      <Inbox className="size-8 text-muted-foreground/60" />
+      <AppIcon icon="inbox" className="size-8 text-muted-foreground/60" />
       <p className="font-medium text-sm">{title}</p>
       {description && (
         <p className="text-muted-foreground text-xs">{description}</p>

@@ -179,7 +179,7 @@ CLI copies files into user's src/ directory
 | `/blocks` | Blocks với filter theo kind/facet/group |
 | `/templates` | Template gallery |
 | `/docs` | Installation và conventions docs |
-| `/icons` | Lucide icon browser |
+| `/icons` | Icon browser — `ICON_NAMES` vẽ qua provider đang active |
 | `/tokens` | Design token table (đọc từ globals.css) |
 | `/internal` | Internal registry browser, auth-protected |
 
@@ -191,7 +191,7 @@ CLI copies files into user's src/ directory
 | Dependency suy tự động từ import | Khai tay → mỗi lần thêm import = cơ hội quên, lỗi chỉ lộ ra ở máy người cài |
 | Catalog là data thuần, không chứa JSX | Script Node đọc được mà không cần bundler |
 | Demo source trích nguyên văn từ file | Một demo một file → source không thể lệch với chính nó |
-| Lucide cho mọi icon | Tránh giao diện lệch nhau do trộn nhiều thư viện icon |
+| Icon qua `AppIcon` + provider (hiện hugeicons); primitive `ui/` giữ lucide | Đổi thư viện bằng một dòng import trong `app-icon.tsx`; ESLint chặn import thẳng thư viện icon ngoài `icon-providers/` và `ui/` |
 
 ## 8. Environment Variables
 

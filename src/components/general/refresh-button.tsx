@@ -5,7 +5,7 @@
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
-import { RefreshCw } from "lucide-react"
+import AppIcon, { type IconName } from "@/components/general/app-icon"
 import { cn } from "@/lib/utils"
 import { memo, useCallback, useEffect, useRef, useState } from "react"
 import { AppTooltip } from "../data-display"
@@ -20,7 +20,7 @@ export interface ButtonRefreshProps {
   disabled?: boolean
   className?: string
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-  icon?: React.ComponentType<{ className?: string }>
+  icon?: IconName
   /** Display mode: 'icon' = icon only, 'text' = icon+text, 'auto' = use showButtonName */
   display?: "icon" | "text" | "auto"
   /** Show text label alongside icon (only used when display='auto') */
@@ -38,7 +38,7 @@ export function RefreshButton({
   onClick,
   size,
   display = "auto",
-  icon: CustomIcon,
+  icon = "refresh-cw",
 }: ButtonRefreshProps & VariantProps<typeof buttonVariants>) {
   const [countdown, setCountdown] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -107,7 +107,6 @@ export function RefreshButton({
 
   // Show countdown UI only when not loading/fetching (both take visual priority)
   const isCoolingDown = countdown > 0 && !loading && !fetching
-  const Icon = CustomIcon ?? RefreshCw
 
   // Determine display mode: explicit display prop overrides showButtonName
   const showText = display === "text" || (display === "auto" && showButtonName)
@@ -126,7 +125,7 @@ export function RefreshButton({
         ) : isCoolingDown ? (
           <span className="text-xs">{countdown}s</span>
         ) : (
-          <Icon className={cn(fetching && "animate-spin")} />
+          <AppIcon icon={icon} className={cn(fetching && "animate-spin")} />
         )}
         {showText && label}
       </Button>

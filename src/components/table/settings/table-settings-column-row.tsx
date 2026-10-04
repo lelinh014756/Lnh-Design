@@ -1,6 +1,6 @@
 "use client";
 
-import { GripVertical } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { SortableItem, SortableItemHandle } from "@/components/ui/sortable";
@@ -50,7 +50,7 @@ export function TableSettingsColumnRow({
             aria-label={labels.dragColumn}
             className="cursor-grab text-muted-foreground active:cursor-grabbing"
           >
-            <GripVertical className="size-3.5" />
+            <AppIcon icon="grip-vertical" className="size-3.5" />
           </button>
         </SortableItemHandle>
 

@@ -5,7 +5,6 @@ import { AppTooltip } from "../data-display"
 import { useTheme } from "next-themes"
 import { AppIcon } from "."
 import { memo, useSyncExternalStore } from "react"
-import { LaptopMinimalIcon } from "lucide-react"
 
 /** Không có gì để theo dõi — chỉ cần phân biệt "trước/sau khi mount". */
 const noopSubscribe = () => () => {}
@@ -47,7 +46,7 @@ const ModeToggleButton = () => {
         {mounted && theme === 'light' && <AppIcon icon="sun" className="h-5 w-5" />}
         {mounted && theme === 'dark' && <AppIcon icon="moon" className="h-5 w-5" />}
         {(!mounted || theme === 'system') && (
-          <LaptopMinimalIcon className="h-5 w-5 text-current" strokeWidth={1.5} />
+          <AppIcon icon="laptop-minimal" className="h-5 w-5 text-current" />
         )}
         <span className="sr-only">Toggle theme</span>
       </Button>

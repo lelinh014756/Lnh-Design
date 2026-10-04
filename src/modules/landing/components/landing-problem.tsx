@@ -1,4 +1,4 @@
-import { CheckIcon, XIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { LandingContainer } from "@/layouts/landing";
@@ -41,13 +41,13 @@ export async function LandingProblem() {
                   </td>
                   <td className="px-4 py-3.5 text-muted-foreground">
                     <span className="flex items-start gap-2">
-                      <XIcon className="mt-0.5 size-4 shrink-0 text-destructive/80" />
+                      <AppIcon icon="x" className="mt-0.5 size-4 shrink-0 text-destructive/80" />
                       {row.before}
                     </span>
                   </td>
                   <td className="px-4 py-3.5 text-foreground">
                     <span className="flex items-start gap-2">
-                      <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <AppIcon icon="check" className="mt-0.5 size-4 shrink-0 text-primary" />
                       {row.after}
                     </span>
                   </td>

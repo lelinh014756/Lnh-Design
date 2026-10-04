@@ -1,5 +1,4 @@
-import { CheckIcon, PackageIcon, TerminalIcon } from "lucide-react";
-
+import AppIcon from "@/components/general/app-icon";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { LandingContainer } from "@/layouts/landing";
 import { cn } from "@/lib/utils";
@@ -17,7 +16,7 @@ export async function LandingChannels() {
   const cards = [
     {
       key: "npm",
-      icon: PackageIcon,
+      icon: "package" as const,
       title: channels.npmTitle,
       body: channels.npmBody,
       points: [channels.npmPoint1, channels.npmPoint2, channels.npmPoint3],
@@ -25,7 +24,7 @@ export async function LandingChannels() {
     },
     {
       key: "registry",
-      icon: TerminalIcon,
+      icon: "terminal" as const,
       title: channels.registryTitle,
       body: channels.registryBody,
       points: [channels.registryPoint1, channels.registryPoint2, channels.registryPoint3],
@@ -58,7 +57,7 @@ export async function LandingChannels() {
                   card.accent ? "bg-primary text-primary-foreground" : "bg-muted text-foreground",
                 )}
               >
-                <card.icon className="size-4.5" />
+                <AppIcon icon={card.icon} className="size-4.5" />
               </span>
 
               <div className="flex flex-col gap-2">
@@ -71,7 +70,7 @@ export async function LandingChannels() {
               <ul className="mt-1 flex flex-col gap-2">
                 {card.points.map((point) => (
                   <li key={point} className="flex items-start gap-2 text-sm text-foreground">
-                    <CheckIcon
+                    <AppIcon icon="check"
                       className={cn(
                         "mt-0.5 size-4 shrink-0",
                         card.accent ? "text-primary" : "text-muted-foreground",

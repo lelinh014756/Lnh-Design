@@ -1,7 +1,5 @@
 "use client";
 
-import { ShieldCheck } from "lucide-react";
-
 import AppButton from "@/components/general/app-button";
 
 /** `intent` cho màu theo trạng thái, `icon` ghi đè icon của preset. */
@@ -12,7 +10,7 @@ export default function AppButtonIntents() {
       <AppButton intent="warning">Tạm giữ</AppButton>
       <AppButton intent="destructive">Từ chối</AppButton>
       <AppButton intent="info">Xem log</AppButton>
-      <AppButton icon={ShieldCheck}>Xác minh</AppButton>
+      <AppButton icon="shield-check">Xác minh</AppButton>
     </div>
   );
 }

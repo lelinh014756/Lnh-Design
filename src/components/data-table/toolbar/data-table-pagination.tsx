@@ -1,10 +1,5 @@
 import type { RowData } from "@tanstack/react-table";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -121,7 +116,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
-            <ChevronsLeft />
+            <AppIcon icon="chevrons-left" />
           </Button>
           <Button
             aria-label={l.goToPreviousPage}
@@ -131,7 +126,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <ChevronLeft />
+            <AppIcon icon="chevron-left" />
           </Button>
           <Button
             aria-label={l.goToNextPage}
@@ -141,7 +136,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <ChevronRight />
+            <AppIcon icon="chevron-right" />
           </Button>
           <Button
             aria-label={l.goToLastPage}
@@ -151,7 +146,7 @@ export function DataTablePagination<TData extends RowData>({
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
-            <ChevronsRight />
+            <AppIcon icon="chevrons-right" />
           </Button>
         </div>
       </div>

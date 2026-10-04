@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogOutIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
@@ -26,7 +26,7 @@ export function LogoutButton() {
 
   return (
     <Button variant="outline" size="sm" onClick={logout} disabled={pending}>
-      {pending ? <Spinner /> : <LogOutIcon />}
+      {pending ? <Spinner /> : <AppIcon icon="log-out" />}
       {dict.showcase.logout}
     </Button>
   );

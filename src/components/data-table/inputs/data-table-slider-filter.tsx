@@ -1,7 +1,7 @@
 "use client";
 
 import type { Column } from "@tanstack/react-table";
-import { PlusCircle, XCircle } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -176,10 +176,10 @@ export function DataTableSliderFilter<TData>({
               className="rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               onClick={onReset}
             >
-              <XCircle />
+              <AppIcon icon="circle-x" />
             </div>
           ) : (
-            <PlusCircle />
+            <AppIcon icon="circle-plus" />
           )}
           <span>{title}</span>
           {columnFilterValue ? (

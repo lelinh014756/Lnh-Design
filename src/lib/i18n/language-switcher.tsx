@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, GlobeIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,7 +41,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
           className={cn("gap-1.5 rounded-md px-2", className)}
           aria-label={`Ngôn ngữ: ${active.label}`}
         >
-          <GlobeIcon className="size-4" aria-hidden="true" />
+          <AppIcon icon="globe" className="size-4" aria-hidden="true" />
           <span className="font-medium text-xs tracking-tight">
             {active.short}
           </span>
@@ -55,7 +55,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
           >
             <span className="flex-1">{LOCALE_META[supportedLocale].label}</span>
             {supportedLocale === locale ? (
-              <CheckIcon className="size-4 opacity-70" aria-hidden="true" />
+              <AppIcon icon="check" className="size-4 opacity-70" aria-hidden="true" />
             ) : null}
           </DropdownMenuItem>
         ))}

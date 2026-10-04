@@ -1,14 +1,7 @@
 "use client";
 
 import type { Column, ColumnMeta, Table } from "@tanstack/react-table";
-import {
-  CalendarIcon,
-  Check,
-  ChevronsUpDown,
-  GripVertical,
-  ListFilter,
-  Trash2,
-} from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import { parseAsStringEnum, useQueryState } from "nuqs";
 import * as React from "react";
 
@@ -285,7 +278,7 @@ export function DataTableFilterList<TData>({
             onKeyDown={onTriggerKeyDown}
             disabled={disabled}
           >
-            <ListFilter className="text-muted-foreground" />
+            <AppIcon icon="list-filter" className="text-muted-foreground" />
             {l.trigger}
             {filters.length > 0 && (
               <Badge
@@ -500,7 +493,7 @@ function DataTableFilterItem<TData>({
                 {columns.find((column) => column.id === filter.id)?.columnDef
                   .meta?.label ?? labels?.selectField ?? "Select field"}
               </span>
-              <ChevronsUpDown className="opacity-50" />
+              <AppIcon icon="chevrons-up-down" className="opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent
@@ -537,7 +530,7 @@ function DataTableFilterItem<TData>({
                       <span className="truncate">
                         {column.columnDef.meta?.label}
                       </span>
-                      <Check
+                      <AppIcon icon="check"
                         className={cn(
                           "ml-auto",
                           column.id === filter.id ? "opacity-100" : "opacity-0",
@@ -605,11 +598,11 @@ function DataTableFilterItem<TData>({
           className="size-8 rounded"
           onClick={() => onFilterRemove(filter.filterId)}
         >
-          <Trash2 />
+          <AppIcon icon="trash-2" />
         </Button>
         <SortableItemHandle asChild>
           <Button variant="outline" size="icon" className="size-8 rounded">
-            <GripVertical />
+            <AppIcon icon="grip-vertical" />
           </Button>
         </SortableItemHandle>
       </div>
@@ -883,7 +876,7 @@ function onFilterInputRender<TData>({
                 !filter.value && "text-muted-foreground",
               )}
             >
-              <CalendarIcon />
+              <AppIcon icon="calendar" />
               <span className="truncate">{displayValue}</span>
             </Button>
           </PopoverTrigger>

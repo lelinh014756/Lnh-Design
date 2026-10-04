@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MailIcon, SearchIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
@@ -137,13 +137,13 @@ export const dataEntryPreviews: PreviewMap = {
     <div className="flex max-w-sm flex-col gap-3">
       <InputGroup>
         <InputGroupAddon>
-          <SearchIcon className="size-4" />
+          <AppIcon icon="search" className="size-4" />
         </InputGroupAddon>
         <InputGroupInput placeholder="Tìm theo tên hoặc mã" />
       </InputGroup>
       <InputGroup>
         <InputGroupAddon>
-          <MailIcon className="size-4" />
+          <AppIcon icon="mail" className="size-4" />
         </InputGroupAddon>
         <InputGroupInput placeholder="ban" />
         <InputGroupAddon align="inline-end">@congty.vn</InputGroupAddon>

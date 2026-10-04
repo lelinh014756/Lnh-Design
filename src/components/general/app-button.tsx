@@ -3,19 +3,12 @@
  * Built on shadcn Button, adds loading state, icons, and preset styles.
  */
 
+import AppIcon, { type IconName } from "@/components/general/app-icon";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
-import { memo, type JSX, type ComponentType } from "react";
-import {
-  Download,
-  ListFilter,
-  Pencil,
-  Plus,
-  Save,
-  type LucideIcon,
-} from "lucide-react";
+import { memo } from "react";
 
 export type ButtonPreset =
   | "add"
@@ -37,20 +30,20 @@ export interface ButtonAppProps
   loading?: boolean;
   /** Text to display while loading. */
   loadingText?: string;
-  /** Custom icon component. Overrides preset icon. */
-  icon?: LucideIcon;
+  /** Custom icon name. Overrides preset icon. */
+  icon?: IconName;
   /** Preset style with associated icon. */
   preset?: ButtonPreset;
   /** Intent color for status indication. */
   intent?: ButtonIntent;
 }
 
-const presetIconMap: Record<ButtonPreset, ComponentType<{ className?: string }> | null> = {
-  add: Plus,
-  edit: Pencil,
-  save: Save,
-  filter: ListFilter,
-  excel: Download,
+const presetIconMap: Record<ButtonPreset, IconName | null> = {
+  add: "plus",
+  edit: "pencil",
+  save: "save",
+  filter: "list-filter",
+  excel: "download",
   gradient: null,
 };
 
@@ -91,7 +84,7 @@ export function ButtonApp({
   children,
   loading = false,
   loadingText = "Đang xử lý...",
-  icon: Icon,
+  icon,
   preset,
   intent,
   variant,
@@ -101,12 +94,9 @@ export function ButtonApp({
   onClick,
   ...props
 }: ButtonAppProps & VariantProps<typeof buttonVariants>) {
-  let presetIcon: JSX.Element | null = null;
   let presetClasses = "";
 
   if (preset) {
-    const PresetIcon = presetIconMap[preset];
-    presetIcon = PresetIcon ? <PresetIcon /> : null;
     presetClasses = presetClassMap[preset];
 
     if (preset === "filter") {
@@ -129,9 +119,7 @@ export function ButtonApp({
     presetClasses += ` ${intentMap[intent]}`;
   }
 
-  if (Icon) {
-    presetIcon = <Icon />;
-  }
+  const iconName = icon ?? (preset ? presetIconMap[preset] : null);
 
   return (
     <Button
@@ -152,7 +140,7 @@ export function ButtonApp({
         </>
       ) : (
         <>
-          {presetIcon}
+          {iconName && <AppIcon icon={iconName} />}
           {children}
         </>
       )}

@@ -3,3 +3,5 @@ export { default as AppAvatar } from "./app-avatar";
 export { AppTooltip } from "./app-tooltip"
 export { default as BadgeStatus } from "./badge-status"
 export { CodeBlock, CommandLine } from "./code-block";
+export { AppStepper, appStepperLabelsEn, appStepperLabelsVi } from "./app-stepper";
+export type { AppStepperApi, AppStepperLabels, AppStepperProps, AppStepperStep } from "./app-stepper";

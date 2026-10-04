@@ -1,6 +1,6 @@
 {
   "title": "Icon",
-  "subtitle": "Bộ lucide — thư viện icon duy nhất cho mọi thứ vào registry. Bấm để chép tên hoặc JSX.",
+  "subtitle": "Các icon đã đăng ký trong AppIcon, vẽ bằng provider {provider}. Đổi thư viện bằng một dòng import trong app-icon.tsx. Bấm để chép tên, chuột phải để chép JSX.",
   "searchPlaceholder": "Tìm icon theo tên…",
   "size": "Cỡ",
   "strokeWidth": "Độ dày nét",

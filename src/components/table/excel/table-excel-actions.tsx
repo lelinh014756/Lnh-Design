@@ -1,6 +1,6 @@
 "use client";
 
-import { FileDown, FileInput, FileSpreadsheet } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 import { toast } from "sonner";
 
@@ -109,7 +109,7 @@ export function TableExcelActions({
             disabled={isDisabled}
             onClick={() => setOpen(true)}
           >
-            <FileSpreadsheet className="text-muted-foreground" />
+            <AppIcon icon="file-spreadsheet" className="text-muted-foreground" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{labels.trigger}</TooltipContent>
@@ -123,13 +123,13 @@ export function TableExcelActions({
       >
         <div className="flex flex-col gap-2">
           <TableExcelActionRow
-            icon={FileDown}
+            icon="file-down"
             label={labels.downloadTemplate}
             disabled={!onDownloadTemplate || pending}
             onClick={() => closeAndRun(() => void handleDownloadTemplate())}
           />
           <TableExcelActionRow
-            icon={FileInput}
+            icon="file-input"
             label={labels.importFile}
             disabled={!onImportFile || pending}
             onClick={() => closeAndRun(() => importInputRef.current?.click())}

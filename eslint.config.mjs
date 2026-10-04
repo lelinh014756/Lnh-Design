@@ -37,6 +37,28 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-empty-object-type": "off",
     },
   },
+  {
+    // Icon đi qua <AppIcon icon="..." /> để đổi thư viện chỉ bằng một dòng
+    // import trong app-icon.tsx. Thư viện icon chỉ được import trong
+    // icon-providers/. Primitive shadcn (ui/) giữ lucide để `shadcn add` không
+    // phải sửa tay mỗi lần kéo bản mới.
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/components/general/icon-providers/**", "src/components/ui/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["lucide-react", "lucide-react/*", "@hugeicons/*", "@hugeicons-pro/*"],
+              message:
+                'Dùng <AppIcon icon="..." /> từ @/components/general/app-icon; icon chưa có thì thêm vào icon-providers/.',
+            },
+          ],
+        },
+      ],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores của eslint-config-next:

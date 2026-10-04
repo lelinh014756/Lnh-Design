@@ -1,6 +1,6 @@
 {
   "title": "Icons",
-  "subtitle": "The lucide set — the single icon library for everything in the registry. Click to copy the name or the JSX.",
+  "subtitle": "Icons registered in AppIcon, drawn by the {provider} provider. Swap libraries with one import line in app-icon.tsx. Click to copy the name, right-click for the JSX.",
   "searchPlaceholder": "Search icons by name…",
   "size": "Size",
   "strokeWidth": "Stroke width",

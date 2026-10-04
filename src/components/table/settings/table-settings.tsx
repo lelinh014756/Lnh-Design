@@ -7,7 +7,7 @@
  * Labels tự đọc từ `table.options.localization.settings` bên trong nếu caller không truyền.
  */
 
-import { SlidersHorizontal } from "lucide-react"
+import AppIcon from "@/components/general/app-icon"
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -70,7 +70,7 @@ export function TableSettings<TSettings extends BaseTableSettings>({
             disabled={disabled}
             onClick={() => setOpen(true)}
           >
-            <SlidersHorizontal className="text-muted-foreground" />
+            <AppIcon icon="sliders-horizontal" className="text-muted-foreground" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{labels.trigger}</TooltipContent>

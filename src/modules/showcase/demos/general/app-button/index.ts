@@ -35,7 +35,7 @@ export const demos: ComponentDemo[] = [
       en: "`intent` colors by meaning; `icon` overrides the preset icon.",
     },
     snippet: `<AppButton intent="destructive">Từ chối</AppButton>
-<AppButton icon={ShieldCheck}>Xác minh</AppButton>`,
+<AppButton icon="shield-check">Xác minh</AppButton>`,
     render: AppButtonIntents,
   },
 ];
@@ -59,10 +59,10 @@ export const props: PropDoc[] = [
   },
   {
     name: "icon",
-    type: "LucideIcon",
+    type: "IconName",
     description: {
-      vi: "Icon đầu nút; ghi đè icon của preset.",
-      en: "Leading icon; overrides the preset icon.",
+      vi: "Tên icon đầu nút (xem `AppIcon`); ghi đè icon của preset.",
+      en: "Leading icon name (see `AppIcon`); overrides the preset icon.",
     },
   },
   {

@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { SearchIcon } from "lucide-react";
 
 import AppIcon from "@/components/general/app-icon";
 import { Badge } from "@/components/ui/badge";
@@ -84,7 +83,7 @@ export function BlockCatalogBrowser({ items }: { items: BlockCatalogItem[] }) {
         ))}
 
         <label className="relative ml-auto flex h-8 min-w-0 flex-1 items-center md:max-w-xs">
-          <SearchIcon className="pointer-events-none absolute left-2.5 size-3.5 text-muted-foreground" />
+          <AppIcon icon="search" className="pointer-events-none absolute left-2.5 size-3.5 text-muted-foreground" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}

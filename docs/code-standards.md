@@ -61,6 +61,18 @@ Component `data-table/` và `table/` được port nguyên từ `tablecn` — so
 }
 ```
 
+### Icon Import Restriction
+
+`lucide-react`, `@hugeicons/*` chỉ được import trong `src/components/general/icon-providers/**` và `src/components/ui/**` (`no-restricted-imports`). Còn lại dùng `<AppIcon icon="..." />`.
+
+## Icons
+
+- Chỗ gọi chỉ dùng tên: `<AppIcon icon="trash-2" />`; prop icon của component nhận `IconName`, không nhận component của thư viện.
+- Đổi thư viện: đổi dòng import `provider` trong `src/components/general/app-icon.tsx` (`hugeiconsProvider` ⇄ `lucideProvider`).
+- Thêm icon: thêm tên vào `icon-providers/icon-names.ts` + một dòng trong **mỗi** provider (`satisfies Record<IconName, …>` → tsc báo nếu thiếu). Hugeicons: `kebab-name` → `PascalNameIcon`, lệch quy ước thì map tay.
+- Độ dày nét dùng prop `strokeWidth`, không dùng class `stroke-*`: hugeicons đặt `stroke-width` trên từng `<path>` nên class trên `<svg>` không có tác dụng.
+- Primitive shadcn (`src/components/ui/`) giữ lucide để `shadcn add` không phải sửa tay.
+
 ## Component Structure
 
 ### Naming
@@ -177,3 +189,4 @@ Registry builder fail build khi:
 ## Change Log
 
 - 2026-10-03: Initial code-standards.md generation via `docs:init`
+- 2026-10-04: Icon provider adapter (hugeicons active, lucide dự phòng), ESLint chặn import thẳng thư viện icon

@@ -1,7 +1,7 @@
 "use client";
 
 import type { Column } from "@tanstack/react-table";
-import { Check, PlusCircle, XCircle } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -101,10 +101,10 @@ export function DataTableFacetedFilter<TData, TValue>({
               className="rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               onClick={onReset}
             >
-              <XCircle />
+              <AppIcon icon="circle-x" />
             </div>
           ) : (
-            <PlusCircle />
+            <AppIcon icon="circle-plus" />
           )}
           {title}
           {selectedValues?.size > 0 && (
@@ -168,7 +168,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                           : "opacity-50 [&_svg]:invisible",
                       )}
                     >
-                      <Check />
+                      <AppIcon icon="check" />
                     </div>
                     {option.icon && <option.icon />}
                     <span className="truncate">{option.label}</span>

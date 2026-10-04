@@ -1,23 +1,19 @@
 "use client";
 
 import { useDeferredValue, useMemo, useState } from "react";
-import { SearchIcon } from "lucide-react";
-import { DynamicIcon, iconNames, type IconName } from "lucide-react/dynamic";
 import { toast } from "sonner";
 
+import AppIcon, { ICON_NAMES, ICON_PROVIDER } from "@/components/general/app-icon";
 import { Slider } from "@/components/ui/slider";
 import { useT } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
 
-/** Trần số icon vẽ cùng lúc. Hơn ngần này thì lưới đứng hình khi gõ, mà không ai cuộn hết. */
-const RENDER_LIMIT = 240;
-
 /**
- * Trình duyệt icon lucide.
+ * Trình duyệt các icon đã đăng ký trong `AppIcon`.
  *
- * Dùng `DynamicIcon` + danh sách TÊN thay vì import cả bộ component: bộ đầy đủ
- * là hơn hai nghìn icon, kéo hết vào bundle của một trang chỉ để hiện lưới là
- * cái giá không đáng.
+ * Chỉ hiện `ICON_NAMES` chứ không phải cả catalog của thư viện: đó là những tên
+ * dùng được trong code, và lưới vẽ qua provider đang active nên đổi thư viện là
+ * trang này đổi theo.
  *
  * `useDeferredValue` giữ ô nhập luôn phản hồi: lưới được vẽ lại ở mức ưu tiên
  * thấp hơn nên gõ nhanh không thấy khựng.
@@ -25,22 +21,19 @@ const RENDER_LIMIT = 240;
 export function IconBrowser() {
   const [query, setQuery] = useState("");
   const [size, setSize] = useState([24]);
-  const [stroke, setStroke] = useState([1.75]);
+  const [stroke, setStroke] = useState([ICON_PROVIDER.defaultStrokeWidth]);
   const deferredQuery = useDeferredValue(query);
   const { dict } = useT();
   const t = dict.icons;
 
   const matches = useMemo(() => {
     const needle = deferredQuery.trim().toLowerCase();
-    const source = needle
-      ? iconNames.filter((name) => name.includes(needle))
-      : (iconNames as readonly IconName[]);
-    return { total: source.length, visible: source.slice(0, RENDER_LIMIT) };
+    return needle ? ICON_NAMES.filter((name) => name.includes(needle)) : ICON_NAMES;
   }, [deferredQuery]);
 
   const copy = async (name: string, mode: "name" | "jsx") => {
     const payload =
-      mode === "name" ? name : `<DynamicIcon name="${name}" size={${size[0]}} />`;
+      mode === "name" ? name : `<AppIcon icon="${name}" size={${size[0]}} />`;
     try {
       await navigator.clipboard.writeText(payload);
       toast.success(
@@ -55,7 +48,10 @@ export function IconBrowser() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-5">
         <label className="relative flex h-9 min-w-0 flex-1 items-center md:max-w-sm">
-          <SearchIcon className="pointer-events-none absolute left-3 size-4 text-muted-foreground" />
+          <AppIcon
+            icon="search"
+            className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
+          />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -78,17 +74,17 @@ export function IconBrowser() {
         </label>
 
         <span className="text-xs tabular-nums text-muted-foreground">
-          {t.resultCount.replace("{count}", String(matches.total))}
+          {t.resultCount.replace("{count}", String(matches.length))}
         </span>
       </div>
 
-      {matches.visible.length === 0 ? (
+      {matches.length === 0 ? (
         <p className="rounded-lg border border-dashed px-5 py-12 text-center text-sm text-muted-foreground">
           {t.empty}
         </p>
       ) : (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))] gap-2">
-          {matches.visible.map((name) => (
+          {matches.map((name) => (
             <button
               key={name}
               type="button"
@@ -103,19 +99,13 @@ export function IconBrowser() {
                 "transition-colors duration-150 hover:border-primary/40 hover:bg-accent/40",
               )}
             >
-              <DynamicIcon name={name} size={size[0]} strokeWidth={stroke[0]} />
+              <AppIcon icon={name} size={size[0]} strokeWidth={stroke[0]} />
               <span className="w-full truncate text-center text-[10px] leading-4 text-muted-foreground">
                 {name}
               </span>
             </button>
           ))}
         </div>
-      )}
-
-      {matches.total > matches.visible.length && (
-        <p className="text-center text-xs text-muted-foreground">
-          {matches.visible.length} / {matches.total}
-        </p>
       )}
     </div>
   );

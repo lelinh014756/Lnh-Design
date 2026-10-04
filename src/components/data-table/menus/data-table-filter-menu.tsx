@@ -1,7 +1,7 @@
 "use client";
 
 import type { Column, Table } from "@tanstack/react-table";
-import { BadgeCheck, CalendarIcon, ListFilter, Text, X } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import { useQueryState } from "nuqs";
 import * as React from "react";
 
@@ -287,7 +287,7 @@ export function DataTableFilterMenu<TData>({
           className="size-8"
           onClick={onFiltersReset}
         >
-          <X />
+          <AppIcon icon="x" />
         </Button>
       )}
       <Popover open={open} onOpenChange={onOpenChange}>
@@ -301,7 +301,7 @@ export function DataTableFilterMenu<TData>({
             onKeyDown={onTriggerKeyDown}
             disabled={disabled}
           >
-            <ListFilter className="text-muted-foreground" />
+            <AppIcon icon="list-filter" className="text-muted-foreground" />
             {filters.length > 0 ? null : l.trigger}
           </Button>
         </PopoverTrigger>
@@ -545,7 +545,7 @@ function DataTableFilterItem<TData>({
           className="h-full rounded-none rounded-r-md border border-input border-l-0 px-1.5 font-normal dark:bg-input/30"
           onClick={() => onFilterRemove(filter.filterId)}
         >
-          <X className="size-3.5" />
+          <AppIcon icon="x" className="size-3.5" />
         </Button>
       </div>
     );
@@ -631,12 +631,12 @@ function FilterValueSelector<TData>({
           >
             {isEmpty ? (
               <>
-                <Text />
+                <AppIcon icon="text-align-start" />
                 <span>{labels?.typeToAddFilter ?? "Type to add filter..."}</span>
               </>
             ) : (
               <>
-                <BadgeCheck />
+                <AppIcon icon="badge-check" />
                 <span className="truncate">{filterByLabel}</span>
               </>
             )}
@@ -903,7 +903,7 @@ function onFilterInputRender<TData>({
                 !filter.value && "text-muted-foreground",
               )}
             >
-              <CalendarIcon className="size-3.5" />
+              <AppIcon icon="calendar" className="size-3.5" />
               <span className="truncate">{displayValue}</span>
             </Button>
           </PopoverTrigger>

@@ -1,19 +1,19 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
 import * as React from "react";
 
+import AppIcon, { type IconName } from "@/components/general/app-icon";
 import { cn } from "@/lib/utils";
 
 interface TableExcelActionRowProps {
-  icon: LucideIcon;
+  icon: IconName;
   label: string;
   onClick: () => void;
   disabled?: boolean;
 }
 
 export function TableExcelActionRow({
-  icon: Icon,
+  icon,
   label,
   onClick,
   disabled,
@@ -29,7 +29,7 @@ export function TableExcelActionRow({
         "disabled:cursor-not-allowed disabled:opacity-60",
       )}
     >
-      <Icon className="size-4 shrink-0 text-muted-foreground" aria-hidden />
+      <AppIcon icon={icon} className="size-4 text-muted-foreground" />
       <span className="flex-1 truncate">{label}</span>
     </button>
   );

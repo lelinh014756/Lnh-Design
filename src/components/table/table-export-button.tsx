@@ -15,7 +15,7 @@
  */
 
 import type { RowData } from "@tanstack/react-table";
-import { Download, Loader2 } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 import { toast } from "sonner";
 
@@ -89,9 +89,9 @@ export function TableExportButton<TData extends RowData>({
           onClick={() => void onExport()}
         >
           {isExporting ? (
-            <Loader2 className="animate-spin text-muted-foreground" />
+            <AppIcon icon="loader-circle" className="animate-spin text-muted-foreground" />
           ) : (
-            <Download className="text-muted-foreground" />
+            <AppIcon icon="download" className="text-muted-foreground" />
           )}
         </Button>
       </TooltipTrigger>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { CheckIcon, CopyIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { useT } from "@/lib/i18n/context";
 import { cn } from "@/lib/utils";
@@ -59,9 +59,9 @@ export function CopyButton({
 
   const iconSize = size === "sm" ? "size-3.5" : "size-4";
   const icon = copied ? (
-    <CheckIcon className={iconSize} />
+    <AppIcon icon="check" className={iconSize} />
   ) : (
-    (idleIcon ?? <CopyIcon className={iconSize} />)
+    (idleIcon ?? <AppIcon icon="copy" className={iconSize} />)
   );
 
   return (

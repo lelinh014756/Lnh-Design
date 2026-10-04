@@ -15,7 +15,7 @@ export type FloatingInputProps = Omit<
   'size' | 'prefix'
 > & {
   label: string
-  /** Icon bên trái (lucide, tên trong APP_ICONS). */
+  /** Icon bên trái (tên trong `ICON_NAMES`). */
   startIcon?: IconName
   /** Nội dung tùy chỉnh bên phải (ưu tiên hơn clear / password toggle). */
   endAdornment?: ReactNode

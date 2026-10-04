@@ -9,7 +9,7 @@
  */
 
 import type { ColumnDef, Row, RowData, Table } from "@tanstack/react-table";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { getTableSelectColumn } from "@/components/table/table-select-column";
@@ -101,9 +101,9 @@ function buildExpandColumn<TData extends RowData>(
           onClick={row.getToggleExpandedHandler()}
         >
           {row.getIsExpanded() ? (
-            <ChevronDown className="size-4" />
+            <AppIcon icon="chevron-down" className="size-4" />
           ) : (
-            <ChevronRight className="size-4" />
+            <AppIcon icon="chevron-right" className="size-4" />
           )}
         </button>
       ) : null,

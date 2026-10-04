@@ -1,6 +1,6 @@
 "use client";
 
-import { PackageIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import {
   Dialog,
@@ -45,7 +45,7 @@ export function DependenciesDialog({
           type="button"
           className="flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 hover:bg-accent"
         >
-          <PackageIcon className="size-3.5" />
+          <AppIcon icon="package" className="size-3.5" />
           {t.dependencies}
           <span className="tabular-nums text-muted-foreground">{dependencies.length}</span>
         </button>

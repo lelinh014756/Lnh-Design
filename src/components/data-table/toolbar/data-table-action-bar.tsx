@@ -8,7 +8,7 @@
  */
 
 import type { RowData } from "@tanstack/react-table";
-import { Download, X } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import {
@@ -87,7 +87,7 @@ export function DataTableActionBar<TData extends RowData>({
         <span>{l.rowsSelected}</span>
         <ActionBarSeparator />
         <ActionBarClose>
-          <X />
+          <AppIcon icon="x" />
         </ActionBarClose>
       </ActionBarSelection>
       <ActionBarSeparator />
@@ -95,7 +95,7 @@ export function DataTableActionBar<TData extends RowData>({
         {children}
         {enableExport && (
           <ActionBarItem onClick={onExport}>
-            <Download />
+            <AppIcon icon="download" />
             {l.export}
           </ActionBarItem>
         )}

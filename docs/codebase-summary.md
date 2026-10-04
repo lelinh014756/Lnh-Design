@@ -26,7 +26,7 @@ Registry UI dùng chung cho các dự án React, theo mô hình shadcn. Repo ch�
 │   │   ├── components/        # Component showcase routes
 │   │   ├── templates/         # Template showcase routes
 │   │   ├── docs/              # Documentation pages
-│   │   ├── icons/             # Lucide icon browser
+│   │   ├── icons/             # Icon browser (ICON_NAMES qua provider đang active)
 │   │   ├── tokens/           # Design token viewer
 │   │   ├── internal/          # Internal area (auth-protected)
 │   │   ├── preview/           # Preview mode

@@ -1,12 +1,7 @@
 "use client";
 
 import type { ColumnSort, SortDirection, Table } from "@tanstack/react-table";
-import {
-  ArrowDownUp,
-  ChevronsUpDown,
-  GripVertical,
-  Trash2,
-} from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -202,7 +197,7 @@ export function DataTableSortList<TData>({
             onKeyDown={onTriggerKeyDown}
             disabled={disabled}
           >
-            <ArrowDownUp className="text-muted-foreground" />
+            <AppIcon icon="arrow-down-up" className="text-muted-foreground" />
             {l.trigger}
             {sorting.length > 0 && (
               <Badge
@@ -360,7 +355,7 @@ function DataTableSortItem({
               className="w-44 justify-between rounded font-normal"
             >
               <span className="truncate">{columnLabels.get(sort.id)}</span>
-              <ChevronsUpDown className="opacity-50" />
+              <AppIcon icon="chevrons-up-down" className="opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent
@@ -420,7 +415,7 @@ function DataTableSortItem({
           className="size-8 shrink-0 rounded"
           onClick={() => onSortRemove(sort.id)}
         >
-          <Trash2 />
+          <AppIcon icon="trash-2" />
         </Button>
         <SortableItemHandle asChild>
           <Button
@@ -428,7 +423,7 @@ function DataTableSortItem({
             size="icon"
             className="size-8 shrink-0 rounded"
           >
-            <GripVertical />
+            <AppIcon icon="grip-vertical" />
           </Button>
         </SortableItemHandle>
       </div>

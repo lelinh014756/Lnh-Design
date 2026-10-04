@@ -16,6 +16,7 @@ export const demoModules: Record<string, () => Promise<DemoModule>> = {
   "actions-button": () => import("./general/actions-button"),
   "app-icon": () => import("./general/app-icon"),
   "app-card": () => import("./layout/app-card"),
+  "app-stepper": () => import("./data-display/app-stepper"),
   "statistics-card": () => import("./layout/statistics-card"),
   "statistics-card-grid": () => import("./layout/statistics-card-grid"),
   "nav-item-recursive": () => import("./navigation/nav-item-recursive"),

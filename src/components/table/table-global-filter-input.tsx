@@ -1,7 +1,7 @@
 "use client";
 
 import type { RowData } from "@tanstack/react-table";
-import { Search, X } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import type * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -41,7 +41,7 @@ export function TableGlobalFilterInput<TData extends RowData>({
 
   return (
     <div className={cn("relative", className)} {...props}>
-      <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
+      <AppIcon icon="search" className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
       <Input
         aria-label={searchLabel}
         placeholder={placeholder}
@@ -57,7 +57,7 @@ export function TableGlobalFilterInput<TData extends RowData>({
           className="absolute top-1/2 right-1 size-6 -translate-y-1/2"
           onClick={() => table.setGlobalFilter("")}
         >
-          <X className="size-3.5" />
+          <AppIcon icon="x" className="size-3.5" />
         </Button>
       )}
     </div>

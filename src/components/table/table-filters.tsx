@@ -29,7 +29,7 @@
  *   </TableFilters>
  */
 
-import { ListFilter } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -113,7 +113,7 @@ function TableFiltersTrigger({
             activeCount > 0 && "border-primary/50",
           )}
         >
-          <ListFilter className="text-muted-foreground" />
+          <AppIcon icon="list-filter" className="text-muted-foreground" />
           {activeCount > 0 && (
             <span
               aria-hidden

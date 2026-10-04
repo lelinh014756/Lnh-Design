@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SearchIcon } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import {
   Command,
@@ -81,7 +81,7 @@ export function CommandSearch() {
           "md:w-56 lg:w-64",
         )}
       >
-        <SearchIcon className="size-4 shrink-0" />
+        <AppIcon icon="search" className="size-4 shrink-0" />
         <span className="hidden truncate md:inline">{t.searchPlaceholder}</span>
         <Kbd className="ml-auto hidden md:inline-flex">⌘K</Kbd>
       </button>

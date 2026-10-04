@@ -15,14 +15,7 @@ import type {
   SortingState,
   Table,
 } from "@tanstack/react-table";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  EyeOffIcon,
-  PinIcon,
-  PinOffIcon,
-  XIcon,
-} from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 import * as React from "react";
 
 import {
@@ -123,7 +116,7 @@ export function DataTableHeadMenu<TData extends RowData>({
         <span data-slot="table-head-label" className="truncate">
           {label}
         </span>
-        <ChevronDownIcon className="shrink-0 text-muted-foreground" />
+        <AppIcon icon="chevron-down" className="shrink-0 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" sideOffset={0} className="w-52">
         {canSort && (
@@ -133,7 +126,7 @@ export function DataTableHeadMenu<TData extends RowData>({
               checked={column.getIsSorted() === "asc"}
               onSelect={() => onSortingChange("asc")}
             >
-              <ChevronUpIcon />
+              <AppIcon icon="chevron-up" />
               {labels.sortByColumnAsc}
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
@@ -141,7 +134,7 @@ export function DataTableHeadMenu<TData extends RowData>({
               checked={column.getIsSorted() === "desc"}
               onSelect={() => onSortingChange("desc")}
             >
-              <ChevronDownIcon />
+              <AppIcon icon="chevron-down" />
               {labels.sortByColumnDesc}
             </DropdownMenuCheckboxItem>
             {column.getIsSorted() && (
@@ -149,7 +142,7 @@ export function DataTableHeadMenu<TData extends RowData>({
                 className="[&_svg]:text-muted-foreground"
                 onSelect={onSortRemove}
               >
-                <XIcon />
+                <AppIcon icon="x" />
                 {labels.clearSort}
               </DropdownMenuItem>
             )}
@@ -163,14 +156,14 @@ export function DataTableHeadMenu<TData extends RowData>({
               className="[&_svg]:text-muted-foreground"
               onSelect={() => column.pin(isPinnedLeft ? false : "left")}
             >
-              {isPinnedLeft ? <PinOffIcon /> : <PinIcon />}
+              {isPinnedLeft ? <AppIcon icon="pin-off" /> : <AppIcon icon="pin" />}
               {isPinnedLeft ? labels.unpin : labels.pinToLeft}
             </DropdownMenuItem>
             <DropdownMenuItem
               className="[&_svg]:text-muted-foreground"
               onSelect={() => column.pin(isPinnedRight ? false : "right")}
             >
-              {isPinnedRight ? <PinOffIcon /> : <PinIcon />}
+              {isPinnedRight ? <AppIcon icon="pin-off" /> : <AppIcon icon="pin" />}
               {isPinnedRight ? labels.unpin : labels.pinToRight}
             </DropdownMenuItem>
           </>
@@ -183,7 +176,7 @@ export function DataTableHeadMenu<TData extends RowData>({
               className="[&_svg]:text-muted-foreground"
               onSelect={() => column.toggleVisibility(false)}
             >
-              <EyeOffIcon />
+              <AppIcon icon="eye-off" />
               {labels.hideColumn}
             </DropdownMenuItem>
           </>

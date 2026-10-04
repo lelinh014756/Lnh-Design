@@ -1,7 +1,7 @@
 "use client";
 
 import type { RowData } from "@tanstack/react-table";
-import { FilterX, ListFilter } from "lucide-react";
+import AppIcon from "@/components/general/app-icon";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -43,9 +43,9 @@ export function TableFilterToggle<TData extends RowData>({
           onClick={() => table.extra.setShowColumnFilters(!showColumnFilters)}
         >
           {showColumnFilters ? (
-            <FilterX className="text-muted-foreground" />
+            <AppIcon icon="filter-x" className="text-muted-foreground" />
           ) : (
-            <ListFilter className="text-muted-foreground" />
+            <AppIcon icon="list-filter" className="text-muted-foreground" />
           )}
         </Button>
       </TooltipTrigger>
