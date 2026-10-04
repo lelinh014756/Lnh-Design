@@ -190,3 +190,4 @@ Registry builder fail build khi:
 
 - 2026-10-03: Initial code-standards.md generation via `docs:init`
 - 2026-10-04: Icon provider adapter (hugeicons active, lucide dự phòng), ESLint chặn import thẳng thư viện icon
+- 2026-10-04: Chuyển provider active về lucide; hugeicons giữ làm provider dự phòng

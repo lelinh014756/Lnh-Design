@@ -89,6 +89,7 @@ export const ICON_NAMES = [
   "rows-4",
   "save",
   "search",
+  "send",
   "settings",
   "settings-2",
   "shield",

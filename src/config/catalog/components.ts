@@ -197,14 +197,11 @@ export const componentItems: ComponentCatalogItem[] = [
 
   // ─── Cấp app (src/components/{general,layout,...}) ────────────────────────
   app("app-button", "AppButton", ["general"],
-    "Nút hệ thống: thêm loading, icon hai đầu, tooltip.",
-    "System button with loading, icons, tooltip."),
+    "Họ nút hệ thống: loading, xác nhận trước khi chạy, màu theo intent, làm mới có khoá.",
+    "Button family: loading, confirm-before-run, intent colors, cooldown refresh."),
   app("actions-button", "ActionsButton", ["general"],
     "Cụm hành động trên dòng bảng, tự gộp vào menu khi chật.",
     "Row action cluster that collapses into a menu."),
-  app("refresh-button", "RefreshButton", ["general"],
-    "Nút tải lại có khoá chống bấm dồn.",
-    "Refresh button with re-entry guard."),
   app("mode-toggle-button", "ModeToggleButton", ["general"],
     "Nút đổi sáng/tối, tránh nháy khi hydrate.",
     "Light/dark toggle, hydration-safe."),

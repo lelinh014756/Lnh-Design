@@ -226,11 +226,6 @@
       "src/components/feedback/ping-indicator.tsx"
     ]
   },
-  "refresh-button": {
-    "files": [
-      "src/components/general/refresh-button.tsx"
-    ]
-  },
   "resize-image": {
     "files": [
       "src/components/data-display/resize-image.tsx"

@@ -5,7 +5,7 @@ Mục tiêu: đổi thư viện icon bằng 1 dòng import trong `src/components
 ## Quyết định (user xác nhận 2026-10-04)
 - `src/components/ui/**` (shadcn) giữ lucide — không đi qua AppIcon, miễn ESLint.
 - Icon browser showcase → duyệt `ICON_NAMES` qua provider đang active (bỏ `lucide-react/dynamic`).
-- Làm hết, active provider = hugeicons.
+- Làm hết, active provider = hugeicons. **2026-10-04 09:26: user yêu cầu đổi active về lucide** (hugeicons giữ làm dự phòng).
 - Provider giữ đủ key (`satisfies Record<IconName, T>`) để đổi qua lại được.
 
 ## Phases

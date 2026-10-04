@@ -124,6 +124,15 @@ export function isCatalogCategory(value: string): value is CatalogCategory {
   return (CATALOG_CATEGORIES as readonly string[]).includes(value);
 }
 
+/**
+ * Item đã gộp vào item khác → đích mới (`slug#neo`). Trang cũ redirect thay vì
+ * 404 để link ngoài không chết. Chỉ giữ được URL trang showcase: lệnh cài
+ * `@aurecook/{slug-cũ}` của CLI thì không chuyển hướng được.
+ */
+export const mergedComponentSlugs: Readonly<Record<string, string>> = {
+  "refresh-button": "app-button#refresh",
+};
+
 /** Tên item khi cài qua CLI. Item nội bộ nằm ở namespace riêng cần token. */
 export function registryItemName(item: CatalogItem): string {
   return item.visibility === "internal" ? `@aurecook-x/${item.slug}` : `@aurecook/${item.slug}`;

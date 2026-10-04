@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   findCatalogItem,
   isCatalogCategory,
+  mergedComponentSlugs,
   showcaseComponentItems,
 } from "@/config/catalog";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -48,6 +49,8 @@ export default async function ComponentDetailPage({
   // Route `/components/{nhóm}` cũ: giữ liên kết ngoài sống, đưa về đúng section
   // trên trang tổng quan thay vì ném 404.
   if (isCatalogCategory(slug)) permanentRedirect(`/components#${slug}`);
+  const mergedInto = mergedComponentSlugs[slug];
+  if (mergedInto) permanentRedirect(`/components/${mergedInto}`);
 
   const item = findCatalogItem(slug);
   if (!item || item.kind !== "component") notFound();

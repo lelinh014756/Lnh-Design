@@ -3,8 +3,8 @@ import type { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
 
 import type { IconName } from "./icon-providers/icon-names"
-import { hugeiconsProvider as provider } from "./icon-providers/hugeicons-provider"
-// import { lucideProvider as provider } from "./icon-providers/lucide-provider"
+// import { hugeiconsProvider as provider } from "./icon-providers/hugeicons-provider"
+import { lucideProvider as provider } from "./icon-providers/lucide-provider"
 
 /**
  * Đổi thư viện icon = đổi dòng import `provider` ở trên. Mỗi provider map đủ
