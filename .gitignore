@@ -50,3 +50,5 @@ registry.internal.json
 
 # demo source trích lúc build (pnpm demos:build)
 /src/modules/showcase/demos/generated/
+
+worktree/
