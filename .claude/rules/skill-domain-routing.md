@@ -77,10 +77,10 @@ User wants to...
 
 ```
 User wants to...
-├── Verify UI render / debug runtime / console & network       → MCP `chrome-devtools` (default, project-registered)
-├── MCP unavailable, hoặc WS full-frame debug / bulk cookie-token
-│   injection / Chrome-profile 2FA-SSO / scripted flows         → /chrome-devtools-scripts
-└── Long autonomous sessions, video, multi-tab, Browserbase    → /agent-browser
+├── Target a real Chrome profile through browser MCP → /an-chrome-profile
+├── Automate with Puppeteer CLI scripts             → /chrome-devtools
+├── Browser automation without real user cookies    → /agent-browser
+└── Drive user's real Chrome profile/cookies        → /chrome-profile
 ```
 
 ## Testing
@@ -97,6 +97,7 @@ User wants to...
 ```
 User wants to...
 ├── Update project docs (codebase-summary, PDR)   → /an-docs
+├── Standardize a roadmap file for public /roadmap → /roadmap-standardizer
 ├── Search library/framework docs (context7)        → /docs-seeker
 ├── Build docs site with Mintlify                  → /mintlify
 ├── Read long-form docs / RFCs / specs in browser  → /markdown-novel-viewer
@@ -121,6 +122,14 @@ User wants to...
 ├── Write landing page, email, headline copy     → /copywriting
 ├── Brand identity, logos, banners               → /design
 └── Create Excalidraw diagrams                  → /excalidraw
+```
+
+## Prompt Authoring
+
+```
+User wants to...
+├── Refactor/optimize a raw prompt into VI (read) + EN (run) versions → /prompt-optimizer
+└── Clean up existing agent/skill/doc files for layer violations     → /prompt-refactor
 ```
 
 ## Workflow Skills
