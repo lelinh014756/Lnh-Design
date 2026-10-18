@@ -1,19 +1,20 @@
 ---
-report_type: generic-doc
-generated_at: 2026-10-03T17:45:00+07:00
+report_type: codebase-summary
+generated_at: "2026-10-18T10:37:33+07:00"
 period: ""
-status: draft
-source: /Users/lehonglinh/Documents/DIP/Source/Lnh-design
-generated_by: report-templates
-triggered_by: docs:init
-plan_ref: ""
+status: current
+source: "/Users/lehonglinh/Documents/DIP/Source/Lnh-design"
+generated_by: "docs-manager"
+triggered_by: "docs:update"
 ---
 
 # Codebase Summary: Lnh-design
 
 ## Overview
 
-Registry UI dùng chung cho các dự án React, theo mô hình shadcn. Repo chứa cả source component (src/) lẫn site showcase (Next.js app) và build system (scripts/).
+Registry UI dùng chung cho các dự án React, theo mô hình shadcn (style `radix-mira`). Repo chứa cả source component (`src/`), site showcase (Next.js App Router) và build system (`scripts/`). Registry JSON sinh tự động từ source nên demo không thể lệch với nội dung phát hành.
+
+Quy mô catalog (xác minh 2026-10-18): **92 registry item** = 83 component (48 primitive + 35 cấp app) + 8 block + 1 template (internal).
 
 ## Directory Structure
 
@@ -21,114 +22,148 @@ Registry UI dùng chung cho các dự án React, theo mô hình shadcn. Repo ch�
 /
 ├── src/
 │   ├── app/                    # Next.js App Router
-│   │   ├── (landing)/         # Landing pages
-│   │   ├── blocks/            # Block showcase routes
-│   │   ├── components/        # Component showcase routes
-│   │   ├── templates/         # Template showcase routes
-│   │   ├── docs/              # Documentation pages
+│   │   ├── (landing)/         # Trang chủ landing
+│   │   ├── blocks/            # /blocks, /blocks/[category], /blocks/[category]/[slug]
+│   │   ├── components/        # /components, /components/[slug]
+│   │   ├── templates/         # /templates, /templates/[slug]
+│   │   ├── docs/              # Trang tài liệu cài đặt
 │   │   ├── icons/             # Icon browser (ICON_NAMES qua provider đang active)
-│   │   ├── tokens/           # Design token viewer
-│   │   ├── internal/          # Internal area (auth-protected)
-│   │   ├── preview/           # Preview mode
-│   │   ├── r/                # Static registry JSON (public)
-│   │   └── api/               # API routes (auth)
+│   │   ├── tokens/            # Design token viewer
+│   │   ├── internal/          # Khu nội bộ (sau cổng session của proxy.ts)
+│   │   ├── login/             # Trang đăng nhập nội bộ
+│   │   ├── preview/[name]/    # Iframe preview theo slug catalog
+│   │   ├── r/                 # public/r (registry JSON tĩnh) + /r/internal/[name] (API, kiểm Bearer)
+│   │   └── api/auth/          # login, logout (route handlers)
 │   ├── components/
-│   │   ├── ui/               # Primitive shadcn (ẩn khỏi UI)
-│   │   ├── general/          # 7 nhóm Ant Design
-│   │   ├── layout/
-│   │   ├── navigation/
-│   │   ├── data-entry/
-│   │   ├── data-display/
-│   │   ├── feedback/
-│   │   ├── data-table/       # data-table blocks
-│   │   └── table/            # table-core blocks
-│   ├── config/catalog/        # Catalog source of truth
-│   │   ├── components.ts     # Component definitions
-│   │   ├── blocks.ts         # Block definitions
-│   │   ├── templates.ts      # Template definitions
-│   │   ├── types.ts          # Type definitions
-│   │   └── index.ts          # Catalog index
+│   │   ├── ui/               # 48 primitive shadcn (ẩn khỏi sidebar, vẫn trong registry)
+│   │   ├── general/          # App-level: app-button, actions-button, app-icon, icon-providers/
+│   │   ├── layout/           # app-card, statistics-card, chart-card…
+│   │   ├── navigation/       # nav-item-recursive
+│   │   ├── data-entry/       # app-input, floating-input, status-switch…
+│   │   ├── data-display/     # app-stepper/ (thư mục), badge-status, marquee…
+│   │   ├── feedback/         # app-dialog, app-sheet, fallback-shell…
+│   │   ├── other/            # theme-toggle-provider
+│   │   ├── illustrations/    # Bộ hình minh hoạ empty/error/loading (token màu)
+│   │   ├── data-table/       # Block: data-table (port từ tablecn)
+│   │   └── table/            # Block: table-core, table-chrome
+│   ├── config/
+│   │   ├── catalog/           # Source of truth: components.ts, blocks.ts, templates.ts, types.ts, index.ts
+│   │   └── nav/               # Điều hướng showcase
 │   ├── modules/
-│   │   ├── showcase/         # Showcase app logic
-│   │   ├── landing/
-│   │   └── auth/
-│   ├── layouts/               # Layout components
-│   ├── hooks/                # Custom hooks
-│   ├── lib/                  # Utilities
-│   │   ├── i18n/            # VI/EN dictionaries
-│   │   ├── auth/            # Auth utilities
-│   │   ├── query/            # TanStack Query setup
-│   │   ├── registry/         # Registry utilities
-│   │   └── tokens/          # Design tokens
-│   └── store/               # Zustand stores
+│   │   ├── showcase/          # components/ (16), demos/ (9 slug, 37 file demo), previews/ (live iframe)
+│   │   ├── landing/           # Logic trang chủ
+│   │   └── auth/              # components/ cho block auth-login
+│   ├── layouts/
+│   │   ├── showcase/          # shell, header, footer, catalog-sidebar, command-search…
+│   │   └── landing/           # shell, header (+client), footer, use-scrolled
+│   ├── hooks/                 # 10 hook gốc + table/ (use-table-core và friends)
+│   ├── lib/
+│   │   ├── i18n/             # VI/EN dictionaries (15 file JSON namespaced mỗi locale)
+│   │   ├── auth/             # Session cookie (verifySession dùng bởi proxy.ts)
+│   │   ├── query/            # TanStack Query client (browser/server, CACHE_DURATIONS)
+│   │   ├── registry/         # Nạp registry JSON lúc runtime cho showcase
+│   │   ├── table/            # types, column-utils, style-utils, localization cho table-core
+│   │   └── tokens/           # Design tokens
+│   ├── store/
+│   │   └── appearance-store.ts # Zustand duy nhất: sidebarStyle (persist localStorage)
+│   └── proxy.ts               # Cổng session cho /internal/** (Next 16 proxy)
 ├── scripts/
-│   ├── registry-builder/     # Registry JSON generator
-│   ├── build-demo-sources.mjs # Demo source extractor
-│   └── hash-password.mjs     # Password hashing for internal auth
-├── public/
-│   └── r/                   # Static registry JSON files
-└── docs/                    # This documentation
+│   ├── registry-builder/      # index.mjs, config.mjs, manifest.mjs, resolve-imports.mjs, verify-closure.mjs
+│   ├── build-demo-sources.mjs # Trích nguồn demo → generated/sources.json
+│   └── hash-password.mjs      # Sinh hash pbkdf2 cho AURECOOK_USERS
+├── registry.manifest.json     # Bổ sung khai tay: files glob, version, cssVars (tùy item)
+└── docs/                      # Documentation này
 ```
 
-## File Counts (src/)
+Lưu ý: `public/r/`, `registry.json`, `registry.internal.json` và `src/modules/showcase/demos/generated/` đều sinh lúc build và nằm trong `.gitignore`.
 
-| Directory | Type | Count |
+## File Counts (src/, xác minh 2026-10-18)
+
+| Directory | Loại | Count |
 |-----------|------|-------|
-| `src/components/ui/` | Primitive shadcn | ~15 |
-| `src/components/{general,layout,navigation,data-entry,data-display,feedback,other}/` | App components | ~50 |
-| `src/components/data-table/` | Block components | ~10 |
-| `src/components/table/` | Block components | ~5 |
-| `src/config/catalog/` | Config files | 5 |
-| `src/modules/showcase/demos/` | Demo files | ~40 |
+| `src/components/ui/` | Primitive shadcn | 48 file |
+| `src/components/{general,layout,navigation,data-entry,data-display,feedback,other}/` | App components | 47 file |
+| `src/components/illustrations/` | Hình minh hoạ trạng thái | 20 file |
+| `src/components/data-table/` | Block data-table | 37 file |
+| `src/components/table/` | Block table-core/table-chrome | 23 file |
+| `src/config/catalog/` | Catalog source of truth | 5 file |
+| `src/modules/showcase/` | Logic showcase (components, demos, previews) | 73 file |
+| `src/modules/showcase/demos/` | File demo `.tsx` | 37 file |
+| `src/modules/landing/` | Landing | 7 file |
+| `src/app/` | Routes + layout | 28 file |
+| `src/lib/` | Utilities + i18n | 27 file |
+| `src/hooks/` | Custom hooks | 17 file |
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `scripts/registry-builder/index.mjs` | Registry build entry point |
-| `scripts/build-demo-sources.mjs` | Extract demo source code |
-| `src/config/catalog/components.ts` | Component catalog definitions |
-| `src/config/catalog/blocks.ts` | Block catalog definitions |
-| `src/config/catalog/templates.ts` | Template catalog definitions |
-| `src/modules/showcase/demos/registry.ts` | Demo registry index |
-| `components.json` | shadcn CLI config với registries |
-| `registry.json` | Generated catalog (public) |
-| `registry.internal.json` | Generated catalog (internal) |
+| `scripts/registry-builder/index.mjs` | Điểm vào registry build: 2 lượt (sở hữu file → dựng item), suy dependency từ import |
+| `scripts/registry-builder/config.mjs` | `REGISTRY_NAME`, `FORBIDDEN_IMPORTS`, `TARGET_RULES` (ánh xạ đường dẫn → alias CLI) |
+| `scripts/build-demo-sources.mjs` | Trích nguyên văn nguồn demo, chặn leak item internal |
+| `src/config/catalog/components.ts` | 83 component item: 48 `primitive()` + 35 `app()` |
+| `src/config/catalog/blocks.ts` | 8 block item, `blockKind`: application / data-grid |
+| `src/config/catalog/templates.ts` | 1 template (`dev-portal`, `visibility: "internal"`) |
+| `src/modules/showcase/demos/registry.ts` | `demoModules` — map slug → demo, nạp lười theo chunk |
+| `src/modules/showcase/previews/index.ts` | `previewRegistry` — map slug → JSX preview live (iframe) |
+| `components.json` | Cấu hình shadcn CLI: style `radix-mira`, iconLibrary `lucide` |
+| `registry.manifest.json` | Khai bổ sung per-item: files glob, registryDependencies, version, cssVars |
+| `registry.json` / `registry.internal.json` | Catalog sinh ra (public / internal) |
 
 ## Component Groups (7 nhóm Ant Design)
 
-1. **General** — `app-button`, `actions-button`, `statistics-card`, `app-card`
-2. **Layout** — Header, sidebar, container components
-3. **Navigation** — `nav-tree`, breadcrumbs, tabs
-4. **Data Entry** — Forms, inputs, `currency-input`
-5. **Data Display** — Tables, lists, cards
-6. **Feedback** — Toast, dialog, modal, alerts
-7. **Other** — Misc components
+Categories chuẩn trong `src/config/catalog/types.ts`, feed thẳng vào field `categories` của registry item:
 
-## Tech Stack
+1. **general** — `app-button`, `actions-button`, `mode-toggle-button`, `app-heading`, `app-title`, `app-icon`, `copy-button`
+2. **layout** — `app-card`, `app-content-shell`, `app-toolbar`, `statistics-card`, `statistics-card-grid`, `chart-card`, `page-background`, `home-section-header`
+3. **navigation** — `nav-item-recursive`
+4. **data-entry** — `app-input`, `app-field`, `floating-input`, `search-input`, `status-switch`, `toggle-group-theme`, `appearance-picker`
+5. **data-display** — `app-stepper` (mới, `isNew`), `app-avatar`, `badge-status`, `app-tooltip`, `marquee`, `resize-image`, `code-block`
+6. **feedback** — `app-dialog`, `app-sheet`, `alert-dialog-status`, `note-confirm-dialog`, `ping-indicator`, `fallback-shell`, `illustrations`
+7. **other** — `theme-toggle-provider`
 
-- **Framework**: Next.js 16.3.2 (App Router, RSC)
-- **UI**: React 19.2.8, Radix UI primitives, Tailwind CSS
-- **State**: Zustand, TanStack Query, nuqs (URL state)
-- **Forms**: react-hook-form + zod
+Ngoài `categories`, component chia 2 **layer**: `primitive` (thẳng từ `ui/`) và `app` (tự build). Block có thêm facet `blockKind` (`application` | `data-grid` | `solutions`) để lọc riêng ở `/blocks`.
+
+## Blocks (8)
+
+| Slug | blockKind | Live preview |
+|------|-----------|--------------|
+| `data-table` | data-grid | Có |
+| `table-core` | data-grid | Chưa |
+| `table-chrome` | data-grid | Chưa |
+| `data-table-url` | data-grid | Chưa |
+| `stats-overview` | application | Có |
+| `nav-tree` | application | Chưa |
+| `empty-states` | application | Có |
+| `auth-login` | application | Chưa |
+
+## Tech Stack (xác minh từ package.json)
+
+- **Framework**: Next.js 16.3.2 (App Router, RSC, `proxy.ts` thay middleware)
+- **UI**: React 19.2.8, `radix-ui` (package hợp nhất), Tailwind CSS v4, shadcn CLI 4.19, style `radix-mira`
+- **State**: Zustand 5 (1 store), TanStack Query 5, nuqs 2 (URL state)
+- **Forms**: react-hook-form 7 + @hookform/resolvers + zod 4
 - **Tables**: TanStack Table v8
 - **DnD**: @dnd-kit
-- **Animation**: motion (Framer Motion replacement)
-- **i18n**: Custom VI/EN dictionary system
-- **Package Manager**: pnpm 10
+- **Animation**: motion 13 (Framer Motion replacement)
+- **Icons**: lucide-react (provider active) + @hugeicons/react (provider dự phòng), qua `<AppIcon>`
+- **Khác**: sonner (toast), embla (carousel), recharts 3 (chart), exceljs (xuất CSV), react-day-picker 10, react-resizable-panels, vaul, next-themes, cmdk
+- **i18n**: Hệ dictionary riêng VI/EN (React context + cookie `NEXT_LOCALE`)
+- **Package Manager**: pnpm 10.30.3
 
 ## Build Commands
 
 | Command | Action |
 |---------|--------|
-| `pnpm dev` | Dev server port 3100 (runs `demos:build` first) |
+| `pnpm dev` | Dev server port 3100 (`predev` chạy `demos:build` trước) |
 | `pnpm build` | `demos:build` → `registry:build` → `next build` |
 | `pnpm typecheck` | `demos:build` → `tsc --noEmit` |
-| `pnpm lint` | ESLint |
-| `pnpm registry:build` | Generate `public/r/*.json`, `registry.json`, `registry.internal.json` |
-| `pnpm demos:build` | Generate `src/modules/showcase/demos/generated/sources.json` |
-| `pnpm i18n:check` | Verify VI/EN dictionary parity |
+| `pnpm lint` | ESLint (flat config) |
+| `pnpm registry:build` | Sinh `public/r/*.json`, `public/r/registry.json`, `registry.json`, `registry.internal.json` |
+| `pnpm demos:build` | Sinh `src/modules/showcase/demos/generated/sources.json` |
+| `pnpm i18n:check` | Kiểm parity dictionary VI/EN |
 
 ## Change Log
 
-- 2026-10-03: Initial docs generation via `docs:init`
+- 2026-10-03: Tạo ban đầu via `docs:init`
+- 2026-10-18: Cập nhật theo codebase hiện tại — counts đúng (48 ui, 37 data-table, 23 table, 20 illustrations), thêm nhóm `illustrations`, blocks đủ 8 (thêm `stats-overview`, `empty-states`), schema catalog mới (`slug`/`layer`/`visibility`), tách `previews/` (live) khỏi `demos/` (tab demo), route `/login` + `/r/internal/[name]`, `proxy.ts`, stack versions xác minh từ package.json
