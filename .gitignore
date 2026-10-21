@@ -51,4 +51,58 @@ registry.internal.json
 # demo source trích lúc build (pnpm demos:build)
 /src/modules/showcase/demos/generated/
 
-worktree/
+# flutter
+.dart_tool
+build
+GoogleService-Info.plist
+
+repomix-output.xml
+ai-context.md
+.serena/cache
+plans/**/*
+!plans/templates/*
+screenshots/*
+docs/screenshots/*
+docs_local
+logs.txt
+test-ck
+__pycache__
+
+# CK meta commands
+prompt.md
+ck.md
+
+# Generated runtime layout for release/install smoke tests
+#/.claude/
+
+# Local-only state inside tracked claude source
+.claude/settings.local.json
+.claude/memory/
+.claude/skills/.venv/
+.claude/skills/node_modules/
+.claude/teams/
+.claude/hooks/.logs/
+.claude/chrome-devtools/
+.claude/session-state/
+
+# Gemini CLI settings (symlink to staged .claude/.mcp.json)
+.gemini/settings.json
+# External repos for study/reference
+external/
+
+# Git worktrees (local development only)
+worktrees/
+
+# Generated OpenCode backup from scripts/generate-opencode.py --force
+.opencode.backup/
+
+# Working directories (temporary planning/reports)
+plans/*
+!plans/task/
+!plans/task/**
+.vercel
+
+.vercel
+
+# Local secrets
+.env
