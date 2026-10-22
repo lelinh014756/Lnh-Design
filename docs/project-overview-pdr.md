@@ -65,8 +65,8 @@ Mô hình shadcn nằm giữa hai thứ đó: **mã nguồn được copy vào r
 ## 5. High-level Requirements
 
 - **Registry system**: JSON-based registry với dependency resolution tự động từ import (2 lượt: bảng sở hữu file → dựng item)
-- **Public/internal split**: Public (`@aurecook/*`) vs internal (`@aurecook-x/*`) qua Authorization header `Bearer {AURECOOK_TOKEN}`
-- **Build integrity**: Fail build khi public item phụ thuộc internal item, import cấm (`@aurecook/*`, `@/lib/i18n`), file không khớp `TARGET_RULES`, hoặc cây dependency không khép kín
+- **Public/internal split**: Public (`@lnhdesign/*`) vs internal (`@lnhdesign-x/*`) qua Authorization header `Bearer {LNHDESIGN_TOKEN}`
+- **Build integrity**: Fail build khi public item phụ thuộc internal item, import cấm (`@lnhdesign/*`, `@/lib/i18n`), file không khớp `TARGET_RULES`, hoặc cây dependency không khép kín
 - **Demo system**: Hai đường — demo tab (nạp lười `demoModules`) và live preview iframe (`previewRegistry` qua `/preview/[name]`); demo source trích nguyên văn, loại item internal khỏi output tĩnh
 - **i18n**: Song ngữ VI/EN — dictionary namespaced cho site, `{vi,en}` inline cho catalog/demo
 
@@ -81,7 +81,7 @@ Mô hình shadcn nằm giữa hai thứ đó: **mã nguồn được copy vào r
 
 ### 6.2. Assumptions
 
-- Namespace `@aurecook/*` sẽ được đổi sang tên mới (đang pending — Phase 1 roadmap)
+- Namespace `@lnhdesign/*` đã được chốt và áp dụng (Phase 1 roadmap, xong 2026-10-22)
 - Môi trường Vercel cho deployment (standard Next.js)
 
 ## 7. Risks & Mitigations
@@ -112,7 +112,7 @@ Tóm tắt: Next.js 16 app (App Router, `proxy.ts` gate `/internal/**`) với re
 
 ## 10. Open Questions
 
-- [ ] **Namespace rename**: Tên mới đã được chốt chưa?
+- [x] **Namespace rename**: Đã chốt `@lnhdesign/*` và áp dụng xong (2026-10-22)
 - [ ] **Token package**: Có tách lại package token/tailwind/ESLint không?
-- [ ] **AURECOOK_TOKEN**: Token internal đã được setup chưa? (`.env.example` đã document cách sinh)
+- [ ] **LNHDESIGN_TOKEN**: Token internal đã được setup chưa? (`.env.example` đã document cách sinh)
 

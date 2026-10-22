@@ -4,6 +4,7 @@ import { CommandLine } from "@/components/data-display/code-block";
 import { Button } from "@/components/ui/button";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { LandingContainer } from "@/layouts/landing";
+import { REGISTRY_NAMESPACE } from "@/config/registry";
 
 /**
  * Hero.
@@ -57,7 +58,7 @@ export async function LandingHero() {
 
         <div className="mt-2 w-full max-w-xl text-left">
           <p className="mb-2 text-xs text-muted-foreground">{hero.installHint}</p>
-          <CommandLine command="pnpm dlx shadcn@latest add @aurecook/data-table" />
+          <CommandLine command={`pnpm dlx shadcn@latest add ${REGISTRY_NAMESPACE}/data-table`} />
         </div>
       </LandingContainer>
     </section>

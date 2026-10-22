@@ -1,9 +1,10 @@
+import { APP_INTERNAL_USERS } from "@/config/env";
 import { isWellFormedHash, verifyPassword } from "./password";
 
 /**
  * Bảng người dùng nội bộ.
  *
- * Nguồn là biến môi trường `AURECOOK_USERS`, định dạng
+ * Nguồn là biến môi trường `LNHDESIGN_USERS`, định dạng
  * `email:hash,email:hash` — hash sinh bằng `node scripts/hash-password.mjs`.
  * Không có đăng ký tự phục vụ và không có database: số người dùng là vài thành
  * viên trong đội, thêm một hạ tầng lưu trữ cho ngần đó tài khoản là chi phí
@@ -16,7 +17,7 @@ interface InternalUser {
 }
 
 function parseUsers(): InternalUser[] {
-  const raw = process.env.AURECOOK_USERS;
+  const raw = APP_INTERNAL_USERS;
   if (!raw) return [];
 
   return raw
@@ -45,7 +46,7 @@ function warnMalformed(users: InternalUser[]): void {
   for (const user of users) {
     if (isWellFormedHash(user.passwordHash)) continue;
     console.error(
-      `[auth] AURECOOK_USERS: hash của "${user.email}" sai định dạng ` +
+      `[auth] LNHDESIGN_USERS: hash của "${user.email}" sai định dạng ` +
         `(cần pbkdf2.<iterations>.<salt>.<hash>). ` +
         "Sinh lại bằng: node scripts/hash-password.mjs <email> <password>",
     );

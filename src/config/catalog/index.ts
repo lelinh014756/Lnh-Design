@@ -11,6 +11,7 @@ import {
   type ComponentCatalogItem,
   type TemplateCatalogItem,
 } from "./types";
+import { REGISTRY_INTERNAL_NAMESPACE, REGISTRY_NAMESPACE } from "@/config/registry";
 
 export * from "./types";
 export { blockItems, componentItems, templateItems };
@@ -27,7 +28,7 @@ export const componentCatalog: CatalogItem[] = [
  *
  * Primitive (`layer: "primitive"`) VẪN nằm trong `componentItems`: registry
  * builder suy `registryDependencies` từ bảng chủ sở hữu file dựng trên toàn bộ
- * catalog, gỡ chúng ra là `app-button` mất `@aurecook/button` và closure vỡ.
+ * catalog, gỡ chúng ra là `app-button` mất `@lnhdesign/button` và closure vỡ.
  * Ẩn ở đây là quyết định sản phẩm — người dùng cài component cấp app, primitive
  * đi theo như phụ thuộc.
  */
@@ -127,7 +128,7 @@ export function isCatalogCategory(value: string): value is CatalogCategory {
 /**
  * Item đã gộp vào item khác → đích mới (`slug#neo`). Trang cũ redirect thay vì
  * 404 để link ngoài không chết. Chỉ giữ được URL trang showcase: lệnh cài
- * `@aurecook/{slug-cũ}` của CLI thì không chuyển hướng được.
+ * `@lnhdesign/{slug-cũ}` của CLI thì không chuyển hướng được.
  */
 export const mergedComponentSlugs: Readonly<Record<string, string>> = {
   "refresh-button": "app-button#refresh",
@@ -135,7 +136,7 @@ export const mergedComponentSlugs: Readonly<Record<string, string>> = {
 
 /** Tên item khi cài qua CLI. Item nội bộ nằm ở namespace riêng cần token. */
 export function registryItemName(item: CatalogItem): string {
-  return item.visibility === "internal" ? `@aurecook-x/${item.slug}` : `@aurecook/${item.slug}`;
+  return item.visibility === "internal" ? `${REGISTRY_INTERNAL_NAMESPACE}/${item.slug}` : `${REGISTRY_NAMESPACE}/${item.slug}`;
 }
 
 export const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const;

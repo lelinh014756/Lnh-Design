@@ -37,7 +37,7 @@ export default async function LoginPage({
           <h2 className="text-3xl font-semibold tracking-tight">{t.heroTitle}</h2>
           <p className="max-w-sm leading-7 text-primary-foreground/85">{t.heroBody}</p>
         </div>
-        <span className="text-sm text-primary-foreground/70">AureCook</span>
+        <span className="text-sm text-primary-foreground/70">LnhDesign</span>
       </div>
 
       <div className="flex flex-col justify-center gap-8 px-6 py-12 md:px-14">

@@ -10,18 +10,18 @@
   "sectionRegistry": "Registry",
   "sections": {
     "intro": {
-      "title": "What AureCook is",
+      "title": "What LnhDesign is",
       "body": "An internal shadcn registry. Declare it once in components.json, then install components with the CLI — the source lands in your repo, with no package in between to wait on for releases."
     },
     "install": {
       "title": "Setup",
       "step1": "Declare the public registry in your repo's components.json:",
       "step2": "Install your first item. The CLI pulls both registry and npm dependencies:",
-      "step3": "Done. Files land in your repo's own alias directories, not AureCook's."
+      "step3": "Done. Files land in your repo's own alias directories, not LnhDesign's."
     },
     "internal": {
       "title": "Private registry",
-      "body": "Internal items live in their own namespace and need a token. Put AURECOOK_TOKEN in your shell or CI environment — never commit it."
+      "body": "Internal items live in their own namespace and need a token. Put LNHDESIGN_TOKEN in your shell or CI environment — never commit it."
     },
     "i18n": {
       "title": "The i18n contract",

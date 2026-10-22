@@ -44,7 +44,7 @@ export type CatalogKind = "component" | "block" | "template";
 /** Facet lọc riêng ở tab `/blocks`, ĐỘC LẬP với `categories`. */
 export type BlockKind = "application" | "data-grid" | "solutions";
 
-/** Item public (`@aurecook/*`) hay chỉ nội bộ (`@aurecook-x/*`, cần token). */
+/** Item public (`@lnhdesign/*`) hay chỉ nội bộ (`@lnhdesign-x/*`, cần token). */
 export type CatalogVisibility = "public" | "internal";
 
 /**
@@ -63,7 +63,7 @@ export interface LocalizedText {
 interface CatalogItemBase {
   /**
    * Slug — TRÙNG tên thư mục `registry/radix-mira/{nhóm}/{slug}/`, tên registry
-   * item `@aurecook/{slug}`, VÀ param của route `/preview/[name]`. Một giá trị,
+   * item `@lnhdesign/{slug}`, VÀ param của route `/preview/[name]`. Một giá trị,
    * ba chỗ dùng — lệch chỗ nào cũng vỡ liên kết.
    */
   slug: string;

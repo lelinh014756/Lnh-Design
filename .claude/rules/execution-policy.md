@@ -139,8 +139,8 @@ Before each tool/skill call, silently verify:
 Follow **ADR-001** (`docs/adr-001-state-boundary.md`):
 - Server data → TanStack Query (`src/lib/query/`)
 - Global UI state → Zustand (`src/store/`)
-- Tree-scoped provider → React Context (`src/context/`)
-- Module-scoped state → `src/modules/*/context/`
+- Tree-scoped provider → React Context (`src/lib/i18n/context.tsx`)
+- Module-scoped state → `src/modules/*/stores/`
 - Local state → `useState`/`useReducer`
 
 **Rule:** If `XContext` and `XStore` both exist for the same domain → kill Context, use Store.

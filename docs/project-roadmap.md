@@ -17,23 +17,23 @@ Lnh-design là registry UI theo mô hình shadcn (style `radix-mira`), đang tro
 ## 2. Strategy & Themes
 
 - **Theme 1: Coverage** — Hoàn thiện demo cho tất cả component (35 app) và block (8) còn thiếu
-- **Theme 2: Branding** — Đổi namespace từ `@aurecook/*` sang tên mới, cập nhật env/domain
+- **Theme 2: Branding** — Đổi namespace từ `@lnhdesign/*` sang tên mới, cập nhật env/domain
 - **Theme 3: Quality** — Registry build 100% pass, i18n parity, type safety
 - **Theme 4: Package Decisions** — Quyết định có tách token/tailwind preset/eslint config không
 
 ## 3. Timeline by Phase
 
-### Phase 1: Namespace Rename — CHƯA BẮT ĐẦU
+### Phase 1: Namespace Rename — XONG (2026-10-22)
 
-- **Goal:** Đổi toàn bộ namespace và branding từ AureCook sang tên mới
-- **Status:** `REGISTRY_NAME = "aurecook"` vẫn đang active trong `scripts/registry-builder/config.mjs` (xác minh 2026-10-18); `site.ts` vẫn trỏ `aurecook.vercel.app`
-- **Start:** TBD · **End:** TBD · **Owner:** Team
+- **Goal:** Đổi toàn bộ namespace và branding sang LnhDesign
+- **Status:** Đã hoàn tất trên nhánh `refactor/sync-eco-farm-rename-lnhdesign` — namespace `@lnhdesign/*` và `@lnhdesign-x/*`, env `LNHDESIGN_*`, domain `lnhdesign.vercel.app`, brand `LnhDesign`. Chưa deploy: cần đổi key trong `.env.local` và bảo đảm domain resolve.
+- **Start:** 2026-10-22 · **End:** 2026-10-22 · **Owner:** Team
 
 #### Scope
 - Chốt tên registry mới
 - Cập nhật `REGISTRY_NAME` + `FORBIDDEN_IMPORTS` trong `scripts/registry-builder/config.mjs`
-- Cập nhật `qualifyDependency()` (namespace `@aurecook`/`@aurecook-x`) trong `scripts/registry-builder/index.mjs`
-- Cập nhật env variables (`AURECOOK_*` → mới) + `.env.example`
+- Cập nhật `qualifyDependency()` (namespace `@lnhdesign`/`@lnhdesign-x`) trong `scripts/registry-builder/index.mjs`
+- Cập nhật env variables (`LNHDESIGN_*`) + `.env.example`
 - Cập nhật domain trong `src/config/site.ts`
 - Chạy lại `registry:build`
 
@@ -83,7 +83,7 @@ Lnh-design là registry UI theo mô hình shadcn (style `radix-mira`), đang tro
 - **Start:** TBD · **Owner:** Team
 
 #### Scope
-- Đánh giá token package: có cần publish riêng không? (catalog comment tham chiếu `@aurecook/tokens` — chưa tách)
+- Đánh giá token package: có cần publish riêng không? (catalog comment tham chiếu `@lnhdesign/tokens` — chưa tách)
 - Tailwind preset: standalone hay bundle trong registry?
 - ESLint config: tách hay giữ nguyên?
 
@@ -97,7 +97,7 @@ Lnh-design là registry UI theo mô hình shadcn (style `radix-mira`), đang tro
 - **Key Features:**
   - 35 component cấp app với demo (+ 48 primitive sẵn dùng)
   - 8 block với demo
-  - Public registry (`@aurecook/*`), showcase site đầy đủ, internal registry với auth
+  - Public registry (`@lnhdesign/*`), showcase site đầy đủ, internal registry với auth
 
 ### Release 2.0.0: Branding Rename — CHƯA CÓ NGÀY
 
@@ -138,9 +138,9 @@ Lnh-design là registry UI theo mô hình shadcn (style `radix-mira`), đang tro
 
 | Item | Description |
 |------|-------------|
-| Namespace `@aurecook/*` | Pending rename (kéo theo `@aurecook-x`, env, domain) |
-| `FORBIDDEN_IMPORTS`/`qualifyDependency` | Hardcode namespace trong 2 file scripts |
-| Domain `aurecook.vercel.app` | Pending update |
+| Namespace `@lnhdesign/*` | Đã đổi (kéo theo `@lnhdesign-x`, env `LNHDESIGN_*`, domain) |
+| `FORBIDDEN_IMPORTS`/`qualifyDependency` | `FORBIDDEN_IMPORTS` dùng `@lnhdesign/`; `qualifyDependency()` suy ra từ `REGISTRY_NAME` |
+| Domain `lnhdesign.vercel.app` | Đã cập nhật — cần bảo đảm domain resolve trước khi deploy |
 | Token/eslint package | Undecided |
 | Comment stale trong `types.ts` | Trỏ tới `src/config/preview-registry.tsx` không tồn tại — map thật nằm ở `src/modules/showcase/previews/index.ts` |
 
@@ -154,3 +154,4 @@ Lnh-design là registry UI theo mô hình shadcn (style `radix-mira`), đang tro
 
 - 2026-10-03: Tạo ban đầu via `docs:init`
 - 2026-10-18: Cập nhật trạng thái — component demo 9/35 (+`app-stepper`), block preview 3/8 (`stats-overview`, `empty-states` có preview), hoàn thành gần đây (stepper, props table, illustrations), sửa `nav-tree` từ "component" sang "block", thêm debt: stale comment preview-registry trong `types.ts`
+- 2026-10-22: Đổi tên AureCook → LnhDesign: namespace @lnhdesign/*, env LNHDESIGN_*, domain lnhdesign.vercel.app.

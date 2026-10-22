@@ -14,7 +14,7 @@ Danh bạ component, hook và quy ước dùng chung của Lnh-design (registry 
 |-----------|----------|----------|
 | Icon | Chỉ dùng `<AppIcon icon="tên" />` (`src/components/general/app-icon.tsx`). **Cấm** import thẳng `lucide-react` hoặc `@hugeicons/*` ngoài `src/components/general/icon-providers/**` và `src/components/ui/**` | ESLint `no-restricted-imports` (error) |
 | Chuỗi trong component của registry | **Không** import `@/lib/i18n` trong file thuộc một registry item; component tự mang chuỗi qua prop hoặc hằng. Chuỗi của site showcase đi qua dictionary `src/lib/i18n/dictionaries/{vi,en}/*.json` | `FORBIDDEN_IMPORTS` trong `scripts/registry-builder/config.mjs` |
-| Import | Từ `@/components/*` theo nhóm hoặc theo file; không có barrel gốc. Cấm alias `@aurecook/*` | registry-builder |
+| Import | Từ `@/components/*` theo nhóm hoặc theo file; không có barrel gốc. Cấm alias `@lnhdesign/*` | registry-builder |
 | Tên | File kebab-case, component PascalCase trùng tên file | `docs/code-standards.md` |
 | Slug | Một `slug` dùng ở 3 chỗ: thư mục demo, tên registry item, tham số `/preview/[name]` | `src/config/catalog/types.ts` |
 | Dependency | Cây dependency của item phải khép kín; item public không kéo theo item internal | `scripts/registry-builder/verify-closure.mjs` |

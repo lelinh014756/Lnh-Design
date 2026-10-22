@@ -7,6 +7,11 @@ import { CodeBlock } from "@/components/data-display/code-block";
 import { Badge } from "@/components/ui/badge";
 import { SESSION_COOKIE, verifySession } from "@/lib/auth/session";
 import { componentCatalog, installCommand, registryItemName } from "@/config/catalog";
+import {
+  REGISTRY_INTERNAL_NAMESPACE,
+  REGISTRY_INTERNAL_URL,
+  REGISTRY_TOKEN_ENV,
+} from "@/config/registry";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { PageHeader } from "@/modules/showcase/components/page-header";
 import { LogoutButton } from "@/modules/auth/components/logout-button";
@@ -18,9 +23,9 @@ export const metadata: Metadata = {
 
 const CONSUMER_CONFIG = `{
   "registries": {
-    "@aurecook-x": {
-      "url": "https://aurecook.vercel.app/r/internal/{name}.json",
-      "headers": { "Authorization": "Bearer \${AURECOOK_TOKEN}" }
+    "${REGISTRY_INTERNAL_NAMESPACE}": {
+      "url": "${REGISTRY_INTERNAL_URL}",
+      "headers": { "Authorization": "Bearer \${${REGISTRY_TOKEN_ENV}}" }
     }
   }
 }`;

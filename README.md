@@ -5,10 +5,8 @@ Registry UI dùng chung cho các dự án React, theo mô hình shadcn. Kèm m�
 Dev ở dự án React bất kỳ chạy một lệnh là có mã nguồn chuẩn nằm ngay trong repo của mình:
 
 ```bash
-pnpm dlx shadcn@latest add @aurecook/data-table
+pnpm dlx shadcn@latest add @lnhdesign/data-table
 ```
-
-> Namespace registry hiện vẫn là `@aurecook/*` (xem [Trạng thái hiện tại](#trạng-thái-hiện-tại)).
 
 ## Bài toán
 
@@ -42,8 +40,8 @@ Phân nhóm theo Ant Design (7 nhóm): `general`, `layout`, `navigation`, `data-
 
 | Kênh | Namespace | Truy cập |
 |---|---|---|
-| Public | `@aurecook/*` | File tĩnh trong `public/r/`, ai cũng cài được |
-| Nội bộ | `@aurecook-x/*` | Sau cổng token (`Authorization: Bearer`), CLI nhận 401 nếu thiếu |
+| Public | `@lnhdesign/*` | File tĩnh trong `public/r/`, ai cũng cài được |
+| Nội bộ | `@lnhdesign-x/*` | Sau cổng token (`Authorization: Bearer`), CLI nhận 401 nếu thiếu |
 
 Item công khai **không được** phụ thuộc item nội bộ — cài item công khai sẽ kéo item nội bộ theo, rò rỉ qua cây dependency.
 
@@ -54,10 +52,10 @@ Thêm vào `components.json` của dự án React:
 ```json
 {
   "registries": {
-    "@aurecook": "https://aurecook.vercel.app/r/{name}.json",
-    "@aurecook-x": {
-      "url": "https://aurecook.vercel.app/r/internal/{name}.json",
-      "headers": { "Authorization": "Bearer ${AURECOOK_TOKEN}" }
+    "@lnhdesign": "https://lnhdesign.vercel.app/r/{name}.json",
+    "@lnhdesign-x": {
+      "url": "https://lnhdesign.vercel.app/r/internal/{name}.json",
+      "headers": { "Authorization": "Bearer ${LNHDESIGN_TOKEN}" }
     }
   }
 }
@@ -150,10 +148,10 @@ CLI shadcn không đọc được repo này; nó chỉ tải một JSON cho mỗ
 
 | Biến | Dùng cho |
 |---|---|
-| `AURECOOK_SESSION_SECRET` | Ký cookie phiên, ≥ 32 ký tự (`openssl rand -base64 48`) |
-| `AURECOOK_USERS` | Tài khoản nội bộ dạng `email:hash`, ngăn bằng dấu phẩy |
-| `AURECOOK_TOKEN` | Token cho registry nội bộ (`openssl rand -hex 32`) |
-| `AURECOOK_HOMEPAGE` | Domain ghi vào `homepage` của `registry.json` |
+| `LNHDESIGN_SESSION_SECRET` | Ký cookie phiên, ≥ 32 ký tự (`openssl rand -base64 48`) |
+| `LNHDESIGN_USERS` | Tài khoản nội bộ dạng `email:hash`, ngăn bằng dấu phẩy |
+| `LNHDESIGN_TOKEN` | Token cho registry nội bộ (`openssl rand -hex 32`) |
+| `LNHDESIGN_HOMEPAGE` | Domain ghi vào `homepage` của `registry.json` |
 
 Tạo hash mật khẩu:
 
@@ -181,6 +179,5 @@ Source này vừa được tách khỏi monorepo. Những điểm chưa khớp:
 
 | Vấn đề | Hệ quả | Cần làm |
 |---|---|---|
-| Namespace `@aurecook/*`, biến môi trường `AURECOOK_*`, domain `aurecook.vercel.app` còn nguyên | Tên thương hiệu cũ lọt vào lệnh cài mà người dùng sẽ copy | Chốt tên mới rồi đổi đồng loạt: `REGISTRY_NAME` + `FORBIDDEN_IMPORTS` trong `scripts/registry-builder/config.mjs`, `registryItemName()` trong catalog, env, homepage, `site.ts`, rồi chạy lại `registry:build` |
 | Chỉ 8/35 component cấp app và 3/8 block có demo (thiếu: `table-core`, `table-chrome`, `data-table-url`, `nav-tree`, `auth-login`) | Trang hiện "Chưa có bản demo" | Viết dần theo nhóm |
 | Gói npm token/tailwind preset/eslint config thuộc monorepo cũ | Chưa có kênh khoá version cho token | Quyết định có tách lại không |

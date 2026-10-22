@@ -64,7 +64,7 @@ export function PreviewFrame({
       if (event.origin !== window.location.origin) return;
 
       const data = event.data as { type?: string; name?: string; value?: number } | null;
-      if (!data || data.type !== "aurecook:height" || typeof data.value !== "number") return;
+      if (!data || data.type !== "lnhdesign:height" || typeof data.value !== "number") return;
       if (data.name !== name) return;
 
       setHeight(Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, Math.ceil(data.value))));

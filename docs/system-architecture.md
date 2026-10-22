@@ -74,7 +74,7 @@ graph TB
     DemoSources --> Showcase
     PreviewRegistry --> Showcase
 
-    ShadcnCLI --> Install["pnpm dlx shadcn@latest add @aurecook/{slug}"]
+    ShadcnCLI --> Install["pnpm dlx shadcn@latest add @lnhdesign/{slug}"]
     AgentAI --> ShadcnCLI
 ```
 
@@ -86,7 +86,7 @@ Catalog (`src/config/catalog/`) là data thuần (không JSX) — script Node n�
 
 | Field | Ý nghĩa |
 |-------|---------|
-| `slug` | Trùng thư mục demo, tên registry item `@aurecook/{slug}`, và param `/preview/[name]` |
+| `slug` | Trùng thư mục demo, tên registry item `@lnhdesign/{slug}`, và param `/preview/[name]` |
 | `name` | Tên hiển thị (danh từ riêng, không dịch) |
 | `description` | `{ vi, en }` nằm ngay trong data — thêm item mà quên dịch là lỗi kiểu |
 | `categories` | 1-N trong 7 nhóm Ant Design |
@@ -141,12 +141,12 @@ scripts/registry-builder/index.mjs  (2 lượt)
     4. Suy dependency: import "@/…" → tra ownerOfFile;
        npm package → tra version trong package.json (bỏ react/react-dom/next)
     5. Validate:
-       - Import cấm (FORBIDDEN_IMPORTS: @aurecook/*, @/lib/i18n)
+       - Import cấm (FORBIDDEN_IMPORTS: @lnhdesign/*, @/lib/i18n)
        - Public item phụ thuộc internal item (leak) → fail
        - File không nằm trong TARGET_RULES → fail
        - verifyClosure: cây dependency khép kín
     6. Output: public/r/{name}.json (91) + public/r/registry.json
-       + registry.json + registry.internal.json (tên "aurecook-x")
+       + registry.json + registry.internal.json (tên "lnhdesign-x")
 ```
 
 Ghi chú kiến trúc:
@@ -176,9 +176,9 @@ Một demo = một file → source là nội dung file nguyên văn: không AST,
 ### 4.4. CLI Install Flow
 
 ```
-User: pnpm dlx shadcn@latest add @aurecook/app-button
+User: pnpm dlx shadcn@latest add @lnhdesign/app-button
          ↓
-shadcn CLI reads: https://aurecook.vercel.app/r/app-button.json
+shadcn CLI reads: https://lnhdesign.vercel.app/r/app-button.json
          ↓
 JSON chứa: registryDependencies (đủ namespace), files (nội dung nhúng), dependencies
          ↓
@@ -189,8 +189,8 @@ CLI đặt file theo alias @ui/ @components/ @hooks/ @lib/ của repo khách
 
 | Channel | Namespace | Đường dẫn | Auth |
 |---------|-----------|-----------|------|
-| Public | `@aurecook/*` | `https://aurecook.vercel.app/r/{name}.json` (tĩnh, CDN) | Không |
-| Internal | `@aurecook-x/*` | `/r/internal/{name}.json` (route handler) | `Authorization: Bearer {AURECOOK_TOKEN}` |
+| Public | `@lnhdesign/*` | `https://lnhdesign.vercel.app/r/{name}.json` (tĩnh, CDN) | Không |
+| Internal | `@lnhdesign-x/*` | `/r/internal/{name}.json` (route handler) | `Authorization: Bearer {LNHDESIGN_TOKEN}` |
 
 **Quy tắc tối quan trọng**: Public item **không được** phụ thuộc internal item — registry builder fail ngay lúc build. Demo source của item internal cũng bị loại khỏi `sources.json` (chặn leak qua đường tĩnh).
 
@@ -215,7 +215,7 @@ CLI đặt file theo alias @ui/ @components/ @hooks/ @lib/ của repo khách
 
 - `src/proxy.ts` (Next 16 thay thế middleware) — cổng duy nhất chặn `/internal/**` bằng session cookie (`SESSION_COOKIE`, `verifySession` từ `src/lib/auth/session`).
 - `/r/internal/*.json` **không** qua proxy: dùng `Authorization: Bearer`, trả 401 cho CLI thay vì redirect. Route handler tự kiểm.
-- Tài khoản nội bộ khai qua `AURECOOK_USERS` (`email:pbkdf2.<iterations>.<salt>.<hash>`, phân cách dấu **chấm** — không dùng `$` vì Next expand `$xxx` thành chuỗi rỗng).
+- Tài khoản nội bộ khai qua `LNHDESIGN_USERS` (`email:pbkdf2.<iterations>.<salt>.<hash>`, phân cách dấu **chấm** — không dùng `$` vì Next expand `$xxx` thành chuỗi rỗng).
 
 ## 8. State Management
 
@@ -242,10 +242,10 @@ CLI đặt file theo alias @ui/ @components/ @hooks/ @lib/ của repo khách
 
 | Variable | Purpose |
 |----------|---------|
-| `AURECOOK_SESSION_SECRET` | Ký cookie phiên, bắt buộc ≥32 ký tự |
-| `AURECOOK_USERS` | Tài khoản nội bộ `email:pbkdf2.<iterations>.<salt>.<hash>`, phân cách dấu chấm |
-| `AURECOOK_TOKEN` | Auth cho `/r/internal/*.json`, repo dùng đặt cùng giá trị rồi khai trong components.json |
-| `AURECOOK_HOMEPAGE` | Domain ghi vào `homepage` của registry.json lúc build |
+| `LNHDESIGN_SESSION_SECRET` | Ký cookie phiên, bắt buộc ≥32 ký tự |
+| `LNHDESIGN_USERS` | Tài khoản nội bộ `email:pbkdf2.<iterations>.<salt>.<hash>`, phân cách dấu chấm |
+| `LNHDESIGN_TOKEN` | Auth cho `/r/internal/*.json`, repo dùng đặt cùng giá trị rồi khai trong components.json |
+| `LNHDESIGN_HOMEPAGE` | Domain ghi vào `homepage` của registry.json lúc build |
 
 ## 11. Build Pipeline
 
@@ -269,3 +269,4 @@ Generated files nằm trong `.gitignore` — suy ra hết được từ `src/`.
 
 - 2026-10-03: Tạo ban đầu via `docs:init`
 - 2026-10-18: Cập nhật theo source đã xác minh — schema catalog mới (slug/layer/visibility/blockKind), tách demo tab khỏi live preview (previews/), registry build 2 lượt + TARGET_RULES + FORBIDDEN_IMPORTS (@aurecook/*, @/lib/i18n), block đủ 8, template dev-portal internal, route /login + /r/internal/[name], phần Auth & Proxy (proxy.ts) và State Management; xoá `src/templates/` (không tồn tại)
+- 2026-10-22: Đổi tên AureCook → LnhDesign: namespace @lnhdesign/*, env LNHDESIGN_*, domain lnhdesign.vercel.app; đồng bộ tooling và quy tắc theo Eco-Farm-web.

@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+dist/
+bin/
 
 # production
 /build
@@ -30,8 +32,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# package manager
+package-lock.json
+yarn.lock
+
 # env files (can opt-in for committing if needed)
 .env*
+# Mẫu biến môi trường phải commit — nó không chứa giá trị thật.
+!.env.example
 
 # vercel
 .vercel
@@ -39,9 +47,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Mẫu biến môi trường phải commit — nó không chứa giá trị thật.
-!.env.example
 
 # Sinh bởi registry-builder ở mỗi lần build.
 public/r/
@@ -51,10 +56,8 @@ registry.internal.json
 # demo source trích lúc build (pnpm demos:build)
 /src/modules/showcase/demos/generated/
 
-# flutter
-.dart_tool
-build
-GoogleService-Info.plist
+# turbo cache và log build
+.turbo/
 
 repomix-output.xml
 ai-context.md
@@ -72,9 +75,6 @@ __pycache__
 prompt.md
 ck.md
 
-# Generated runtime layout for release/install smoke tests
-#/.claude/
-
 # Local-only state inside tracked claude source
 .claude/settings.local.json
 .claude/memory/
@@ -91,18 +91,11 @@ ck.md
 external/
 
 # Git worktrees (local development only)
+worktree/
 worktrees/
+
+# Bản sao skill tạm (không commit)
+/.claude/skills copy/
 
 # Generated OpenCode backup from scripts/generate-opencode.py --force
 .opencode.backup/
-
-# Working directories (temporary planning/reports)
-plans/*
-!plans/task/
-!plans/task/**
-.vercel
-
-.vercel
-
-# Local secrets
-.env

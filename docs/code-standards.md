@@ -14,6 +14,63 @@ triggered_by: "docs:update"
 
 Coding conventions và architectural standards cho Lnh-design registry project. Thư viện theo mô hình shadcn (style `radix-mira`) — source được copy vào repo người dùng, nên code phải clean, readable, và không có dependency phức tạp.
 
+## State Boundary (ADR-001)
+
+| Tầng | Tech | Vị trí |
+|---|---|---|
+| Server data | TanStack Query | `src/lib/query/` (`query-client.ts`) |
+| Global UI state | Zustand singleton | `src/store/` (`appearance-store.ts`) |
+| Tree-scoped provider | React Context | `src/lib/i18n/context.tsx` |
+| Compound-component state | React Context bên trong component | `src/components/**` (vd `SidebarContext`, `TableContext`) |
+| Module-scoped state | Zustand singleton + selector | `src/modules/*/stores/` (chưa có) |
+| Local state | `useState` / `useReducer` | trong component |
+
+Nếu cùng một domain có cả `XContext` và `XStore` → bỏ Context, dùng Store.
+Bản quyết định đầy đủ: [`docs/adr-001-state-boundary.md`](./adr-001-state-boundary.md).
+
+## LOC Limits
+
+- components/hooks ≤ 500 LOC
+- pages/layouts/modules ≤ 700 LOC
+- config/generated ≤ 1000 LOC
+
+Vượt ngưỡng → tách theo ranh giới logic.
+
+## Code Guidelines
+
+- **YAGNI — KISS — DRY.** Không tạo abstraction một-lần; chỉ tách helper khi có ≥ 2–3 chỗ gọi hoặc logic lặp.
+- Code phải build được: không có syntax error, typecheck sạch.
+- Xử lý lỗi bằng `try/catch` theo security standards.
+- Comment chỉ giải thích ý định không hiển nhiên — không bao giờ tham chiếu plan, phase, finding code hay mã audit (xem `.claude/rules/review-audit-self-decision.md` §5).
+
+## Prettier
+
+`.prettierrc` đồng bộ từ Eco-Farm-web: `semi: false`, `printWidth: 80`, `trailingComma: "es5"`, plugin `prettier-plugin-tailwindcss` với `tailwindFunctions: ["cn", "cva"]`.
+
+- `pnpm format` phủ `**/*.{ts,tsx}`.
+- Lần format toàn repo đang pending thành commit riêng. Cho tới lúc đó: **file mới** theo `.prettierrc`; **file sửa** giữ style hiện tại của file đó.
+
+## Pre-commit / Pre-push
+
+- `pnpm lint`, `pnpm typecheck`.
+- `pnpm i18n:check` khi có thay đổi dictionary.
+- `pnpm registry:build` khi có thay đổi registry item, catalog hoặc manifest.
+- `.github/workflows/pr-check.yml` chạy lint, typecheck và build trên PR.
+- Conventional Commits; thay đổi trong `.claude/` không dùng type `chore`/`docs`; không nhắc AI trong commit message.
+
+## Repo-specific
+
+- **Package manager**: chỉ pnpm (`pnpm-lock.yaml`), không trộn npm/yarn.
+- **Privacy hook** (`@@PRIVACY_PROMPT@@`): khi bị chặn, parse JSON giữa `@@PRIVACY_PROMPT_START@@`/`@@PRIVACY_PROMPT_END@@`, hỏi user qua `AskUserQuestion`, chỉ tiếp tục khi được duyệt (chi tiết ở `CLAUDE.md`).
+- **`plans/`** không commit, trừ `plans/templates/*`.
+- `.claude/session-state/`, `.claude/hooks/.logs/`, `.claude/chrome-devtools/` không commit.
+- Không commit `.env` hay secret.
+- App đọc biến môi trường **chỉ qua `src/config/env.ts`**; script Node trong `scripts/` tự đọc biến của mình.
+
+## UI Standards
+
+Tuân thủ `.claude/rules/anti-ai-look.md` (radius, spacing, color, shadow, typography, motion, layout, copy). Rule đó là nguồn chuẩn — không copy vào đây.
+
 ## TypeScript
 
 - **Strict mode enabled** — `tsconfig.json` có `"strict": true` (xác minh 2026-10-18)
@@ -180,7 +237,7 @@ Block khai trực tiếp object trong `blocks.ts` với `blockKind: "application
 
 `scripts/registry-builder/` fail build khi:
 
-1. **Import cấm** — `FORBIDDEN_IMPORTS` trong `config.mjs`: `@aurecook/*` (alias workspace không resolve được ở repo khách) và `@/lib/i18n` (item phải tự mang chuỗi hiển thị)
+1. **Import cấm** — `FORBIDDEN_IMPORTS` trong `config.mjs`: `@lnhdesign/*` (alias workspace không resolve được ở repo khách) và `@/lib/i18n` (item phải tự mang chuỗi hiển thị)
 2. **Public → internal leak** — public item kéo theo internal item qua `registryDependencies`
 3. **File không phân loại được** — không khớp `TARGET_RULES` nào trong `config.mjs` (`src/components/ui/` → `@ui/`, `src/components/` → `@components/`, `src/hooks/` → `@hooks/`, `src/lib/` → `@lib/`, `src/config|layouts|store/` → `~/`)
 4. **Cây dependency không khép kín** — `verify-closure.mjs`
@@ -214,3 +271,5 @@ Ngoài ra: dependency suy từ import (`@/…` → tra `ownerOfFile`, npm packag
 - 2026-10-04: Icon provider adapter (hugeicons active, lucide dự phòng), ESLint chặn import thẳng thư viện icon
 - 2026-10-04: Chuyển provider active về lucide; hugeicons giữ làm dự phòng
 - 2026-10-18: Cập nhật theo source đã xác minh — schema demo thật (`demos: ComponentDemo[]` với snippet/props, đăng ký `demoModules` nạp lười), schema catalog (`primitive()`/`app()`, `slug`/`layer`/`visibility`), FORBIDDEN_IMPORTS đủ 2 rule (+`@aurecook/*`), TARGET_RULES, i18n namespaced JSON, ESLint global rules + `.claude/**` ignore
+- 2026-10-22: Bổ sung các mục chuẩn chung đồng bộ từ Eco-Farm-web (state boundary, LOC, code guidelines, Prettier, pre-commit, repo-specific)
+- 2026-10-22: Đổi tên AureCook → LnhDesign: namespace @lnhdesign/*, env LNHDESIGN_*, domain lnhdesign.vercel.app; đồng bộ tooling và quy tắc theo Eco-Farm-web.

@@ -20,6 +20,9 @@ Quy mô catalog (xác minh 2026-10-18): **92 registry item** = 83 component (48 
 
 ```
 /
+├── .github/workflows/pr-check.yml # CI PR: lint, typecheck, build
+├── .vscode/settings.json      # Format on save bằng Prettier
+├── .prettierrc / .prettierignore / .nvmrc (Node 24) / pnpm-workspace.yaml
 ├── src/
 │   ├── app/                    # Next.js App Router
 │   │   ├── (landing)/         # Trang chủ landing
@@ -47,6 +50,9 @@ Quy mô catalog (xác minh 2026-10-18): **92 registry item** = 83 component (48 
 │   │   ├── data-table/       # Block: data-table (port từ tablecn)
 │   │   └── table/            # Block: table-core, table-chrome
 │   ├── config/
+│   │   ├── env.ts             # Điểm đọc env duy nhất của app (APP_* constants)
+│   │   ├── registry.ts        # Namespace + URL registry dùng cho snippet cài đặt
+│   │   ├── site.ts            # siteConfig: tên, domain, repo
 │   │   ├── catalog/           # Source of truth: components.ts, blocks.ts, templates.ts, types.ts, index.ts
 │   │   └── nav/               # Điều hướng showcase
 │   ├── modules/
@@ -70,9 +76,13 @@ Quy mô catalog (xác minh 2026-10-18): **92 registry item** = 83 component (48 
 ├── scripts/
 │   ├── registry-builder/      # index.mjs, config.mjs, manifest.mjs, resolve-imports.mjs, verify-closure.mjs
 │   ├── build-demo-sources.mjs # Trích nguồn demo → generated/sources.json
-│   └── hash-password.mjs      # Sinh hash pbkdf2 cho AURECOOK_USERS
+│   └── hash-password.mjs      # Sinh hash pbkdf2 cho LNHDESIGN_USERS
 ├── registry.manifest.json     # Bổ sung khai tay: files glob, version, cssVars (tùy item)
 └── docs/                      # Documentation này
+    ├── adr-001-state-boundary.md
+    ├── design-guidelines.md
+    ├── deployment-guide.md
+    └── design-patterns/task-report/  # Template báo cáo task
 ```
 
 Lưu ý: `public/r/`, `registry.json`, `registry.internal.json` và `src/modules/showcase/demos/generated/` đều sinh lúc build và nằm trong `.gitignore`.
@@ -167,3 +177,4 @@ Ngoài `categories`, component chia 2 **layer**: `primitive` (thẳng từ `ui/`
 
 - 2026-10-03: Tạo ban đầu via `docs:init`
 - 2026-10-18: Cập nhật theo codebase hiện tại — counts đúng (48 ui, 37 data-table, 23 table, 20 illustrations), thêm nhóm `illustrations`, blocks đủ 8 (thêm `stats-overview`, `empty-states`), schema catalog mới (`slug`/`layer`/`visibility`), tách `previews/` (live) khỏi `demos/` (tab demo), route `/login` + `/r/internal/[name]`, `proxy.ts`, stack versions xác minh từ package.json
+- 2026-10-22: Đổi tên AureCook → LnhDesign: namespace @lnhdesign/*, env LNHDESIGN_*, domain lnhdesign.vercel.app; đồng bộ tooling và quy tắc theo Eco-Farm-web.

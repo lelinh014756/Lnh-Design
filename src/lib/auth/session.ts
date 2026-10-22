@@ -9,7 +9,9 @@
  * mọi thứ nhét vào đó là thứ họ đọc được.
  */
 
-export const SESSION_COOKIE = "aurecook_session";
+import { APP_SESSION_SECRET } from "@/config/env";
+
+export const SESSION_COOKIE = "lnhdesign_session";
 export const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
 
 export interface SessionPayload {
@@ -37,10 +39,10 @@ function decodeBase64Url(value: string): Uint8Array {
  * chỗ thay vì lặng lẽ ký bằng chuỗi rỗng và tạo ra phiên ai cũng giả được.
  */
 function sessionSecret(): string {
-  const secret = process.env.AURECOOK_SESSION_SECRET;
+  const secret = APP_SESSION_SECRET;
   if (!secret || secret.length < 32) {
     throw new Error(
-      "AURECOOK_SESSION_SECRET phải có và dài ít nhất 32 ký tự. Sinh bằng: openssl rand -base64 48",
+      "LNHDESIGN_SESSION_SECRET phải có và dài ít nhất 32 ký tự. Sinh bằng: openssl rand -base64 48",
     );
   }
   return secret;

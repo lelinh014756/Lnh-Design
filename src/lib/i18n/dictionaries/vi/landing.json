@@ -3,7 +3,7 @@
     "eyebrow": "Registry UI nội bộ",
     "title": "Một hệ UI. Mọi sản phẩm.",
     "titleAccent": "Mọi sản phẩm.",
-    "subtitle": "AureCook phân phối component chuẩn của đội qua registry shadcn: chạy một lệnh là có mã nguồn nằm trong repo bạn, sửa thoải mái, không khoá vào thư viện nào.",
+    "subtitle": "LnhDesign phân phối component chuẩn của đội qua registry shadcn: chạy một lệnh là có mã nguồn nằm trong repo bạn, sửa thoải mái, không khoá vào thư viện nào.",
     "ctaPrimary": "Bắt đầu",
     "ctaSecondary": "Xem component",
     "installHint": "Cài một item bất kỳ:"
@@ -18,8 +18,8 @@
     "title": "Vì sao cần thứ này",
     "subtitle": "Hai dự án cùng công ty, cùng shadcn, nhưng không dùng lại được của nhau. Mỗi lần dựng màn mới là dựng lại từ đầu.",
     "colAspect": "Hạng mục",
-    "colBefore": "Trước khi có AureCook",
-    "colAfter": "Sau khi có AureCook",
+    "colBefore": "Trước khi có LnhDesign",
+    "colAfter": "Sau khi có LnhDesign",
     "rows": {
       "style": {
         "aspect": "Style shadcn",

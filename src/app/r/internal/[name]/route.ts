@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { APP_REGISTRY_TOKEN } from "@/config/env";
 import { getRegistryItem } from "@/lib/registry/load";
 
 /**
@@ -12,7 +13,7 @@ import { getRegistryItem } from "@/lib/registry/load";
  * `proxy.ts` cố ý không đụng vào tiền tố này — xem chú thích ở đó.
  */
 function isAuthorized(request: Request): boolean {
-  const expected = process.env.AURECOOK_TOKEN;
+  const expected = APP_REGISTRY_TOKEN;
   // Thiếu token phía server nghĩa là chưa cấu hình xong — từ chối hết, không
   // im lặng mở cửa.
   if (!expected) return false;
@@ -38,8 +39,8 @@ export async function GET(
 ) {
   if (!isAuthorized(request)) {
     return NextResponse.json(
-      { error: "Cần AURECOOK_TOKEN hợp lệ trong header Authorization." },
-      { status: 401, headers: { "WWW-Authenticate": 'Bearer realm="aurecook"' } },
+      { error: "Cần LNHDESIGN_TOKEN hợp lệ trong header Authorization." },
+      { status: 401, headers: { "WWW-Authenticate": 'Bearer realm="lnhdesign"' } },
     );
   }
 

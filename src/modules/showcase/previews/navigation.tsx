@@ -38,7 +38,7 @@ export const navigationPreviews: PreviewMap = {
           Khung xem trước chạy trong iframe, đổi viewport không tải lại demo.
         </TabsContent>
         <TabsContent value="code" className="pt-4 font-mono text-xs text-muted-foreground">
-          pnpm dlx shadcn@latest add @aurecook/tabs
+          pnpm dlx shadcn@latest add @lnhdesign/tabs
         </TabsContent>
         <TabsContent value="deps" className="pt-4 text-sm text-muted-foreground">
           Không có phụ thuộc registry nào.

@@ -53,7 +53,7 @@ export async function verifyClosure(entries, problems) {
 
     const own = new Set(filesOf.get(slug) ?? []);
     for (const dep of bySlug.get(slug)?.registryDependencies ?? []) {
-      // Bỏ namespace: `@aurecook/badge` → `badge`.
+      // Bỏ namespace: `@lnhdesign/badge` → `badge`.
       const depSlug = dep.includes("/") ? dep.slice(dep.indexOf("/") + 1) : dep;
       for (const file of closure(depSlug, seen)) own.add(file);
     }
