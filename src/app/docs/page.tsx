@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 
 import { CodeBlock, CommandLine } from "@/components/data-display/code-block";
+import {
+  REGISTRY_INTERNAL_NAMESPACE,
+  REGISTRY_INTERNAL_URL,
+  REGISTRY_NAMESPACE,
+  REGISTRY_PUBLIC_URL,
+  REGISTRY_TOKEN_ENV,
+} from "@/config/registry";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { PageHeader } from "@/modules/showcase/components/page-header";
@@ -10,16 +17,16 @@ export const metadata: Metadata = { title: "Docs" };
 
 const PUBLIC_REGISTRY = `{
   "registries": {
-    "@aurecook": "https://aurecook.vercel.app/r/{name}.json"
+    "${REGISTRY_NAMESPACE}": "${REGISTRY_PUBLIC_URL}"
   }
 }`;
 
 const INTERNAL_REGISTRY = `{
   "registries": {
-    "@aurecook": "https://aurecook.vercel.app/r/{name}.json",
-    "@aurecook-x": {
-      "url": "https://aurecook.vercel.app/r/internal/{name}.json",
-      "headers": { "Authorization": "Bearer \${AURECOOK_TOKEN}" }
+    "${REGISTRY_NAMESPACE}": "${REGISTRY_PUBLIC_URL}",
+    "${REGISTRY_INTERNAL_NAMESPACE}": {
+      "url": "${REGISTRY_INTERNAL_URL}",
+      "headers": { "Authorization": "Bearer \${${REGISTRY_TOKEN_ENV}}" }
     }
   }
 }`;
@@ -68,7 +75,7 @@ export default async function DocsPage() {
           <p className="leading-7 text-muted-foreground">{s.install.step1}</p>
           <CodeBlock code={PUBLIC_REGISTRY} language="components.json" />
           <p className="leading-7 text-muted-foreground">{s.install.step2}</p>
-          <CommandLine command="pnpm dlx shadcn@latest add @aurecook/data-table" />
+          <CommandLine command={`pnpm dlx shadcn@latest add ${REGISTRY_NAMESPACE}/data-table`} />
           <p className="leading-7 text-muted-foreground">{s.install.step3}</p>
         </section>
 
@@ -78,7 +85,7 @@ export default async function DocsPage() {
           </h2>
           <p className="leading-7 text-muted-foreground">{s.internal.body}</p>
           <CodeBlock code={INTERNAL_REGISTRY} language="components.json" />
-          <CommandLine command="pnpm dlx shadcn@latest add @aurecook-x/dev-portal" />
+          <CommandLine command={`pnpm dlx shadcn@latest add ${REGISTRY_INTERNAL_NAMESPACE}/dev-portal`} />
         </section>
 
         <section id="i18n" className="flex scroll-mt-20 flex-col gap-4">

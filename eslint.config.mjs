@@ -22,7 +22,7 @@ const eslintConfig = defineConfig([
     // rule sẽ phải viết lại kiến trúc hook mà không có test bao phủ để xác
     // nhận không phá hành vi. Không tắt các rule khác (no-explicit-any,
     // no-unused-vars... vẫn chạy, chỉ ở mức warning như phần còn lại của repo).
-    // Không có nhóm data-grid: AureCook bỏ hẳn cụm này khi copy (xem I.5).
+    // Không có nhóm data-grid: LnhDesign bỏ hẳn cụm này khi copy.
     files: [
       "src/components/data-table/**",
       "src/components/table/**",

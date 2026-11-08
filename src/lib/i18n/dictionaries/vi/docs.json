@@ -10,18 +10,18 @@
   "sectionRegistry": "Registry",
   "sections": {
     "intro": {
-      "title": "AureCook là gì",
+      "title": "LnhDesign là gì",
       "body": "Một registry shadcn nội bộ. Bạn khai registry một lần trong components.json, rồi cài từng component bằng CLI — mã nguồn chép thẳng vào repo bạn, không có package nào đứng giữa để phải chờ release."
     },
     "install": {
       "title": "Cài đặt",
       "step1": "Khai registry công khai trong components.json của repo bạn:",
       "step2": "Cài item đầu tiên. CLI tự kéo cả phụ thuộc registry lẫn gói npm:",
-      "step3": "Xong. File nằm ở đúng thư mục theo alias của repo bạn, không phải theo alias của AureCook."
+      "step3": "Xong. File nằm ở đúng thư mục theo alias của repo bạn, không phải theo alias của LnhDesign."
     },
     "internal": {
       "title": "Registry nội bộ",
-      "body": "Item nội bộ nằm ở namespace riêng và cần token. Đặt AURECOOK_TOKEN vào biến môi trường của máy hoặc CI — không bao giờ commit vào repo."
+      "body": "Item nội bộ nằm ở namespace riêng và cần token. Đặt LNHDESIGN_TOKEN vào biến môi trường của máy hoặc CI — không bao giờ commit vào repo."
     },
     "i18n": {
       "title": "Hợp đồng i18n",

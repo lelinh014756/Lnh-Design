@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+dist/
+bin/
 
 # production
 /build
@@ -30,8 +32,14 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# package manager
+package-lock.json
+yarn.lock
+
 # env files (can opt-in for committing if needed)
 .env*
+# Mẫu biến môi trường phải commit — nó không chứa giá trị thật.
+!.env.example
 
 # vercel
 .vercel
@@ -39,9 +47,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Mẫu biến môi trường phải commit — nó không chứa giá trị thật.
-!.env.example
 
 # Sinh bởi registry-builder ở mỗi lần build.
 public/r/
@@ -51,4 +56,46 @@ registry.internal.json
 # demo source trích lúc build (pnpm demos:build)
 /src/modules/showcase/demos/generated/
 
+# turbo cache và log build
+.turbo/
+
+repomix-output.xml
+ai-context.md
+.serena/cache
+plans/**/*
+!plans/templates/*
+screenshots/*
+docs/screenshots/*
+docs_local
+logs.txt
+test-ck
+__pycache__
+
+# CK meta commands
+prompt.md
+ck.md
+
+# Local-only state inside tracked claude source
+.claude/settings.local.json
+.claude/memory/
+.claude/skills/.venv/
+.claude/skills/node_modules/
+.claude/teams/
+.claude/hooks/.logs/
+.claude/chrome-devtools/
+.claude/session-state/
+
+# Gemini CLI settings (symlink to staged .claude/.mcp.json)
+.gemini/settings.json
+# External repos for study/reference
+external/
+
+# Git worktrees (local development only)
 worktree/
+worktrees/
+
+# Bản sao skill tạm (không commit)
+/.claude/skills copy/
+
+# Generated OpenCode backup from scripts/generate-opencode.py --force
+.opencode.backup/

@@ -1,29 +1,85 @@
 ---
-report_type: generic-doc
-generated_at: 2026-10-03T17:45:00+07:00
+report_type: code-standards
+generated_at: "2026-10-18T10:37:33+07:00"
 period: ""
-status: draft
-source: /Users/lehonglinh/Documents/DIP/Source/Lnh-design
-generated_by: report-templates
-triggered_by: docs:init
-plan_ref: ""
+status: current
+source: "/Users/lehonglinh/Documents/DIP/Source/Lnh-design"
+generated_by: "docs-manager"
+triggered_by: "docs:update"
 ---
 
 # Code Standards: Lnh-design
 
 ## Overview
 
-Coding conventions và architectural standards cho Lnh-design registry project. Thư viện theo mô hình shadcn — source được copy vào repo người dùng, nên code phải clean, readable, và không có dependency phức tạp.
+Coding conventions và architectural standards cho Lnh-design registry project. Thư viện theo mô hình shadcn (style `radix-mira`) — source được copy vào repo người dùng, nên code phải clean, readable, và không có dependency phức tạp.
+
+## State Boundary (ADR-001)
+
+| Tầng | Tech | Vị trí |
+|---|---|---|
+| Server data | TanStack Query | `src/lib/query/` (`query-client.ts`) |
+| Global UI state | Zustand singleton | `src/store/` (`appearance-store.ts`) |
+| Tree-scoped provider | React Context | `src/lib/i18n/context.tsx` |
+| Compound-component state | React Context bên trong component | `src/components/**` (vd `SidebarContext`, `TableContext`) |
+| Module-scoped state | Zustand singleton + selector | `src/modules/*/stores/` (chưa có) |
+| Local state | `useState` / `useReducer` | trong component |
+
+Nếu cùng một domain có cả `XContext` và `XStore` → bỏ Context, dùng Store.
+Bản quyết định đầy đủ: [`docs/adr-001-state-boundary.md`](./adr-001-state-boundary.md).
+
+## LOC Limits
+
+- components/hooks ≤ 500 LOC
+- pages/layouts/modules ≤ 700 LOC
+- config/generated ≤ 1000 LOC
+
+Vượt ngưỡng → tách theo ranh giới logic.
+
+## Code Guidelines
+
+- **YAGNI — KISS — DRY.** Không tạo abstraction một-lần; chỉ tách helper khi có ≥ 2–3 chỗ gọi hoặc logic lặp.
+- Code phải build được: không có syntax error, typecheck sạch.
+- Xử lý lỗi bằng `try/catch` theo security standards.
+- Comment chỉ giải thích ý định không hiển nhiên — không bao giờ tham chiếu plan, phase, finding code hay mã audit (xem `.claude/rules/review-audit-self-decision.md` §5).
+
+## Prettier
+
+`.prettierrc` đồng bộ từ Eco-Farm-web: `semi: false`, `printWidth: 80`, `trailingComma: "es5"`, plugin `prettier-plugin-tailwindcss` với `tailwindFunctions: ["cn", "cva"]`.
+
+- `pnpm format` phủ `**/*.{ts,tsx}`.
+- Lần format toàn repo đang pending thành commit riêng. Cho tới lúc đó: **file mới** theo `.prettierrc`; **file sửa** giữ style hiện tại của file đó.
+
+## Pre-commit / Pre-push
+
+- `pnpm lint`, `pnpm typecheck`.
+- `pnpm i18n:check` khi có thay đổi dictionary.
+- `pnpm registry:build` khi có thay đổi registry item, catalog hoặc manifest.
+- `.github/workflows/pr-check.yml` chạy lint, typecheck và build trên PR.
+- Conventional Commits; thay đổi trong `.claude/` không dùng type `chore`/`docs`; không nhắc AI trong commit message.
+
+## Repo-specific
+
+- **Package manager**: chỉ pnpm (`pnpm-lock.yaml`), không trộn npm/yarn.
+- **Privacy hook** (`@@PRIVACY_PROMPT@@`): khi bị chặn, parse JSON giữa `@@PRIVACY_PROMPT_START@@`/`@@PRIVACY_PROMPT_END@@`, hỏi user qua `AskUserQuestion`, chỉ tiếp tục khi được duyệt (chi tiết ở `CLAUDE.md`).
+- **`plans/`** không commit, trừ `plans/templates/*`.
+- `.claude/session-state/`, `.claude/hooks/.logs/`, `.claude/chrome-devtools/` không commit.
+- Không commit `.env` hay secret.
+- App đọc biến môi trường **chỉ qua `src/config/env.ts`**; script Node trong `scripts/` tự đọc biến của mình.
+
+## UI Standards
+
+Tuân thủ `.claude/rules/anti-ai-look.md` (radius, spacing, color, shadow, typography, motion, layout, copy). Rule đó là nguồn chuẩn — không copy vào đây.
 
 ## TypeScript
 
-- **Strict mode enabled** — `tsconfig.json` có `"strict": true`
+- **Strict mode enabled** — `tsconfig.json` có `"strict": true` (xác minh 2026-10-18)
 - **No explicit `any`** — `@typescript-eslint/no-explicit-any`: warn
 - **Path aliases** — `@/*` maps to `./src/*`
 - **moduleResolution**: `bundler`
 
 ```json
-// tsconfig.json
+// tsconfig.json (compilerOptions chính)
 {
   "compilerOptions": {
     "strict": true,
@@ -33,19 +89,22 @@ Coding conventions và architectural standards cho Lnh-design registry project. 
 }
 ```
 
-## ESLint
+## ESLint (flat config, ESLint 9)
 
-Sử dụng `eslint-config-next/core-web-vitals` + `eslint-config-next/typescript`.
+Sử dụng `eslint-config-next/core-web-vitals` + `eslint-config-next/typescript`, gói trong `defineConfig`.
 
 ```javascript
 // eslint.config.mjs
+import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 ```
 
+Global rules thêm: `@typescript-eslint/no-explicit-any: warn`, `react/no-unescaped-entities: warn`. `globalIgnores` bổ sung `.claude/**` (script hook .cjs, không phải mã nguồn).
+
 ### Data-table/table Rule Overrides
 
-Component `data-table/` và `table/` được port nguyên từ `tablecn` — source đó không có eslint-config-next. Bốn rule bị disable cho các file trong `src/components/data-table/**`, `src/components/table/**`, `src/hooks/table/**`:
+Component `data-table/` và `table/` được port nguyên từ `tablecn` — nguồn đó không có eslint-config-next nên các rule react-hooks chưa từng được kiểm ở thượng nguồn. Sáu rule bị disable cho `src/components/data-table/**`, `src/components/table/**`, `src/hooks/table/**`:
 
 ```javascript
 {
@@ -63,12 +122,12 @@ Component `data-table/` và `table/` được port nguyên từ `tablecn` — so
 
 ### Icon Import Restriction
 
-`lucide-react`, `@hugeicons/*` chỉ được import trong `src/components/general/icon-providers/**` và `src/components/ui/**` (`no-restricted-imports`). Còn lại dùng `<AppIcon icon="..." />`.
+`lucide-react` và `@hugeicons/*` chỉ được import trong `src/components/general/icon-providers/**` và `src/components/ui/**` (`no-restricted-imports`, mức **error**). Còn lại bắt buộc `<AppIcon icon="..." />`.
 
 ## Icons
 
-- Chỗ gọi chỉ dùng tên: `<AppIcon icon="trash-2" />`; prop icon của component nhận `IconName`, không nhận component của thư viện.
-- Đổi thư viện: đổi dòng import `provider` trong `src/components/general/app-icon.tsx` (`hugeiconsProvider` ⇄ `lucideProvider`).
+- Chỗ gọi chỉ dùng tên: `<AppIcon icon="trash-2" />`; prop icon nhận `IconName`, không nhận component của thư viện.
+- Provider active: **lucide** (xác minh `src/components/general/app-icon.tsx`); hugeicons giữ làm dự phòng, đổi bằng một dòng import trong `app-icon.tsx`.
 - Thêm icon: thêm tên vào `icon-providers/icon-names.ts` + một dòng trong **mỗi** provider (`satisfies Record<IconName, …>` → tsc báo nếu thiếu). Hugeicons: `kebab-name` → `PascalNameIcon`, lệch quy ước thì map tay.
 - Độ dày nét dùng prop `strokeWidth`, không dùng class `stroke-*`: hugeicons đặt `stroke-width` trên từng `<path>` nên class trên `<svg>` không có tác dụng.
 - Primitive shadcn (`src/components/ui/`) giữ lucide để `shadcn add` không phải sửa tay.
@@ -79,7 +138,7 @@ Component `data-table/` và `table/` được port nguyên từ `tablecn` — so
 
 - File: kebab-case, mô tả purpose rõ ràng
 - Component: PascalCase, trùng với file name
-- Demo: `{slug}/{demo-id}.tsx` trong `src/modules/showcase/demos/`
+- Demo: `demos/{category}/{slug}/{demo-id}.tsx` trong `src/modules/showcase/demos/`
 
 ### Import Pattern
 
@@ -93,32 +152,56 @@ import { useForm } from "react-hook-form";
 
 ### Export Pattern
 
-- **Barrel file per group**: `src/components/{group}/index.ts`
+- **Barrel file per group**: `src/components/{group}/index.ts` (xác minh: mọi group đều có `index.ts`)
 - **No root barrel**: Import theo nhóm hoặc theo file cụ thể
 
 ## Demo Standards
 
-### Demo File Structure
+### Demo File Structure (xác minh từ 9 slug đang có)
 
 ```
-src/modules/showcase/demos/{group}/{slug}/
-├── basic.tsx          # Demo default
-├── {demo-id}.tsx     # Additional demos
-└── index.ts          # Metadata + demo list
+src/modules/showcase/demos/{category}/{slug}/
+├── {demo-id}.tsx     # Một demo = một file (nguyên văn = source hiển thị)
+└── index.ts          # Export `demos: ComponentDemo[]`
 ```
 
-### Demo Metadata (index.ts)
+### Demo Definition (index.ts)
+
+`index.ts` export **`demos: ComponentDemo[]`** (không có object `meta` riêng):
 
 ```typescript
-export const meta = {
-  title: "Currency Input",
-  description: "...",
-};
+import type { ComponentDemo, PropDoc } from "../../types";
 
-export const demos = [
-  { id: "basic", label: "Basic" },
-  { id: "with-prefix", label: "With Prefix" },
+import AppButtonFamily from "./family";
+
+export const demos: ComponentDemo[] = [
+  {
+    id: "family",
+    title: { vi: "Họ nút đặt sẵn", en: "Preset family" },
+    description: { vi: "...", en: "..." },
+    snippet: `<ButtonAdd>Thêm căn</ButtonAdd>`,
+    render: AppButtonFamily,
+  },
 ];
+```
+
+| Field | Bắt buộc | Ghi chú |
+|-------|----------|---------|
+| `id` | Có | Trùng tên file `{demo-id}.tsx` |
+| `title`, `description` | Có | `{ vi, en }` — nằm ngay trong demo, không qua dictionary |
+| `snippet` | Có | Code ngắn hiển thị kèm demo (hỗ trợ inline code) |
+| `render` | Có | Component React của demo |
+| `props` | Không | `PropDoc[]` — feed props table (thêm 2026-10, commit `0c78f7c`) |
+
+### Đăng Ký Demo
+
+Demo **phải** được khai tường minh trong `src/modules/showcase/demos/registry.ts` (`demoModules` — map slug → `() => import(...)` nạp lười). Khai tường minh thay vì quét thư mục: gõ sai đường dẫn là lỗi biên dịch, không phải trang trống lúc chạy.
+
+```typescript
+export const demoModules: Record<string, () => Promise<DemoModule>> = {
+  "app-button": () => import("./general/app-button"),
+  "app-stepper": () => import("./data-display/app-stepper"),
+};
 ```
 
 ### Demo Rules
@@ -126,68 +209,67 @@ export const demos = [
 - Chỉ import từ `@/components/*` và package có trong `package.json`
 - Không tự mount `TooltipProvider` / `Toaster` — showcase shell cung cấp
 - Overlay mở bằng nút, không `defaultOpen`
-- Demo phải trích nguyên văn từ file nguồn (không cắt theo marker)
+- Demo phải trích nguyên văn từ file nguồn (một demo = một file, không cắt theo marker)
+- Item `visibility: "internal"` bị loại khỏi `sources.json` — chặn leak qua đường tĩnh
 
 ## Catalog Definition
 
-### Component Catalog (src/config/catalog/components.ts)
+Catalog là **data thuần** (không JSX), dùng hàm dựng `primitive()` / `app()` trong `src/config/catalog/components.ts`:
 
 ```typescript
-export const components = [
-  {
-    name: "app-button",
-    type: "components",
-    group: "general",
-    description: { vi: "...", en: "..." },
-    registryDependencies: [],  // tự suy từ import trong build
-  },
-];
+// primitive: mặc định files = src/components/ui/{slug}.tsx
+primitive("stepper", "Stepper", ["data-display"],
+  "Khung stepper headless: nav, trigger, indicator, panel.",
+  "Headless stepper scaffold with roving-focus keyboard nav.");
+
+// app component; options có thể chứa { isNew: true }
+app("app-stepper", "AppStepper", ["data-display"],
+  "Wizard nhiều bước: guard async, chế độ tuần tự, 6 bố cục.",
+  "Multi-step wizard with async guards, linear mode, six layouts.",
+  { isNew: true });
 ```
 
-### Block Catalog (src/config/catalog/blocks.ts)
+Schema item (types.ts): `slug`, `name`, `description: {vi,en}`, `categories`, `kind`, `layer` (component), `visibility`, `isNew`, `thumbnail`; block có thêm `blockKind`; template có `techStack` + `framework/base/style/surface`. Field `slug` phải trùng: thư mục demo, tên registry item, param `/preview/[name]`.
 
-```typescript
-export const blocks = [
-  {
-    name: "data-table",
-    type: "blocks",
-    group: "data-grid",
-    facets: ["application", "data-grid"],
-    description: { vi: "...", en: "..." },
-  },
-];
-```
+Block khai trực tiếp object trong `blocks.ts` với `blockKind: "application" | "data-grid" | "solutions"`; template khai trong `templates.ts` với `visibility: "internal"` hiện tại.
 
 ## Registry Build Rules
 
-Registry builder fail build khi:
+`scripts/registry-builder/` fail build khi:
 
-1. Import bị cấm (`@/lib/i18n` — item phải tự mang chuỗi hiển thị)
-2. Item public phụ thuộc item internal (leak)
-3. Một file bị hai item cùng nhận
-4. Cây dependency không khép kín
+1. **Import cấm** — `FORBIDDEN_IMPORTS` trong `config.mjs`: `@lnhdesign/*` (alias workspace không resolve được ở repo khách) và `@/lib/i18n` (item phải tự mang chuỗi hiển thị)
+2. **Public → internal leak** — public item kéo theo internal item qua `registryDependencies`
+3. **File không phân loại được** — không khớp `TARGET_RULES` nào trong `config.mjs` (`src/components/ui/` → `@ui/`, `src/components/` → `@components/`, `src/hooks/` → `@hooks/`, `src/lib/` → `@lib/`, `src/config|layouts|store/` → `~/`)
+4. **Cây dependency không khép kín** — `verify-closure.mjs`
+5. **Glob không khớp file nào** — pattern trong `registry.manifest.json` trống
+
+Ngoài ra: dependency suy từ import (`@/…` → tra `ownerOfFile`, npm package → version trong `package.json`, bỏ react/react-dom/next); `src/lib/utils.ts` do `shadcn init` tạo sẵn nên item không mang theo.
 
 ## i18n Standards
 
-- Dictionary files: `src/lib/i18n/dictionaries/{vi,en}.json`
-- Parity check: `pnpm i18n:check` verify cùng cấu trúc keys
-- User-facing strings phải qua dictionary, không hardcode
+- **Dictionary namespaced**: `src/lib/i18n/dictionaries/{vi,en}/*.json` — 15 file mỗi locale (`auth`, `blocks`, `common`, `components`, `docs`, `header`, `icons`, `internal`, `landing`, `nav`, `nav-sections`, `breadcrumb`, `showcase`, `templates`, `tokens`), nạp theo section cần dùng.
+- Parity check: `pnpm i18n:check` (`verify-dictionary-parity.mjs`) verify cùng cấu trúc keys
+- User-facing strings phải qua dictionary; riêng **catalog và demo** mang `description: {vi, en}` ngay trong data (script Node import được, không thể lệch — quên dịch là lỗi kiểu)
 
 ## Styling
 
-- **Tailwind CSS** với CVA (class-variance-authority) cho variants
-- **Design tokens**: CSS variables trong `globals.css`
+- **Tailwind CSS v4** với CVA (class-variance-authority) cho variants
+- **Design tokens**: CSS variables trong `src/app/globals.css`; site dùng style `radix-mira`
 - **No inline styles** cho component logic — dùng Tailwind classes
 
 ## Testing
 
-- Unit tests: Vitest (nếu có)
-- Type checking: `pnpm typecheck` (tsc --noEmit)
+- Unit tests: chưa có infra test unit
+- Type checking: `pnpm typecheck` (`demos:build` → `tsc --noEmit`)
 - Lint: `pnpm lint`
 - i18n check: `pnpm i18n:check`
+- Registry/demo build: fail sớm các lỗi leak/forbidden import ngay lúc build
 
 ## Change Log
 
-- 2026-10-03: Initial code-standards.md generation via `docs:init`
+- 2026-10-03: Tạo ban đầu via `docs:init`
 - 2026-10-04: Icon provider adapter (hugeicons active, lucide dự phòng), ESLint chặn import thẳng thư viện icon
-- 2026-10-04: Chuyển provider active về lucide; hugeicons giữ làm provider dự phòng
+- 2026-10-04: Chuyển provider active về lucide; hugeicons giữ làm dự phòng
+- 2026-10-18: Cập nhật theo source đã xác minh — schema demo thật (`demos: ComponentDemo[]` với snippet/props, đăng ký `demoModules` nạp lười), schema catalog (`primitive()`/`app()`, `slug`/`layer`/`visibility`), FORBIDDEN_IMPORTS đủ 2 rule (+`@aurecook/*`), TARGET_RULES, i18n namespaced JSON, ESLint global rules + `.claude/**` ignore
+- 2026-10-22: Bổ sung các mục chuẩn chung đồng bộ từ Eco-Farm-web (state boundary, LOC, code guidelines, Prettier, pre-commit, repo-specific)
+- 2026-10-22: Đổi tên AureCook → LnhDesign: namespace @lnhdesign/*, env LNHDESIGN_*, domain lnhdesign.vercel.app; đồng bộ tooling và quy tắc theo Eco-Farm-web.

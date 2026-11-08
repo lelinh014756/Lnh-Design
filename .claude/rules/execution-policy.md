@@ -11,21 +11,21 @@ Tool/skill activation, token budget, code quality standards. **Activate only whe
 | Task Shape | Activate | Conditionally | Skip |
 |------------|----------|---------------|------|
 | Component/page UI | `ui-builder` | `ui-styling` (shadcn), `frontend-design` (mockup) | `project-organization`, `bootstrap` |
-| State/data logic | `ui-builder` | `react-best-practices` (perf), `docs-seeker` (external API), MCP `chrome-devtools` (runtime inspect) | `ui-styling` |
+| State/data logic | `ui-builder` | `react-best-practices` (perf), `docs-seeker` (external API) | `chrome-devtools`, `ui-styling` |
 | Layout/navigation | `ui-builder` | `web-frameworks` (Next.js routing) | `project-organization` |
-| Bug fix | *(none)* | MCP `chrome-devtools` (UI bug), `docs-seeker` (lib issue) | All others |
+| Bug fix | *(none)* | `chrome-devtools` (UI bug), `docs-seeker` (lib issue) | All others |
 | Hotfix/trivial | *(none)* | — | All |
 
 **Activation rules:**
 - Code patterns change → `ui-builder`
 - External library docs → `docs-seeker` (on-demand)
 - UI from design/mockup → `frontend-design`
-- Verify browser rendering → MCP `chrome-devtools` (default, project-registered); `chrome-devtools-scripts` only when MCP unavailable or special cases
+- Verify browser rendering → `chrome-devtools`
 - Default: **no extra skill** if task doesn't match matrix
 
 **Negative rules:**
 - No `brainstorm` for route-level UI audits, code explanation, scoped review without real decision branching
-- No browser probe (MCP or scripts) if source code answers the question; no `chrome-devtools-scripts` while MCP `chrome-devtools` is loaded — outside the listed special cases
+- No `chrome-devtools` if source code + DOM/text probes answer question
 - No `docs-seeker` for internal codebase consistency; only external docs
 - No stacking heavy skills unless next provides new capability
 
@@ -63,35 +63,28 @@ Before each tool/skill call, silently verify:
 
 **Principle:** Browser automation expensive. Use only when source code insufficient.
 
-**Runtime preflight:** Before trusting browser output, verify from first probe: target URL matches intent, not `about:blank`, runtime health not contradicted by blocking console/network issues. Applies to MCP probes and scripts alike — do not skip preflight because the transport differs.
+**Runtime preflight:** Before trusting browser output, verify from first probe: target URL matches intent, not `about:blank`, runtime health not contradicted by blocking console/network issues.
 
-**Runtime selection (hard rule):** MCP `chrome-devtools` is the default browser runtime — project-registered in `.mcp.json`, so always loaded in this repo (Cursor: namespace `user-chrome-devtools`). Detect from the session tool list only — never `npx`-probe. Use skill `chrome-devtools-scripts` (Puppeteer scripts) only when:
-1. MCP absent from tool list or failing
-2. Special cases: WebSocket full-frame debug, cookie/token bulk injection, Chrome-profile reuse with 2FA/SSO, repeatable scripted flows
-
-Do not confuse MCP `chrome-devtools` with skill `chrome-devtools-scripts`.
-
-**Default order (MCP canonical):**
+**Default order:**
 1. `Grep` route/component anchor
 2. `Read(offset, limit)` slices
-3. Navigate — MCP `navigate_page`
-4. DOM/text probe — MCP `evaluate_script` with small, curated payload / `take_snapshot`
-5. Console/network — MCP `list_console_messages` / `list_network_requests` once runtime hypothesis exists or health suspicious
-6. Specialized audits only — MCP `performance_start_trace`, `lighthouse_audit`, `take_heapsnapshot`
-
-**Scripts fallback mapping** (MCP unavailable only): `navigate.js` ↔ `navigate_page` · `evaluate.js` ↔ `evaluate_script` · `console.js`/`network.js` ↔ `list_console_messages`/`list_network_requests` · `aria-snapshot.js` ↔ `take_snapshot` · `performance.js` ↔ `performance_start_trace`. Skill has no `screenshot.js`.
+3. `navigate.js`
+4. `evaluate.js` with small, curated payload
+5. `console.js` / `network.js` once runtime hypothesis exists or health suspicious
+6. `screenshot.js` only if visual confirmation matters
+7. `performance.js`, `aria-snapshot.js`, raw `snapshot.js` — specialized audits/discovery only
 
 **Do:**
-- Curate `evaluate_script` payloads; pull only needed fields
-- Normal UI verification: DOM/`evaluate_script` first → console/network
-- Visual proof (rare): MCP `take_screenshot`
-- Treat runtime health as evidence, not noise. If page/session health suspect, switch to diagnostics vs continuing interaction
+- Curate `evaluate.js` payloads; pull only needed fields
+- Normal UI verification: `evaluate.js`/DOM first → `console.js`/`network.js` → **one** `screenshot.js` if visual proof needed
+- Treat runtime health as evidence, not noise. If session selection/health suspect, switch to diagnostics vs continuing interaction script
+- Full-page screenshots only when whole-page layout is source of truth; else capture section or skip
 - Stop when source of truth strong enough
 
 **Don't:**
-- Run `take_snapshot`, `evaluate_script`, performance trace together for normal UI question
-- Prefer PNG screenshots over DOM/`evaluate_script` / console / network for ordinary UI questions
-- Use `chrome-devtools-scripts` while MCP `chrome-devtools` is loaded (outside special cases)
+- Run `aria-snapshot.js`, `snapshot.js`, `evaluate.js`, `performance.js` together for normal UI question
+- Fall back to repeated viewport/full-page screenshots before checking if DOM inspection answers question
+- Analyze screenshot if screenshot failed or browser output doesn't match expected URL
 
 ## Package Integration
 
@@ -146,8 +139,8 @@ Do not confuse MCP `chrome-devtools` with skill `chrome-devtools-scripts`.
 Follow **ADR-001** (`docs/adr-001-state-boundary.md`):
 - Server data → TanStack Query (`src/lib/query/`)
 - Global UI state → Zustand (`src/store/`)
-- Tree-scoped provider → React Context (`src/context/`)
-- Module-scoped state → `src/modules/*/context/`
+- Tree-scoped provider → React Context (`src/lib/i18n/context.tsx`)
+- Module-scoped state → `src/modules/*/stores/`
 - Local state → `useState`/`useReducer`
 
 **Rule:** If `XContext` and `XStore` both exist for the same domain → kill Context, use Store.

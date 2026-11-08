@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     response.cookies.set(SESSION_COOKIE, await signSession(authenticated), sessionCookieOptions);
     return response;
   } catch (error) {
-    // Thiếu AURECOOK_SESSION_SECRET ném ở đây. Ghi log để người vận hành thấy
+    // Thiếu LNHDESIGN_SESSION_SECRET ném ở đây. Ghi log để người vận hành thấy
     // nguyên nhân thật, còn phía người dùng chỉ nhận lỗi máy chủ chung chung.
     console.error("[auth/login] không tạo được phiên:", error);
     return NextResponse.json({ error: "server_error" }, { status: 500 });

@@ -6,19 +6,19 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 /** Gốc app — nơi có `src/`, `package.json`, `registry.manifest.json`. Script nằm ở `scripts/registry-builder/`. */
 export const APP_ROOT = path.resolve(here, "../..");
 
-export const REGISTRY_NAME = "aurecook";
-export const HOMEPAGE = process.env.AURECOOK_HOMEPAGE ?? "https://aurecook.vercel.app";
+export const REGISTRY_NAME = "lnhdesign";
+export const HOMEPAGE = process.env.LNHDESIGN_HOMEPAGE ?? "https://lnhdesign.vercel.app";
 
 /**
  * Import mà file registry KHÔNG được phép dùng.
  *
- * `@aurecook/*` là alias workspace — nó resolve được ở repo này và không
+ * `@lnhdesign/*` là alias workspace — nó resolve được ở repo này và không
  * resolve được ở bất kỳ repo khách nào. Đây là loại lỗi chỉ lộ ra SAU khi đã
  * publish, nên chặn cứng ở bước build.
  */
 export const FORBIDDEN_IMPORTS = [
   {
-    prefix: "@aurecook/",
+    prefix: "@lnhdesign/",
     reason: "alias workspace không resolve được ở repo khách",
   },
   {

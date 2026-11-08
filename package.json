@@ -2,12 +2,14 @@
   "name": "Lnh-Design",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "predev": "pnpm demos:build",
     "dev": "next dev -p 3100",
     "build": "pnpm demos:build && pnpm registry:build && next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "pnpm demos:build && tsc --noEmit",
     "i18n:check": "node src/lib/i18n/verify-dictionary-parity.mjs",
     "registry:build": "node scripts/registry-builder/index.mjs",
@@ -57,6 +59,7 @@
     "agentation": "^3.0.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
+    "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
     "typescript": "^5"

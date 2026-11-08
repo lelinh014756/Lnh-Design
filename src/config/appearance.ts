@@ -6,7 +6,7 @@
  * + nhãn, dùng chung giữa store (`src/store/appearance-store.ts`), picker
  * (`src/components/data-entry/appearance-picker.tsx`) và trang `/tokens`.
  *
- * Không có chiều "màu thương hiệu": AureCook chỉ có một brand duy nhất, token
+ * Không có chiều "màu thương hiệu": LnhDesign chỉ có một brand duy nhất, token
  * màu khai một lần ở `:root`/`.dark`.
  */
 
@@ -25,7 +25,7 @@ export const SIDEBAR_STYLE_OPTIONS: Record<
 
 export const DEFAULT_SIDEBAR_STYLE: SidebarStyle = "default";
 
-export const APPEARANCE_STORAGE_KEY = "aurecook-appearance";
+export const APPEARANCE_STORAGE_KEY = "lnhdesign-appearance";
 
 export function isSidebarStyle(value: unknown): value is SidebarStyle {
   return typeof value === "string" && (SIDEBAR_STYLES as readonly string[]).includes(value);

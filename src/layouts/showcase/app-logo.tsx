@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
- * Dấu nhận diện AureCook.
+ * Dấu nhận diện LnhDesign.
  *
  * Vẽ bằng SVG inline thay vì file ảnh: logo phải đổi màu theo token
  * `--primary` ở cả hai theme, một file PNG/SVG tĩnh thì không làm được.
@@ -21,7 +21,7 @@ export function AppLogo({
     <Link
       href={href}
       className={cn("flex items-center gap-2.5 outline-none", className)}
-      aria-label="AureCook"
+      aria-label="LnhDesign"
     >
       <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
         <svg viewBox="0 0 24 24" className="size-4.5" fill="none" aria-hidden>

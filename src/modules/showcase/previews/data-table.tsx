@@ -52,7 +52,7 @@ function DataTableDemo() {
           <span className="flex flex-col gap-0.5">
             <span className="font-medium">{row.original.name}</span>
             <span className="font-mono text-[11px] text-muted-foreground">
-              @aurecook/{row.original.slug}
+              @lnhdesign/{row.original.slug}
             </span>
           </span>
         ),

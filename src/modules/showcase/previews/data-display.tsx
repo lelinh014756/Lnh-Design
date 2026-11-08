@@ -130,7 +130,7 @@ export const dataDisplayPreviews: PreviewMap = {
       <AccordionItem value="c">
         <AccordionTrigger>Đổi màu thương hiệu ở đâu?</AccordionTrigger>
         <AccordionContent>
-          Trong `@aurecook/tokens`. Component thì copy được, còn token thì khoá version.
+          Trong `@lnhdesign/tokens`. Component thì copy được, còn token thì khoá version.
         </AccordionContent>
       </AccordionItem>
     </Accordion>
@@ -144,9 +144,9 @@ export const dataDisplayPreviews: PreviewMap = {
         </Button>
       </CollapsibleTrigger>
       <CollapsibleContent className="mt-3 flex flex-col gap-1.5 rounded-lg border p-3 font-mono text-xs">
-        <span>@aurecook/table-core</span>
-        <span>@aurecook/table-chrome</span>
-        <span>@aurecook/action-bar</span>
+        <span>@lnhdesign/table-core</span>
+        <span>@lnhdesign/table-chrome</span>
+        <span>@lnhdesign/action-bar</span>
       </CollapsibleContent>
     </Collapsible>
   ),

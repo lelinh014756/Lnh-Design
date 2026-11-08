@@ -1,10 +1,11 @@
 import { CodeBlock, CommandLine } from "@/components/data-display/code-block";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { LandingContainer } from "@/layouts/landing";
+import { REGISTRY_NAMESPACE, REGISTRY_PUBLIC_URL } from "@/config/registry";
 
 const REGISTRY_SNIPPET = `{
   "registries": {
-    "@aurecook": "https://aurecook.vercel.app/r/{name}.json"
+    "${REGISTRY_NAMESPACE}": "${REGISTRY_PUBLIC_URL}"
   }
 }`;
 
@@ -31,7 +32,7 @@ export async function LandingUsage() {
     {
       title: usage.step2Title,
       body: usage.step2Body,
-      snippet: <CommandLine command="pnpm dlx shadcn@latest add @aurecook/app-button" />,
+      snippet: <CommandLine command={`pnpm dlx shadcn@latest add ${REGISTRY_NAMESPACE}/app-button`} />,
     },
     {
       title: usage.step3Title,

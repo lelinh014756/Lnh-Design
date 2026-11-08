@@ -12,6 +12,7 @@ Current in `./docs`:
 - `project-roadmap.md` (active roadmap; older refs to `development-roadmap.md` redirect here)
 - `deployment-guide.md`
 - `design-guidelines.md`
+- `public-roadmap-format.md` — định dạng file roadmap công khai (trang `/roadmap`); skill `roadmap-standardizer` chuẩn hoá nguồn theo đặc tả này
 
 Additional:
 - `.claude/repomix-instructions.md` — update when add/remove bounded context, change architecture pattern, or naming convention

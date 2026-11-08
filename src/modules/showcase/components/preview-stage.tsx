@@ -63,7 +63,7 @@ export function PreviewStage({
 
     const post = () => {
       window.parent.postMessage(
-        { type: "aurecook:height", name, value: stage.getBoundingClientRect().height },
+        { type: "lnhdesign:height", name, value: stage.getBoundingClientRect().height },
         window.location.origin,
       );
     };

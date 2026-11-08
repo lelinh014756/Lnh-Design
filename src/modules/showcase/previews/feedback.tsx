@@ -81,7 +81,7 @@ export const feedbackPreviews: PreviewMap = {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Gỡ `@aurecook/data-table`?</AlertDialogTitle>
+          <AlertDialogTitle>Gỡ `@lnhdesign/data-table`?</AlertDialogTitle>
           <AlertDialogDescription>
             Repo nào đang cài item này sẽ không cập nhật được nữa. Việc gỡ không hoàn tác được.
           </AlertDialogDescription>
@@ -138,7 +138,7 @@ export const feedbackPreviews: PreviewMap = {
       <Button
         variant="outline"
         size="sm"
-        onClick={() => toast.info("Có bản mới của @aurecook/tokens")}
+        onClick={() => toast.info("Có bản mới của @lnhdesign/tokens")}
       >
         Thông tin
       </Button>

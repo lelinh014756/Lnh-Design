@@ -1,0 +1,12 @@
+dist/
+node_modules/
+.next/
+.turbo/
+coverage/
+pnpm-lock.yaml
+.pnpm-store/
+worktree/
+public/r/
+registry.json
+registry.internal.json
+src/modules/showcase/demos/generated/

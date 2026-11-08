@@ -2,7 +2,7 @@
   "title": "Internal area",
   "subtitle": "Items published to the team only. Installable with a private registry token.",
   "tokenTitle": "Registry token",
-  "tokenBody": "Put AURECOOK_TOKEN in your shell or CI environment — never in the repo.",
+  "tokenBody": "Put LNHDESIGN_TOKEN in your shell or CI environment — never in the repo.",
   "configTitle": "Consumer configuration",
   "itemsTitle": "Internal items",
   "signedInAs": "Signed in as"

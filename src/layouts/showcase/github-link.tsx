@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
  * Link tới mã nguồn.
  *
  * Logo GitHub vẽ inline: lucide đã bỏ toàn bộ icon thương hiệu khỏi bộ, và kéo
- * thêm một thư viện icon thứ hai chỉ vì một hình là đúng thứ AureCook sinh ra
+ * thêm một thư viện icon thứ hai chỉ vì một hình là đúng thứ LnhDesign sinh ra
  * để dẹp.
  */
 export function GithubLink({ href = siteConfig.repo, label }: { href?: string; label: string }) {

@@ -6,7 +6,7 @@ export interface DependencyEntry {
 /**
  * Gộp hai danh sách của registry item thành một danh sách phẳng đã gắn nhãn nguồn.
  *
- * Tên registry giữ nguyên văn: builder đã ghi kèm namespace (`@aurecook/x`),
+ * Tên registry giữ nguyên văn: builder đã ghi kèm namespace (`@lnhdesign/x`),
  * còn tên trần theo quy ước shadcn là item của registry mặc định — gắn thêm
  * namespace nào cũng là đổi nghĩa.
  *

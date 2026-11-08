@@ -94,13 +94,13 @@ function defaultPatternsFor(item) {
 /**
  * Tên registry đầy đủ của một phụ thuộc.
  *
- * PHẢI có namespace `@aurecook/`. Tên trần (`action-bar`) được CLI hiểu là item
+ * PHẢI có namespace `@lnhdesign/`. Tên trần (`action-bar`) được CLI hiểu là item
  * của registry shadcn CHÍNH THỨC — nó sẽ đi gọi ui.shadcn.com và fail với những
  * primitive ta tự vendor, hoặc tệ hơn: kéo về đúng bản upstream cho `button`,
  * `badge`… làm mất hết phần đã chỉnh theo style và token của hệ.
  */
 function qualifyDependency(name, visibilityBySlug) {
-  const namespace = visibilityBySlug.get(name) === "internal" ? "@aurecook-x" : "@aurecook";
+  const namespace = visibilityBySlug.get(name) === "internal" ? `@${REGISTRY_NAME}-x` : `@${REGISTRY_NAME}`;
   return `${namespace}/${name}`;
 }
 

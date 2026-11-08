@@ -70,7 +70,7 @@ export const layoutPreviews: PreviewMap = {
       {["table-core", "table-chrome", "data-table"].map((name, index) => (
         <Item key={name} className={index > 0 ? "border-t" : undefined}>
           <ItemContent>
-            <ItemTitle className="font-mono text-sm">@aurecook/{name}</ItemTitle>
+            <ItemTitle className="font-mono text-sm">@lnhdesign/{name}</ItemTitle>
             <ItemDescription>Registry · lucide-react ^1.31.0</ItemDescription>
           </ItemContent>
           <ItemActions>

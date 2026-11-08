@@ -1587,197 +1587,197 @@
           "installedAt": "2026-03-05T03:39:45.020Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/references/authentication.md",
-          "checksum": "31b50603f67daa979370112e7778130175e3664754b8ed339215c400e2d2a574",
-          "ownership": "user",
-          "installedVersion": "v2.13.0",
-          "installedAt": "2026-03-05T03:39:45.054Z"
-        },
-        {
-          "path": "skills/chrome-devtools-scripts/references/cdp-domains.md",
+          "path": "skills/chrome-devtools/references/cdp-domains.md",
           "checksum": "fa81fa0fda1ae94ff2c25c924cfcb16f5a6e967b6d8412ddd372dc8a1b26f601",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.054Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/references/performance-guide.md",
+          "path": "skills/chrome-devtools/references/performance-guide.md",
           "checksum": "e9391edae861ecd6fac3af4384a7e692def9c9cacbb8c5d4f7ff207475f977c0",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.058Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/references/puppeteer-reference.md",
+          "path": "skills/chrome-devtools/references/puppeteer-reference.md",
           "checksum": "dcec4af083b7fe2d405a40aad2b511317c1e9deaa2bec5ca91ec9959aff1a423",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.055Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/__tests__/error-handling.test.js",
+          "path": "skills/chrome-devtools/scripts/__tests__/error-handling.test.js",
           "checksum": "f357f96e84393791b350edcfeafedbe661d7f1efa4c6a330837e15861d7f96f4",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.059Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/__tests__/selector.test.js",
+          "path": "skills/chrome-devtools/scripts/__tests__/selector.test.js",
           "checksum": "69fa6c4d04f2c8d0578325894fc06ea820e4c771d267d90969f09343e076d5e2",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.058Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/aria-snapshot.js",
+          "path": "skills/chrome-devtools/scripts/aria-snapshot.js",
           "checksum": "9cafee9ddbe59f0dc994a24ab1678a1a67a3d83f8ad10ae2c0295211a4842cc4",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.113Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/click.js",
+          "path": "skills/chrome-devtools/scripts/click.js",
           "checksum": "1f66e2688572356a0e60146bbaaa5081032e8025b3defc76ad83d723fbdd9279",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.059Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/connect-chrome.js",
+          "path": "skills/chrome-devtools/scripts/connect-chrome.js",
           "checksum": "cfff3f3c9f9a67a9cdfa416ab760757f4b8a8eb6912faa2b9ac7b2a293923e5a",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.059Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/console.js",
+          "path": "skills/chrome-devtools/scripts/console.js",
           "checksum": "28f10b0bc6842d89baefeca6a0fdc31689fce8dcce59d992710609f6d8f2e0c1",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.065Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/evaluate.js",
+          "path": "skills/chrome-devtools/scripts/evaluate.js",
           "checksum": "6414e0555182111a80f9169b39733f198edf65875ff6ad3e3868c951ce2f06e0",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.065Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/fill.js",
+          "path": "skills/chrome-devtools/scripts/fill.js",
           "checksum": "cda2255bfa65c46120f1ddc873beef464754550e0efab95c44f879fca7c5f441",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.064Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/import-cookies.js",
+          "path": "skills/chrome-devtools/scripts/import-cookies.js",
           "checksum": "471213d664ca8dd99af6e70a338be3cde2dcdc633fc2921cfbc3efdcf913e69f",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.065Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/inject-auth.js",
+          "path": "skills/chrome-devtools/scripts/inject-auth.js",
           "checksum": "d537b1c32c426050e4f1ae8449859700b97717f78a1af4969da6f8f3d45ad811",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/install-deps.sh",
+          "path": "skills/chrome-devtools/scripts/install-deps.sh",
           "checksum": "c236b59df7a234079da05bdb18c22f064955a3ccea315431fa87f8a413ecc78c",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.113Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/install.sh",
+          "path": "skills/chrome-devtools/scripts/install.sh",
           "checksum": "bdd10bfe4195ca105704c2b4ba2f641f484e3706bb6cf57030372e5a90aa10df",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/lib/browser.js",
+          "path": "skills/chrome-devtools/scripts/lib/browser.js",
           "checksum": "78f5cc8f734dfe9d645dbb75d3afb3da8318f1abd28517ede83290e35ecda367",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.120Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/lib/selector.js",
+          "path": "skills/chrome-devtools/scripts/lib/selector.js",
           "checksum": "0c988abbec29cfb7361920c773673191a94d99c01fe1aec5a42cb48aeb6acf88",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/navigate.js",
+          "path": "skills/chrome-devtools/scripts/navigate.js",
           "checksum": "457850870ced014e15742d38c257e8dfb3c85551a22616219e7cc77e342c4db7",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.121Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/network.js",
+          "path": "skills/chrome-devtools/scripts/network.js",
           "checksum": "819b7cb69a2961750162669a2117ad4f9f13330ceee85c2b20723cb801c51caa",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/package.json",
+          "path": "skills/chrome-devtools/scripts/package.json",
           "checksum": "c9820cccfe82545cc91397fd97c18a4c13c4a95937d892e6f1f389012a616f0f",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/performance.js",
+          "path": "skills/chrome-devtools/scripts/performance.js",
           "checksum": "cba1ed6ab9d502789a10a5d5e15fe468902632456437c945b63a00ec3415358e",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.114Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/README.md",
+          "path": "skills/chrome-devtools/scripts/README.md",
           "checksum": "796bf556b9ed197d8eb619a50d5b20439911650111712265431862184210ec43",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.059Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/select-ref.js",
+          "path": "skills/chrome-devtools/scripts/screenshot.js",
+          "checksum": "51307b81350e1d25f4b9c1e847f324b00791fdde57fb98e60fba29aaee754d6e",
+          "ownership": "user",
+          "installedVersion": "v2.13.0",
+          "installedAt": "2026-03-05T03:39:45.114Z"
+        },
+        {
+          "path": "skills/chrome-devtools/scripts/select-ref.js",
           "checksum": "6ac158593dce2157b07da7da47ba874c2922bca9de68ea9127b9d03c51e987b8",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.121Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/snapshot.js",
+          "path": "skills/chrome-devtools/scripts/snapshot.js",
           "checksum": "65804d0e88557f9b8fae04a9688ffc1d475adf17a426f4d14e4642a40a2d3748",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.139Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/ws-debug.js",
+          "path": "skills/chrome-devtools/scripts/ws-debug.js",
           "checksum": "4a9fc95bc85bd02e883b0c6f4730aaf894a3cf0659a35b4507b63753d6d36610",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.140Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/scripts/ws-full-debug.js",
+          "path": "skills/chrome-devtools/scripts/ws-full-debug.js",
           "checksum": "91e0bf7dcde99470c19ce68a93f17409f7b5f4ef5a0ede141173dc4892d6c21e",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.140Z"
         },
         {
-          "path": "skills/chrome-devtools-scripts/SKILL.md",
-          "checksum": "9fad886bd906a64b75cc9a40411556ce7361ae641a6beb0ab64b7297eace267b",
+          "path": "skills/chrome-devtools/SKILL.md",
+          "checksum": "4bd4d2a370efe966143d90b5bfd37c7445384c50996b69d9fdf8bfe29d8bac39",
           "ownership": "user",
           "installedVersion": "v2.13.0",
           "installedAt": "2026-03-05T03:39:45.021Z"

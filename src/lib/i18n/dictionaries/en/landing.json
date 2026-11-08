@@ -3,7 +3,7 @@
     "eyebrow": "Internal UI registry",
     "title": "One UI system. Every product.",
     "titleAccent": "Every product.",
-    "subtitle": "AureCook ships our standard components through a shadcn registry: run one command and the source lands in your repo, yours to edit, with nothing locked in.",
+    "subtitle": "LnhDesign ships our standard components through a shadcn registry: run one command and the source lands in your repo, yours to edit, with nothing locked in.",
     "ctaPrimary": "Get started",
     "ctaSecondary": "Browse components",
     "installHint": "Install any item:"
@@ -18,8 +18,8 @@
     "title": "Why this exists",
     "subtitle": "Two products, same shadcn base, zero reuse between them. Every new screen starts from scratch.",
     "colAspect": "Aspect",
-    "colBefore": "Before AureCook",
-    "colAfter": "With AureCook",
+    "colBefore": "Before LnhDesign",
+    "colAfter": "With LnhDesign",
     "rows": {
       "style": {
         "aspect": "shadcn style",

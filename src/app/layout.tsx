@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "component library",
     "Next.js",
     "Tailwind CSS",
-    "AureCook",
+    "LnhDesign",
   ],
   authors: [{ name: siteConfig.authors.name, url: siteConfig.authors.url }],
   creator: siteConfig.authors.name,

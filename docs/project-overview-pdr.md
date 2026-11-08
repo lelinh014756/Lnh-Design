@@ -1,19 +1,18 @@
 ---
 report_type: project-overview-pdr
-generated_at: 2026-10-03T17:45:00+07:00
+generated_at: "2026-10-18T10:37:33+07:00"
 period: ""
-status: draft
-source: /Users/lehonglinh/Documents/DIP/Source/Lnh-design
-generated_by: report-templates
-triggered_by: docs:init
-plan_ref: ""
+status: current
+source: "/Users/lehonglinh/Documents/DIP/Source/Lnh-design"
+generated_by: "docs-manager"
+triggered_by: "docs:update"
 ---
 
 # Project Overview & PDR: Lnh-design
 
 ## 1. Executive Summary
 
-Registry UI dùng chung cho các dự án React, theo mô hình shadcn. Dự án cung cấp bộ component/block/template copyable vào repo người dùng, kèm site showcase để duyệt demo, xem mã nguồn, và lấy lệnh cài tự động.
+Registry UI dùng chung cho các dự án React, theo mô hình shadcn (style `radix-mira`). Dự án cung cấp **92 registry item** — 83 component (48 primitive shadcn + 35 cấp app), 8 block, 1 template (internal) — copyable vào repo người dùng, kèm site showcase để duyệt demo, xem mã nguồn, và lấy lệnh cài tự động.
 
 ## 2. Business Context & Goals
 
@@ -25,36 +24,37 @@ Mô hình shadcn nằm giữa hai thứ đó: **mã nguồn được copy vào r
 
 ### 2.2. Project Goals
 
-- **Component Registry** — Cung cấp bộ UI component cấp app (35+), chia theo 7 nhóm Ant Design, copyable qua CLI
-- **Block Library** — Cụm component ghép thành mảng giao diện chạy được (data-table, nav-tree, auth-login…)
-- **Template Gallery** — Template nhiều trang hoàn chỉnh (dev-portal)
-- **Showcase Site** — Trang web duyệt catalog, xem demo, lấy mã nguồn và lệnh cài
-- **AI Integration** — Nút "Chép prompt cho AI" sinh sẵn lệnh cài + URL để agent tự cài
+- **Component Registry** — Bộ component hai tầng: 48 primitive shadcn (ẩn khỏi sidebar showcase) + 35 component cấp app chia theo 7 nhóm Ant Design, copyable qua CLI
+- **Block Library** — 8 cụm component ghép thành mảng giao diện chạy được: 4 data-grid (`data-table`, `table-core`, `table-chrome`, `data-table-url`) + 4 application (`stats-overview`, `nav-tree`, `empty-states`, `auth-login`)
+- **Template Gallery** — 1 template nhiều trang hoàn chỉnh (`dev-portal`, internal)
+- **Showcase Site** — Trang web duyệt catalog, xem demo (tab demo + live iframe preview), lấy mã nguồn và lệnh cài, kèm props table
+- **AI Integration** — Prompt cài đặt sẵn để agent tự cài item qua shadcn CLI
 
-### 2.3. Success Metrics
+### 2.3. Success Metrics (cập nhật 2026-10-18)
 
-- **Component coverage**: baseline = 8/35 có demo, target = 35/35 — đo bằng số component có demo trong showcase
-- **Block coverage**: baseline = 3/8 có demo, target = 8/8 — đo bằng số block có demo
-- **Build integrity**: 0 lỗi registry:build — đo bằng CI exit code
+- **Component demo coverage**: 9/35 app component có demo tab — mục tiêu 35/35; đo bằng số slug đăng ký trong `demoModules` (`src/modules/showcase/demos/registry.ts`)
+- **Block preview coverage**: 3/8 block có live preview — mục tiêu 8/8; đo qua `hasPreview()` (`src/modules/showcase/previews/index.ts`)
+- **Build integrity**: 0 lỗi `registry:build` / `demos:build` — đo bằng exit code; fail ngay khi leak internal hoặc forbidden import
 - **i18n parity**: VI/EN dictionary cùng cấu trúc — đo bằng `pnpm i18n:check`
 
 ## 3. Scope
 
 ### 3.1. In Scope
 
-- Component registry (public + internal channels)
+- Component registry (public + internal channels, 92 item)
 - Block registry (public + internal channels)
 - Template registry
-- Showcase site (components, blocks, templates, docs, icons, tokens, internal)
-- Registry build system (scripts/registry-builder)
-- Demo build system (scripts/build-demo-sources.mjs)
-- CLI integration via shadcn registry protocol
+- Showcase site (components, blocks, templates, docs, icons, tokens, internal, login)
+- Registry build system (`scripts/registry-builder`)
+- Demo build system (`scripts/build-demo-sources.mjs`)
+- CLI integration qua shadcn registry protocol (style `radix-mira`)
 
 ### 3.2. Out of Scope
 
 - NPM package publishing (chỉ cung cấp registry JSON, không publish lên npm)
-- Token package / Tailwind preset / ESLint config (thuộc monorepo cũ, chưa tách)
-- Primitive shadcn components trên UI (ẩn khỏi showcase, vẫn nằm trong registry)
+- Token package / Tailwind preset / ESLint config (chưa tách — xem [project-roadmap](./project-roadmap.md) Phase 4)
+- Primitive shadcn trên UI (ẩn khỏi sidebar showcase, vẫn nằm trong registry)
+- Test infra unit/E2E (chưa có)
 
 ## 4. Stakeholders
 
@@ -64,45 +64,55 @@ Mô hình shadcn nằm giữa hai thứ đó: **mã nguồn được copy vào r
 
 ## 5. High-level Requirements
 
-- **Registry system**: JSON-based registry với dependency resolution tự động từ import
-- **Public/internal split**: Public (`@aurecook/*`) vs internal (`@aurecook-x/*`) qua Authorization header
-- **Build integrity**: Fail build khi public item phụ thuộc internal item (prevent leak)
-- **Demo system**: Demo render trực tiếp trong trang (component) hoặc iframe (block)
-- **i18n**: Song ngữ VI/EN, dictionary parity check
+- **Registry system**: JSON-based registry với dependency resolution tự động từ import (2 lượt: bảng sở hữu file → dựng item)
+- **Public/internal split**: Public (`@lnhdesign/*`) vs internal (`@lnhdesign-x/*`) qua Authorization header `Bearer {LNHDESIGN_TOKEN}`
+- **Build integrity**: Fail build khi public item phụ thuộc internal item, import cấm (`@lnhdesign/*`, `@/lib/i18n`), file không khớp `TARGET_RULES`, hoặc cây dependency không khép kín
+- **Demo system**: Hai đường — demo tab (nạp lười `demoModules`) và live preview iframe (`previewRegistry` qua `/preview/[name]`); demo source trích nguyên văn, loại item internal khỏi output tĩnh
+- **i18n**: Song ngữ VI/EN — dictionary namespaced cho site, `{vi,en}` inline cho catalog/demo
 
 ## 6. Constraints & Assumptions
 
 ### 6.1. Constraints
 
 - Registry JSON phải tương thích shadcn CLI protocol
-- Demo phải trích nguyên văn từ file nguồn, không cắt theo marker
+- Demo phải trích nguyên văn từ file nguồn (một demo = một file), không cắt theo marker
 - Dependency suy tự động từ import, không khai tay
+- Catalog là data thuần (không JSX) để script Node nạp trực tiếp
 
 ### 6.2. Assumptions
 
-- Namespace `@aurecook/*` sẽ được đổi sang tên mới (hiện đang pending)
+- Namespace `@lnhdesign/*` đã được chốt và áp dụng (Phase 1 roadmap, xong 2026-10-22)
 - Môi trường Vercel cho deployment (standard Next.js)
 
 ## 7. Risks & Mitigations
 
-- **Namespace leak**: Public item phụ thuộc internal → registry:build fail at build time
-- **Demo out of sync**: Demo code lệch với source → CI fail, enforced by build system
-- **Missing demo coverage**: Component/block không có demo → hiển thị "Chưa có bản demo"
+| Risk | Mitigation |
+|------|-----------|
+| Namespace leak | Public phụ thuộc internal → `registry:build` fail at build time |
+| Demo out of sync | Một demo một file, trích nguyên văn — không thể lệch với chính nó |
+| Missing demo coverage | Item chưa có demo hiển thị trạng thái "chưa có demo", tự suy từ registry |
+| Internal leak qua đường tĩnh | `build-demo-sources.mjs` loại item internal khỏi `sources.json`, fail nếu lọt |
 
 ## 8. High-level Architecture / Solution Approach
 
 Xem [System Architecture](./system-architecture.md) đầy đủ.
 
-Tóm tắt: Next.js 16 app với registry builder (Node script), demo sources extractor, và static JSON output cho shadcn CLI.
+Tóm tắt: Next.js 16 app (App Router, `proxy.ts` gate `/internal/**`) với registry builder Node (2 lượt, suy dependency từ import), demo source extractor, và static JSON output cho shadcn CLI (public qua CDN `public/r/`, internal sau cổng Bearer token).
 
 ## 9. Milestones & Timeline
 
-- **Namespace rename**: Chốt tên mới, đổi đồng loạt REGISTRY_NAME + FORBIDDEN_IMPORTS — Owner: team
-- **Demo coverage 35/35**: Viết demo cho tất cả component còn thiếu — Owner: team
-- **Block coverage 8/8**: Viết demo cho nav-tree, auth-login, table-core, table-chrome, data-table-url
+| Milestone | Trạng thái | Ghi chú |
+|-----------|-----------|---------|
+| Stepper: primitive + `app-stepper` + 19 demo | **Hoàn thành** (commit `b990d96`) | Indicator, inline, vertical, validated wizard |
+| Props table + inline code cho trang component | **Hoàn thành** (commit `0c78f7c`) | `PropDoc` trong demo definition |
+| Block `stats-overview` + `empty-states` có preview | **Hoàn thành** | Cộng với `data-table` = 3/8 blocks |
+| Demo coverage 35/35 component | Đang tiến hành (9/35) | Ưu tiên nhóm feedback + data-entry |
+| Block coverage 8/8 | Đang tiến hành (3/8) | Còn: table-core, table-chrome, data-table-url, nav-tree, auth-login |
+| Namespace rename | Chưa bắt đầu | Phase 1 roadmap |
 
 ## 10. Open Questions
 
-- [ ] **Namespace rename**: Tên mới đã được chốt chưa?
+- [x] **Namespace rename**: Đã chốt `@lnhdesign/*` và áp dụng xong (2026-10-22)
 - [ ] **Token package**: Có tách lại package token/tailwind/ESLint không?
-- [ ] **AURECOOK_TOKEN**: Token internal đã được setup chưa?
+- [ ] **LNHDESIGN_TOKEN**: Token internal đã được setup chưa? (`.env.example` đã document cách sinh)
+

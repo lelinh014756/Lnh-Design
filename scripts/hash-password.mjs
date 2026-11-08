@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Sinh hash mật khẩu cho `AURECOOK_USERS`.
+ * Sinh hash mật khẩu cho `LNHDESIGN_USERS`.
  *
  *   node scripts/hash-password.mjs 'email@congty.vn' 'mật khẩu'
  *

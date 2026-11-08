@@ -2,7 +2,7 @@
   "title": "Khu vực nội bộ",
   "subtitle": "Item chỉ phát hành trong đội. Cài được khi có token registry riêng.",
   "tokenTitle": "Token registry",
-  "tokenBody": "Đặt AURECOOK_TOKEN vào biến môi trường của máy hoặc CI, không commit vào repo.",
+  "tokenBody": "Đặt LNHDESIGN_TOKEN vào biến môi trường của máy hoặc CI, không commit vào repo.",
   "configTitle": "Cấu hình phía repo dùng",
   "itemsTitle": "Item nội bộ",
   "signedInAs": "Đang đăng nhập:"

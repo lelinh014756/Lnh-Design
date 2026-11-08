@@ -97,7 +97,7 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    /* Brand AureCook: primary #1B49F5 · phụ #7839EE */
+    /* Brand LnhDesign: primary #1B49F5 · phụ #7839EE */
     --primary: oklch(0.508 0.258 265.14);
     --primary-foreground: oklch(0.98 0.02 265.14);
     --brand-secondary: oklch(0.537 0.248 291.51);
@@ -170,7 +170,7 @@
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.205 0 0);
     --popover-foreground: oklch(0.985 0 0);
-    /* Brand AureCook (dark): primary #1B49F5 · phụ #7839EE.
+    /* Brand LnhDesign (dark): primary #1B49F5 · phụ #7839EE.
        ⚠️ PLACEHOLDER — chỉ suy diễn cơ học từ bản light (L+, C− cùng H, đúng
        nguyên tắc pattern sẵn có), CHƯA tự tay tinh chỉnh bằng mắt theo I.5
        mục 12. Cần duyệt lại độ tương phản khi build UI thật trên nền tối. */
@@ -218,7 +218,7 @@
 
 /* Appearance — màu thương hiệu
    ─────────────────────────────────────────────────────────────────────────
-   AureCook chỉ có MỘT brand, nên không còn khối `[data-brand="..."]`: token
+   LnhDesign chỉ có MỘT brand, nên không còn khối `[data-brand="..."]`: token
    --primary/--brand-secondary/--brand-accent-2 khai một lần ở :root/.dark
    phía trên là đủ. Cơ chế đổi nền sidebar (`data-sidebar-style`) vẫn giữ —
    nó độc lập với brand và là thứ trang /tokens cho phép thử trực tiếp. */
